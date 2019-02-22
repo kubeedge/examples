@@ -2,12 +2,8 @@ package main
 
 import (
         "fmt"
-
         "github.com/yosssi/gmq/mqtt"
         "github.com/yosssi/gmq/mqtt/client"
-       // "encoding/json"
-
-        //"time"
 )
 
 func main(){

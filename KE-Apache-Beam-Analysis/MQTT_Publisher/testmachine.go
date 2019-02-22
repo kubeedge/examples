@@ -2,12 +2,10 @@ package main
 
 import (
 	"fmt"
-
+	"time"
 	"github.com/yosssi/gmq/mqtt"
 	"github.com/yosssi/gmq/mqtt/client"
-	"encoding/json"
-
-	"time"
+	"encoding/json"	
 )
 type ReadDataFn struct {
 	ID int64 `json:"ID,omitempty"`
