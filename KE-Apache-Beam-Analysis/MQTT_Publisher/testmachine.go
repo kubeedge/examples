@@ -1,17 +1,18 @@
 package main
 
 import (
-	"encoding/json"
-	"fmt"
-	"github.com/yosssi/gmq/mqtt"
-	"github.com/yosssi/gmq/mqtt/client"
 	"time"
+	"fmt"
+	"encoding/json"
+
+	"github.com/yosssi/gmq/mqtt"
+	"github.com/yosssi/gmq/mqtt/client"	
 )
 
 type ReadDataFn struct {
 	ID         int64  `json:"ID,omitempty"`
 	Device     string `json:"Device,omitempty"`
-	CreateTime int64  `json:"CreateTime,omitempty"`
+	CreateTime time.Time  `json:"CreateTime,omitempty"`
 	Label      string `json:"Label,omitempty"`
 	Units      string `json:"Units,omitempty"`
 	Value      string `json:"Value,omitempty"`
@@ -40,7 +41,7 @@ func main() {
 		panic(err)
 	}
 	Data := ReadDataFn{Device: "cc2650",
-		CreateTime: 12345,
+		CreateTime: time.Now().Local(),
 		Label:      "Temperature",
 		Units:      "DegreeCelcius",
 		Value:      "85",
@@ -51,7 +52,7 @@ func main() {
 	for i = 0; i < 20; i++ {
 		time.Sleep(2 * time.Second)
 		Data.ID = i
-		Data.CreateTime = Data.CreateTime + 100
+		Data.CreateTime = time.Now().Local()	
 		if i == 1 {
 			Data.Value = "90"
 			Data.MachineID = "M2000"

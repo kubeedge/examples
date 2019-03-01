@@ -32,22 +32,22 @@ There are many frameworks like Hadoop, Spark, Flink, Google Cloud Dataflow etc f
 
 ### Prerequisites
 - Golang(version: 1.11.4)
-- KubeEdge
+- KubeEdge(version: v0.1)
 - Docker(version: 18.06.1-ce)
 
 ##### Following are the steps to deploy pipeline application on IEF cloud:
 For demo 1.1:
 Pull the docker image from dockerhub by using following command
-```sh
+```shell
     $ sudo docker pull containerise/ke_apache_beam:ke_apache_analysisv1.1
 ```
 For demo 1.2:
 Pull the docker image from dockerhub by using following command
-```sh
+```shell
    $ sudo docker pull containerise/ke_apache_beam:ke_apache_analysisv1.2
 ```
 Run the command
-```sh
+```shell
     $ docker images
 ```
 This will shows all images created. Check image named ke_apache_analysisv1.1 or ke_apache_analysisv1.2
@@ -64,11 +64,11 @@ This will shows all images created. Check image named ke_apache_analysisv1.1 or 
 - Create
 	
 To check app running or not:
-```sh
+```shell
     $ docker ps -a -n2
 ```
 It will list cotainers which are in running state.
-```sh
+```shell
     $ docker logs id_of_running_container
 ```
 This will show log of your container.
@@ -76,12 +76,12 @@ This will show log of your container.
 To check result, publish dummy data by using [testmachine](MQTT_Publisher/testmachine.go). 
 
 Add following vendor packages:
-```sh
+```shell
     $ go get -u github.com/yosssi/gmq/mqtt
     $ go get -u github.com/yosssi/gmq/mqtt/client
 ```
 run:
-```sh
+```shell
     $ go build testmachine.go
     $ ./testmachine
 ```

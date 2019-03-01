@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+
 	"github.com/yosssi/gmq/mqtt"
 	"github.com/yosssi/gmq/mqtt/client"
 )
@@ -37,7 +38,7 @@ func main() {
 				Handler: func(topicName, message []byte) {
 
 					str := string(message)
-					fmt.Println("", str)
+					fmt.Println(str)
 				},
 			},
 		},
