@@ -1,6 +1,6 @@
-#Identity Management Using SPIRE for Kubeedge
+# Identity Management Using SPIRE for Kubeedge
 
-##SPIRE-based Identity Management Reference Architecture
+## SPIRE-based Identity Management Reference Architecture
 
 Goal of this example is to achieve workload identity management for
 cloud and edge processes . A reference architecture is shown below . A
@@ -10,7 +10,7 @@ integrated with kubeege for the same .
 
 ![](doc/images/demo_arch.png)
 
-##Folders
+## Folders
 * release : Directory has configurations and scripts to be used for deployment of identity management infrastructure for Kubeedge.
 
 * app-agent-conf  : Configurations for spire agent interfacing with edge (event-bus) and user applications . Spire agent communicates to edge spire server.|
@@ -23,7 +23,7 @@ integrated with kubeege for the same .
 
 * log : Logs for different processes run as part of the example.
 
-##Scripts
+## Scripts
 * deploy-cloud.sh : Deploys cloud part of identity management infrastructure. Used to 
                     
                     1) Start cloud spire server.
@@ -45,7 +45,7 @@ integrated with kubeege for the same .
 
 * commands.sh  : Abstracts spire cli commands.
  
-##Configuration
+## Configuration
 ### Cloud node configuration
 
 *Upstream CA – Cloud spire server configuration:*
