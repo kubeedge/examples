@@ -8,7 +8,7 @@ list of things to-do is listed below in version information section .
 For further integration , an extension add-on will be developed
 integrated with kubeege for the same .
 
-![](doc/images/demo_arch.png)
+![image](./doc/images/demo-arch.png)
 
 ## Folders
 * release : Directory has configurations and scripts to be used for deployment of identity management infrastructure for Kubeedge.
