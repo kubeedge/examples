@@ -1,16 +1,53 @@
 # Identity Management Using SPIRE for Kubeedge
 
+## Background
+
+Security is a paramount requirement for edge computing architecture as security breaches can make a complete organization to come to a halt (IIot) , data breach can lead to privacy issues and also control of the complete edge computing infrastructure. 
+
+The enable better security, following needs to be satisfied for kubeedge framework
+* Only verified and authorized edge nodes should be able to join cluster and connect to cloud.
+* Applications connecting to edge computing framework should be verified against the assigned identities.
+* Applications should be authorized to send and receive data from edge computing framework.
+* Certificate rotation should be possible at each service-level.
+* Audit at service-level for all communciation between services.
+
+## SPIFFE and SPIRE
+
+The Secure Production Identity Framework For Everyone (SPIFFE) Project defines a framework and set of standards for identifying and securing communications between services.
+SPIFFE enables enterprises to transform their security posture from just protecting the edge to consistently securing all inter-service communications deep within their applications.
+SPIFFE recommends industry standards like TLS and JWT for forming a identity document for every service. The service-level identity AuthN and AuthZ removes the dependency of complex network-level ACL strategies.
+
+More information about SPIFFE can be found at [*https://github.com/spiffe/spiffe*](https://github.com/spiffe/spiffe).
+
+SPIRE (SPIFFE Runtime Environment) is a reference implementation of SPIFFE specification. SPIRE manages identities for node and workloads.
+ It provides API for controlling attestation policies and identity issuance and rotation strategies.
+
+More information about SPIRE can be found at [*https://github.com/spiffe/spire*](https://github.com/spiffe/spire).
+
+## Benefits
+
+* Node attestation: Only verifiable edge nodes can join the edge clusters. Every node is issued an identity on verification.
+ In case of failed node attestations, no identity documents can be issued for services running on the node.
+
+* Workload attestation: Only verifiable workload can run on edge nodes. In case of failed workload attestations, there are no identities issues for the workloads.
+All communications are blocked from unverified workloads.
+
+* Certificate rotation: Short-lived certificates are generated and rotation policies can be configured for every service communication.
+There is no need for custom agents and reliance on specific orchestrators for certificate rotation configuration and management.
+
+* Automated non-root CA certificate heirarchical deployments: Edge spire servers can be configured to not share any root CA chain for downstream nodes and workloads.
+
 ## SPIRE-based Identity Management Reference Architecture
 
 Goal of this example is to achieve workload identity management for
-cloud and edge processes . A reference architecture is shown below . A
-list of things to-do is listed below in version information section .
+cloud and edge processes . A reference architecture is shown below. A
+list of things to-do is listed below in version information section.
 For further integration , an extension add-on will be developed
-integrated with kubeege for the same .
+integrated with kubeege for the same.
 
 ![image](./doc/images/demo-arch.png)
 
-## Folders
+## Source Folders
 * release : Directory has configurations and scripts to be used for deployment of identity management infrastructure for Kubeedge.
 
 * app-agent-conf  : Configurations for spire agent interfacing with edge (event-bus) and user applications . Spire agent communicates to edge spire server.|
@@ -45,7 +82,7 @@ integrated with kubeege for the same .
 
 * commands.sh  : Abstracts spire cli commands.
  
-## Configuration
+## How to configure
 ### Cloud node configuration
 
 *Upstream CA – Cloud spire server configuration:*
@@ -166,8 +203,7 @@ export CLOUD\_VM\_IP=192.168.56.101
 
 export SPIRE\_PATH=/opt/spire
 
-Usage
------
+## How to setup and use
 
 1\. Copy the package to cloud node and edge node .
 
@@ -193,8 +229,7 @@ Usage of the application can be referred in the same page.
 For spire server cli usage , please refer to
 [*https://github.com/spiffe/spire*](https://github.com/spiffe/spire).
 
-Present support
----------------
+## Present support
 
 1\. Initial infrastructure deployment.
 
@@ -204,17 +239,20 @@ scripts.
 3\. Communication from user application and edge application using
 certificates issued by cloud spire server and edge spire server.
 
-ToDo
-----
+## ToDo
 
 1\. Optimization for redundancies in configuration and scripts.
 
 2\. Automate build/release and remove binaries from the package.
 
-3\. Test and support upstream\_bundle=false for edge spire server.
+3\. Test and support upstream\_bundle=false to prune rootCA at edge spire server.
 
 4\. Certificate rotation issue needs to be automated or changes may be
 required in spiffe helper for the dependency on keystore for ghostunnel.
 
 5\. Auto-generate configurations (partially) based on environment
 information.
+
+6\. Trusted cloud spire server for communication between edge spire agents, edge spire server, cloud spire agent and cloud spire server.
+
+7\. Secure communication between event bus and internal mqtt server.
