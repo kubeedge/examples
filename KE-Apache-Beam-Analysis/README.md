@@ -35,55 +35,46 @@ There are many frameworks like Hadoop, Spark, Flink, Google Cloud Dataflow etc f
 - KubeEdge(version: v0.1)
 - Docker(version: 18.06.1-ce)
 
-##### Following are the steps to deploy pipeline application on IEF cloud:
+### Deploy pipeline application:
 For demo 1.1:
 Pull the docker image from dockerhub by using following command
 ```shell
-    $ sudo docker pull containerise/ke_apache_beam:ke_apache_analysisv1.1
+   $ sudo docker pull containerise/ke_apache_beam:ke_apache_analysis_v1.1
 ```
 For demo 1.2:
 Pull the docker image from dockerhub by using following command
 ```shell
-   $ sudo docker pull containerise/ke_apache_beam:ke_apache_analysisv1.2
+   $ sudo docker pull containerise/ke_apache_beam:ke_apache_analysis_v1.2
 ```
 Run the command
 ```shell
-    $ docker images
+   $ docker images
 ```
-This will shows all images created. Check image named ke_apache_analysisv1.1 or ke_apache_analysisv1.2
-    
-#### Open IEF console: [HuaweiCloud](https://console.huaweicloud.com/ief2.0/?region=cn-north-1#/app/dashboard)
-##### Go to Edge Application
-- Create App Template
-- Upload image(eg. ke_apache_analysisv1.2). While uploading select 'upload image from client' option. Follow the instruction given on dashboard to tag and push the image.
-- Create
+This will shows all images created. Check image named ke_apache_analysis_v1.1 or ke_apache_analysis_v1.2
+
+Follows steps from [here](https://github.com/kubeedge/kubeedge/blob/master/README.md) to setup prerequisite environment.
 	
-##### Go to app deployment(IEF)
-- Select your node(make sure that node is in running state)
-- Select app template(docker image)
-- Create
-	
-To check app running or not:
+Try out a application deployment by following below steps.
 ```shell
-    $ docker ps -a -n2
+   $ kubectl apply -f examples/KE-Apache-Beam-Analysis/KE-Apache-Beam-Deployment.yaml
 ```
-It will list cotainers which are in running state.
+Then you can use below command to check if the application is normally running.
 ```shell
-    $ docker logs id_of_running_container
+kubectl get pods
 ```
-This will show log of your container.
 
 To check result, publish dummy data by using [testmachine](MQTT_Publisher/testmachine.go). 
 
 Add following vendor packages:
 ```shell
-    $ go get -u github.com/yosssi/gmq/mqtt
-    $ go get -u github.com/yosssi/gmq/mqtt/client
+   $ go get -u github.com/yosssi/gmq/mqtt
+   $ go get -u github.com/yosssi/gmq/mqtt/client
 ```
 run:
 ```shell
-    $ go build testmachine.go
-    $ ./testmachine
+   $ go build testmachine.go
+   $ ./testmachine
 ```
     
+
 
