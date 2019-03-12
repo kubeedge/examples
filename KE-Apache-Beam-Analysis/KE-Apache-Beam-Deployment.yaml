@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ke-apachebeam-analysis-deployment
+  labels:
+    app: ke-apachebeam-analysis
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ke-apachebeam-analysis
+  template:
+    metadata:
+      labels:
+        app: ke-apachebeam-analysis
+    spec:
+      containers:
+      - name: ke-apachebeam-analysis
+        image: containerise/ke_apache_beam:ke_apache_analysis_v1.2
