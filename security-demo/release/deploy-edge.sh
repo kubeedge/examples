@@ -1,4 +1,4 @@
-#!/bin/sh -x
+#!/bin/bash
 
 COMMAND_PATH=/opt/spire
 

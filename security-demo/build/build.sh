@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 check_error_and_exit()
 {
@@ -19,18 +19,12 @@ build_components()
     name=`echo $component | awk -F'::' '{print $1}'`
     gitpath=`echo $component | awk -F'::' '{print $2}'`
     buildcmd=`echo $component | awk -F'::' '{$1=$2=""; print $0}'`
-    # delete below two lines after testing
-#    echo $name $gitpath $buildcmd
-#    dir=$(get_project_dir $gitpath $name)
-#    echo $buildcmd
     build_component $name "$gitpath" "$buildcmd"
-
   done <<< $components
 }
 
 get_project_dir()
 {
-#  ret=`cut -d $1.git -f 1`
   removehttps=`echo $2 | awk -F"https://" {'print $2'}`
   ret=`echo $removehttps | awk -F"$1.git" {'print $1'}`
   echo $ret

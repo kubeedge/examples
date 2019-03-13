@@ -1,4 +1,4 @@
-#!/bin/sh 
+#!/bin/bash 
 
 #Generically using . to source env config , should be present in the same path as the script
 . ./edge.env
