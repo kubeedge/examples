@@ -2,25 +2,24 @@ package cloudhub
 
 import (
 	"encoding/json"
+	"fmt"
 	"io"
 	"io/ioutil"
 	"net/http"
-	"fmt"
 
 	"k8s.io/api/core/v1"
 
-	"github.com/kubeedge/kubeedge/common/beehive/pkg/core/model"
 	"github.com/kubeedge/examples/security-demo/cloud-stub/cmd/config"
+	"github.com/kubeedge/kubeedge/common/beehive/pkg/core/model"
 
 	"github.com/gorilla/mux"
 	"github.com/gorilla/websocket"
-
 )
 
 type StubCloudHub struct {
 	//context *context.Context
-	wsConn  *websocket.Conn
-	config  *config.CloudStubConfig
+	wsConn *websocket.Conn
+	config *config.CloudStubConfig
 }
 
 func (tm *StubCloudHub) eventReadLoop(conn *websocket.Conn, stop chan bool) {
@@ -57,7 +56,7 @@ func (tm *StubCloudHub) deviceHandler(w http.ResponseWriter, req *http.Request) 
 	if req.Body != nil {
 		body, err := ioutil.ReadAll(req.Body)
 		if err != nil {
-			fmt.Println("failed to read request body with error %s",err.Error())
+			fmt.Println("failed to read request body with error %s", err.Error())
 			w.Write([]byte("failed to read request body"))
 			w.WriteHeader(http.StatusInternalServerError)
 			return
@@ -91,9 +90,8 @@ func (tm *StubCloudHub) deviceHandler(w http.ResponseWriter, req *http.Request) 
 		err = tm.wsConn.WriteJSON(*msgReq)
 		fmt.Println("send message to edgehub is %+v\n", *msgReq)
 
-
 		if err != nil {
-			fmt.Println("failed to send message to edge hub with error - %s",err.Error())
+			fmt.Println("failed to send message to edge hub with error - %s", err.Error())
 		}
 		io.WriteString(w, "OK\n")
 
@@ -147,9 +145,8 @@ func (tm *StubCloudHub) podHandler(w http.ResponseWriter, req *http.Request) {
 		err = tm.wsConn.WriteJSON(*msgReq)
 		fmt.Println("send message to edgehub is %+v\n", *msgReq)
 
-
 		if err != nil {
-			fmt.Println("failed to send message to edge hub with error - %s",err.Error())
+			fmt.Println("failed to send message to edge hub with error - %s", err.Error())
 		}
 		io.WriteString(w, "OK\n")
 
@@ -167,7 +164,7 @@ func (tm *StubCloudHub) podHandler(w http.ResponseWriter, req *http.Request) {
 func (tm *StubCloudHub) placementHandler(w http.ResponseWriter, req *http.Request) {
 	switch req.Method {
 	case "GET":
-		fmt.Println(" Config placement url : %s",tm.config.PlacementURL)
+		fmt.Println(" Config placement url : %s", tm.config.PlacementURL)
 		w.Write([]byte(tm.config.PlacementURL))
 		w.WriteHeader(http.StatusOK)
 	}
@@ -179,7 +176,7 @@ func (tm *StubCloudHub) wsHandler(w http.ResponseWriter, req *http.Request) {
 	upgrader := websocket.Upgrader{}
 	conn, err := upgrader.Upgrade(w, req, req.Header)
 	if err != nil {
-		fmt.Println("websocket upgrade failed with error - %s",err.Error())
+		fmt.Println("websocket upgrade failed with error - %s", err.Error())
 		return
 	}
 
@@ -194,15 +191,16 @@ func (tm *StubCloudHub) wsHandler(w http.ResponseWriter, req *http.Request) {
 			fmt.Println("read message failed with error - %s", err.Error())
 			break
 		}
-		fmt.Println(" received message on websocket == %v",msg)
+		fmt.Println(" received message on websocket == %v", msg)
 	}
 }
 
 func (tm *StubCloudHub) Start() {
 	router := mux.NewRouter()
-	router.HandleFunc("/{group_id}/events", tm.serveEvent) // for edge-hub
-	router.HandleFunc("/{project_id}/{node_id}/events",tm.wsHandler) // for cloudhub url placement handler
-	s := http.Server {
+	router.HandleFunc("/v1/placement_external/message_queue", tm.placementHandler) // for cloudhub url placement handler
+	router.HandleFunc("/{group_id}/events", tm.serveEvent)            // for edge-hub
+	router.HandleFunc("/{project_id}/{node_id}/events", tm.wsHandler) // for cloudhub url placement handler
+	s := http.Server{
 		Addr:    "127.0.0.1:20000",
 		Handler: router,
 	}
@@ -217,9 +215,8 @@ func (tm *StubCloudHub) Start() {
 func (tm *StubCloudHub) PlacementServer() {
 	fmt.Println("started placement server")
 	router := mux.NewRouter()
-	router.HandleFunc("/v1/placement_external/message_queue",tm.placementHandler) // for cloudhub url placement handler
-	router.HandleFunc("/pod", tm.podHandler)               // for pod test
-	router.HandleFunc("/device",tm.deviceHandler)
+	router.HandleFunc("/pod", tm.podHandler)                                       // for pod test
+	router.HandleFunc("/device", tm.deviceHandler)
 
 	s := http.Server{
 		Addr:    "127.0.0.1:30000",
@@ -233,7 +230,7 @@ func (tm *StubCloudHub) PlacementServer() {
 }
 
 func NewCloudStub(config *config.CloudStubConfig) *StubCloudHub {
-	return &StubCloudHub {
+	return &StubCloudHub{
 		config: config,
 	}
 }

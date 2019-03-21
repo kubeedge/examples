@@ -50,6 +50,7 @@ build_component()
     fi
     cd $projectdir
     git clone $2
+    cd $projectdir/$1
   fi
   echo "build command is => $3"
   ret=$(eval $3)

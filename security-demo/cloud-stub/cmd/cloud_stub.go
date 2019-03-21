@@ -3,8 +3,8 @@ package main
 import (
 	"fmt"
 	//"github.com/kubeedge/kubeedge/edge/pkg/common/dbm"
-	"github.com/kubeedge/examples/security-demo/cloud-stub/pkg/controller/cloudhub"
 	"github.com/kubeedge/examples/security-demo/cloud-stub/cmd/config"
+	"github.com/kubeedge/examples/security-demo/cloud-stub/pkg/controller/cloudhub"
 )
 
 const (

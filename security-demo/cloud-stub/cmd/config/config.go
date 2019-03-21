@@ -1,14 +1,14 @@
 package config
 
 import (
-	"io/ioutil"
 	"fmt"
 	"github.com/hashicorp/hcl"
+	"io/ioutil"
 )
 
 // CloudStubConfig is HCL config data
 type CloudStubConfig struct {
-	PlacementURL  string `hcl:"placementURL"`
+	PlacementURL string `hcl:"placementURL"`
 }
 
 // ParseConfig parses the given HCL file into a SidecarConfig struct
@@ -36,4 +36,3 @@ func ParseConfig(file string) (stubConfig *CloudStubConfig, err error) {
 	fmt.Println("config file : %s, config : %s", file, stubConfig.PlacementURL)
 	return stubConfig, nil
 }
-

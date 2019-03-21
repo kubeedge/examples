@@ -82,6 +82,12 @@ integrated with kubeege for the same.
 
 * commands.sh  : Abstracts spire cli commands.
  
+## Prerequisites
+* Bash version 4.4.19
+* Go compiler version 1.11.4
+* go dep and glide package managers
+* sshpass
+
 ## How to configure
 ### Cloud node configuration
 
