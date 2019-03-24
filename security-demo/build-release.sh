@@ -4,6 +4,11 @@ build_dependencies()
 {
   echo "Building all dependent libraries.."
   cd build/
+  ./generate-test-certs.sh
+  if [ $? -ne 0 ]; then
+    echo "Release build failed."
+    exit 1
+  fi
   ./build.sh
   if [ $? -ne 0 ]; then
     echo "Release build failed."
@@ -14,6 +19,15 @@ build_dependencies()
 
 copy_binaries()
 {
+  echo "Create log directory..."
+  mkdir -p release/log
+
+  echo "Copying test certificates..."
+  cp build/cert.crt release/app-agent-conf/agent/dummy_root_ca.crt
+  cp build/cert.crt release/conf/agent/dummy_root_ca.crt
+  cp build/cert.crt release/conf/server/dummy_upstream_ca.crt
+  cp build/cert.key release/conf/server/dummy_upstream_ca.key
+
   echo "Copying libraries..."
   cp $GOPATH/src/github.com/kubeedge/examples/security-demo/cloud-stub/cmd/cloud-app release/app-binaries/cloud-app && \
   cp $GOPATH/src/github.com/kubeedge/examples/led-raspberrypi/light_mapper/light_mapper release/app-binaries/light_mapper && \

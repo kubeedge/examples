@@ -6,6 +6,7 @@ clean()
 {
   pkill spire-server; pkill spire-agent; pkill spiffe-helper; pkill ghostunnel; pkill cloud-app
   rm .data/*
+  rm .agentdata/*
   rm certs/*.p12 certs/*.pem
 }
 

@@ -1,1 +1,0 @@
-# Log files place holder

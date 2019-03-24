@@ -211,9 +211,9 @@ export SPIRE\_PATH=/opt/spire
 
 ## How to setup and use
 
-1\. Copy the package to cloud node and edge node .
+1\. Copy the release files to cloud node and edge node at path /opt/spire/.
 
-2\. Update the IP , port and spire path in the configurations.
+2\. Update the IP , port and spire path in the above listed configurations.
 
 3\. In cloud node , execute deploy-cloud.sh.
 
@@ -222,12 +222,12 @@ export SPIRE\_PATH=/opt/spire
 5\. Register an example device with cloud using following command. Please
 note, in the current version, cloud test application opens 30000 port
 for metadata creation (create pod or device) and 20000 port for
-communication with kubeedge edgehub.
+communication with kubeedge edgehub. In cloud node, execute
 
 curl -XGET http://127.0.0.1:30000/device -H 'content-type:
 application/json' -d@&lt;SPIRE\_PATH&gt;/app-binaries/test-device.yaml
 
-6\. Run the light\_mapper application from app\_binaries. Light mapper
+6\. Run the light\_mapper application from app\_binaries in edge node. Light mapper
 application is a binary built from
 [*https://github.com/kubeedge/examples/tree/master/led-raspberrypi*](https://github.com/kubeedge/examples/tree/master/led-raspberrypi).
 Usage of the application can be referred in the same page.

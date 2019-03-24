@@ -8,6 +8,8 @@ clean()
 	rm /opt/spire/.dserverdata/*
 # agent crashes with old certificates ??
 	rm /opt/spire/.data/*
+  rm /opt/spire/.agentdata/*
+  rm /opt/spire/.app-data/*
 	rm /opt/spire/certs/*.pem /opt/spire/certs/*.p12
 	rm /opt/spire/user-app/certs/*.pem /opt/spire/user-app/certs/*.p12
 	rm /opt/spire/event-bus/certs/*.pem /opt/spire/event-bus/certs/*.p12
