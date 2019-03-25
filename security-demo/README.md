@@ -224,8 +224,7 @@ note, in the current version, cloud test application opens 30000 port
 for metadata creation (create pod or device) and 20000 port for
 communication with kubeedge edgehub. In cloud node, execute
 
-curl -XGET http://127.0.0.1:30000/device -H 'content-type:
-application/json' -d@&lt;SPIRE\_PATH&gt;/app-binaries/test-device.yaml
+    curl -XGET http://127.0.0.1:30000/device -H 'content-type:application/json' -d@/opt/spire/app-binaries/test-device.yaml
 
 6\. Run the light\_mapper application from app\_binaries in edge node. Light mapper
 application is a binary built from
