@@ -94,7 +94,6 @@ create_cloud_node()
      else
        echo "failed with error : $return "
      fi 
-
   else 
      echo "failed with error : $token " 
      err=$?
@@ -162,7 +161,7 @@ create_edge_node()
 #TBD : error handling for nohup commands 
      nohup $SPIRE_PATH/spire-agent run -joinToken $token -logFile $SPIRE_PATH/log/edge-agent.log &
      if [ $? -eq 0 ]; then
-       echo "started upstream agent in upstream-cloud-node."
+       echo "started upstream agent in upstream-edge-node."
        echo "returned token = $return"
      else
        echo "failed with error : $return "

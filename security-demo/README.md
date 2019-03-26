@@ -4,7 +4,7 @@
 
 Security is a paramount requirement for edge computing architecture as security breaches can make a complete organization to come to a halt (IIot) , data breach can lead to privacy issues and also control of the complete edge computing infrastructure. 
 
-The enable better security, following needs to be satisfied for kubeedge framework
+To enable better security, following needs to be satisfied for kubeedge framework
 * Only verified and authorized edge nodes should be able to join cluster and connect to cloud.
 * Applications connecting to edge computing framework should be verified against the assigned identities.
 * Applications should be authorized to send and receive data from edge computing framework.
@@ -47,10 +47,67 @@ integrated with kubeege for the same.
 
 ![image](./doc/images/demo-arch.png)
 
+## Functional sequence diagrams
+
+### Cloud component sequence
+1\. Start cloud spire server.
+
+2\. Generate token for node with spiffeID association for cloud node. (e.g: spiffe id = spiffe://example.org/upstream-cloud-node).
+
+3\. Start spire agent with generated token. Node attestation is performed.
+
+4\. Create entry with cloud spire server for cloud component (cloudapp in this example). The entry is associated with node spiffeID and selectors used for attestation of cloud component.
+
+5\. Start spiffe-helper with helper.conf configuration. Spiffe-helper fetches certificates and starts ghostunnel. Spiffe-helper also updates the certificates and signals (SIGUSR1) to ghostunnel to reload certificates. Workload attestation is performed.
+
+6\. Start cloud component. Cloud component uses localhost ip and port to transfer data. Ghostunnel fetches data from this port and securely sends the data to peer ghostunnel.
+
+7\. SpiffeIDs are validated by ghostunnel to control authorization by using tls peer verification method. Authorized spiffeID are configured as arguments to ghostunnel in helper.conf.
+
+![image](./doc/images/cloudsequence.png)
+
+### Edge component sequence
+
+1\. Generate token for edge with spiffeID association for edge node. (e.g:spiffe id = spiffe://example.org/upstream-edge-node).
+
+2\. Start spire agent (cloud spire agent) on edge node with configuration to connect to cloud spire server and associated token. Node attestation is performed.
+
+3\. Create entry with cloud spire server for edge component. The entry is associated with node spiffeID and selectors used for attestation of edge component.
+
+4\. Start edge spire server. Edge spire server starts with upstreamCA configured to cloud spire server.
+
+5\. Edge spire server fetches certificate from cloud spire agent (running on edge node) which invokes workload attestation and receives workload certificates in response.
+
+6\. Edge spire server connects to cloud spire server using workload certificates to fetch intermediate CA using spire node api.
+
+7\. Generate token for edge with spiffeID association for edge node. (e.g:spiffe id = spiffe://example.org/downstream-edge-node).
+
+8\. Start edge spire agent on edge node with configuration to connect to edge spire server and associated token. Node attestation is performed.
+
+9\. Start spiffe-helper. Spiffe-helper fetches workload certificate for edge component (edge-hub) from cloud spire agent (running on edge node) and starts ghostunnel. Spiffe-helper also updates the certificates and signals (SIGUSR1) to ghostunnel to reload certificates. Workload attestation is performed.
+
+10\. Start edge-hub (execute edge_core binary). Edge-hub uses localhost ip and port to transfer data. Ghostunnel fetches data from this port and securely sends the data to peer ghostunnel.
+
+11\. SpiffeIDs are validated by ghostunnel to control authorization by using tls peer verification method. Authorized spiffeID are configured as arguments to ghostunnel in helper.conf.
+
+![image](./doc/images/edgehubsequence.png)
+
+### Edge application sequence
+
+1\. Create entry with edge spire server for edge applications (eventbus and lightmapper in this example). The entry is associated with edge node spiffeID (token parameter used to register edge spire agent) and selectors used for attestation of edge application.
+
+2\. Start spiffe-helper with helper.conf configuration (refer event-bus-helper.conf/user-app-helper.conf files). Spiffe-helper fetches certificates and starts ghostunnel. Spiffe-helper also updates the certificates and signals (SIGUSR1) to ghostunnel to reload certificates. Workload attestation is performed.
+
+3\. Start edge applications. Edge application uses localhost ip and port to transfer data. Ghostunnel fetches data from this port and securely sends the data to peer ghostunnel.
+
+4\. SpiffeIDs are validated by ghostunnel to control authorization by using tls peer verification method. Authorized spiffeID are configured as arguments to ghostunnel in helper.conf.
+
+![image](./doc/images/edgeappsequence.png)
+
 ## Source Folders
 * release : Directory has configurations and scripts to be used for deployment of identity management infrastructure for Kubeedge.
 
-* app-agent-conf  : Configurations for spire agent interfacing with edge (event-bus) and user applications . Spire agent communicates to edge spire server.|
+* app-agent-conf  : Configurations for spire agent interfacing with edge (event-bus) and user applications . Spire agent communicates to edge spire server.
 
 * conf : Configurations for spire server (cloud and edge) and spire agent (agent communicating to cloud spire server).
 
@@ -224,7 +281,7 @@ note, in the current version, cloud test application opens 30000 port
 for metadata creation (create pod or device) and 20000 port for
 communication with kubeedge edgehub. In cloud node, execute
 
-    curl -XGET http://127.0.0.1:30000/device -H 'content-type:application/json' -d@/opt/spire/app-binaries/test-device.yaml
+    `curl -XGET http://127.0.0.1:30000/device -H 'content-type:application/json' -d@/opt/spire/app-binaries/test-device.yaml`
 
 6\. Run the light\_mapper application from app\_binaries in edge node. Light mapper
 application is a binary built from
@@ -248,16 +305,14 @@ certificates issued by cloud spire server and edge spire server.
 
 1\. Optimization for redundancies in configuration and scripts.
 
-2\. Automate build/release and remove binaries from the package.
+2\. Test and support upstream\_bundle=false to prune rootCA at edge spire server.
 
-3\. Test and support upstream\_bundle=false to prune rootCA at edge spire server.
-
-4\. Certificate rotation issue needs to be automated or changes may be
+3\. Certificate rotation issue needs to be automated or changes may be
 required in spiffe helper for the dependency on keystore for ghostunnel.
 
-5\. Auto-generate configurations (partially) based on environment
+4\. Auto-generate configurations (partially) based on environment
 information.
 
-6\. Trusted cloud spire server for communication between edge spire agents, edge spire server, cloud spire agent and cloud spire server.
+5\. Trusted cloud spire server for communication between edge spire agents, edge spire server, cloud spire agent and cloud spire server.
 
-7\. Secure communication between event bus and internal mqtt server.
+6\. Secure communication between event bus and internal mqtt server.
