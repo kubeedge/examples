@@ -5,14 +5,13 @@ COMMAND_PATH=/opt/spire
 clean()
 {
 	pkill spire-server; pkill spire-agent; pkill spiffe-helper; pkill ghostunnel; sudo pkill edge_core;
-	rm /opt/spire/.dserverdata/*
 # agent crashes with old certificates ??
 	rm /opt/spire/.data/*
   rm /opt/spire/.agentdata/*
   rm /opt/spire/.app-data/*
-	rm /opt/spire/certs/*.pem /opt/spire/certs/*.p12
-	rm /opt/spire/user-app/certs/*.pem /opt/spire/user-app/certs/*.p12
-	rm /opt/spire/event-bus/certs/*.pem /opt/spire/event-bus/certs/*.p12
+	rm /opt/spire/certs/*
+	rm /opt/spire/user-app/certs/*
+	rm /opt/spire/event-bus/certs/*
 }
 
 check_command_status()
