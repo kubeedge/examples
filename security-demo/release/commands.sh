@@ -53,26 +53,15 @@ create_upstream_workload()
 
 start_cloud_hub()
 {
-# TBD : Due to dependency of ghostunnel on keystore , on the initial run , start-spiffe-helper.sh should be run manually after creating cloud-node.
-#       spiffe-helper requires initial certificates to be downloaded to start ghostunnel with keystore .
-
-#     if [ -e $SPIRE_PATH/certs/svid.pem ]; then
-     if [ -e $SPIRE_PATH/certs/svid.pem ]; then
-       cd $SPIRE_PATH/app-binaries/
-       pwd=`pwd`
-       echo "changed directory to $pwd"
-       nohup ./cloud-app 2>&1 1> $SPIRE_PATH/log/cloudhub.log &
-       cd $SPIRE_PATH/
-       pwd=`pwd`
-       echo "changed directory to $pwd"
-       nohup bash -x $SPIRE_PATH/start-spiffe-helper.sh
+  cd $SPIRE_PATH/app-binaries/
+  pwd=`pwd`
+  echo "changed directory to $pwd"
+  nohup ./cloud-app 2>&1 1> $SPIRE_PATH/log/cloudhub.log &
+  cd $SPIRE_PATH/
+  pwd=`pwd`
+  echo "changed directory to $pwd"
+  nohup $SPIRE_PATH/spiffe-helper -config $SPIRE_PATH/helper.conf &> $SPIRE_PATH/log/helper.log &
 # Ignore nohup errors 
-     else 
-       echo "Kill and run spiffe helper manually using command - $SPIRE_PATH/start-spiffe-helper.sh"
-       echo "Or rerun this command"
-       bash -x $SPIRE_PATH/start-spiffe-helper.sh 
-     fi
-     exit 0
 }
 
 # TBD : create upstream cloud node with name as parameter
@@ -211,10 +200,6 @@ create_user_app()
 
 start_edge_hub()
 {
-# TBD : Due to dependency of ghostunnel on keystore , on the initial run , start-spiffe-helper.sh should be run manually after creating cloud-node.
-#       spiffe-helper requires initial certificates to be downloaded to start ghostunnel with keystore .
-
-     if [ -e $SPIRE_PATH/certs/svid.pem ]; then
        cd $SPIRE_PATH/app-binaries/ 
        pwd=`pwd`
        echo "changed to directory $pwd"
@@ -222,14 +207,8 @@ start_edge_hub()
        cd $SPIRE_PATH/
        pwd=`pwd`
        echo "changed to directory $pwd"
-       nohup bash -x $SPIRE_PATH/start-spiffe-helper.sh 
+       nohup $SPIRE_PATH/spiffe-helper -config $SPIRE_PATH/helper.conf  &> $SPIRE_PATH/log/helper.log &
 # Ignore nohup errors 
-     else 
-       echo "Kill and run spiffe helper manually using command - $SPIRE_PATH/start-spiffe-helper.sh"
-       echo "Or rerun this command"
-       bash -x $SPIRE_PATH/start-spiffe-helper.sh 
-     fi
-     exit 0
 }
 
 start_edge_identity_server()
@@ -292,38 +271,14 @@ create_edge_app()
 
 start_edge_event_bus()
 {
-     if [ -e $SPIRE_PATH/event-bus/certs/svid.pem ]; then
-       echo "started event bus helper ghostunnel"
-       cd $SPIRE_PATH/event-bus/
-       nohup bash -x .//start-spiffe-helper.sh
-       cd $SPIRE_PATH/
-# Ignore nohup errors 
-     else
-       echo "Kill and run spiffe helper manually using command - $SPIRE_PATH/event-bus/start-spiffe-helper.sh \n"
-       echo "Or rerun this command"
-       cd $SPIRE_PATH/event-bus/
-       bash -x $SPIRE_PATH/event-bus/start-spiffe-helper.sh
-       cd $SPIRE_PATH/
-     fi
-     exit 0
+  nohup $SPIRE_PATH/spiffe-helper -config /opt/spire/event-bus/event-bus-helper.conf &> /opt/spire/log/event-bus-helper.log &
+# Ignore nohup errors
 }
 
 start_edge_app()
 {
-     if [ -e $SPIRE_PATH/user-app/certs/svid.pem ]; then
-       cd $SPIRE_PATH/user-app/
-       nohup bash -x ./start-spiffe-helper.sh
-       cd $SPIRE_PATH/
-       echo "Run the user application to use ip and port configured as per $SPIRE_PATH/user-app/user-app-helper.conf"
+  nohup $SPIRE_PATH/spiffe-helper -config /opt/spire/user-app/user-app-helper.conf &> /opt/spire/log/user-app-helper.log &
 # Ignore nohup errors 
-     else
-       echo "Kill and run spiffe helper manually using command - $SPIRE_PATH/user-app/start-spiffe-helper.sh"
-       echo "Or rerun this command"
-       cd $SPIRE_PATH/user-app/
-       bash -x $SPIRE_PATH/user-app/start-spiffe-helper.sh
-       cd $SPIRE_PATH/
-     fi
-     exit 0
 }
 
 echo $1 option selected 
