@@ -215,7 +215,7 @@ func (tm *StubCloudHub) Start() {
 func (tm *StubCloudHub) PlacementServer() {
 	fmt.Println("started placement server")
 	router := mux.NewRouter()
-	router.HandleFunc("/pod", tm.podHandler)                                       // for pod test
+	//router.HandleFunc("/pod", tm.podHandler)                                       // for pod test
 	router.HandleFunc("/device", tm.deviceHandler)
 
 	s := http.Server{

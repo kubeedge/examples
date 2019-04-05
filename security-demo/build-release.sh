@@ -29,9 +29,10 @@ copy_binaries()
   cp build/cert.key release/conf/server/dummy_upstream_ca.key
 
   echo "Copying libraries..."
-  cp $GOPATH/src/github.com/kubeedge/examples/security-demo/cloud-stub/cmd/cloud-app release/app-binaries/cloud-app && \
-  cp $GOPATH/src/github.com/kubeedge/examples/led-raspberrypi/light_mapper/light_mapper release/app-binaries/light_mapper && \
-  cp $GOPATH/src/github.com/kubeedge/kubeedge/edge/edge_core release/app-binaries/edge_core && \
+  cp $GOPATH/src/github.com/kubeedge/examples/security-demo/cloud-stub/cmd/cloud-app release/app-binaries/cloud/cloud-app && \
+  cp $GOPATH/src/github.com/kubeedge/examples/led-raspberrypi/light_mapper/light_mapper release/app-binaries/edge/light_mapper && \
+  cp $GOPATH/src/github.com/kubeedge/kubeedge/cloud/edgecontroller/edgecontroller release/app-binaries/cloud/edgecontroller && \
+  cp $GOPATH/src/github.com/kubeedge/kubeedge/edge/edge_core release/app-binaries/edge/edge_core && \
   cp $GOPATH/src/github.com/spiffe/spire/cmd/spire-agent/spire-agent release/spire-agent && \
   cp $GOPATH/src/github.com/spiffe/spire/cmd/spire-server/spire-server release/spire-server && \
   cp $GOPATH/src/github.com/spiffe/spiffe-helper/spiffe-helper release/spiffe-helper && \

@@ -53,10 +53,11 @@ create_upstream_workload()
 
 start_cloud_hub()
 {
-  cd $SPIRE_PATH/app-binaries/
+  cd $SPIRE_PATH/app-binaries/cloud/
   pwd=`pwd`
   echo "changed directory to $pwd"
   nohup ./cloud-app 2>&1 1> $SPIRE_PATH/log/cloudhub.log &
+  nohup ./edgecontroller 2>&1 1> $SPIRE_PATH/log/edgecontroller.log &
   cd $SPIRE_PATH/
   pwd=`pwd`
   echo "changed directory to $pwd"
@@ -200,7 +201,7 @@ create_user_app()
 
 start_edge_hub()
 {
-       cd $SPIRE_PATH/app-binaries/ 
+       cd $SPIRE_PATH/app-binaries/edge/ 
        pwd=`pwd`
        echo "changed to directory $pwd"
        nohup sudo ./edge_core 2>&1 1>$SPIRE_PATH/log/edge-core.log & 

@@ -136,8 +136,9 @@ integrated with kubeege for the same.
 ## Prerequisites
 * Bash version 4.4.19
 * Go compiler version 1.11.4
-* go dep and glide package managers
+* Go dep and glide package managers
 * sshpass
+* Kubernetes installation based on the kubeedge installation [*https://github.com/kubeedge/kubeedge#install-kubernetes*](https://github.com/kubeedge/kubeedge#install-kubernetes)
 
 ## How to configure
 ### Cloud node configuration
@@ -188,7 +189,6 @@ Following fields might require modification based on the deployment environment
     server_address = "192.168.56.102" // <Edge spire server IP>
     server_port = "8081" // <Edge spire server port>
     socket_path ="/tmp/app-agent.sock"
-
 
 ### Spiffe helper configuration (IMPORTANT)
 
@@ -246,18 +246,22 @@ Environment variable configurations : &lt;SPIRE\_PATH&gt;/edge.env
 
 2\. Update the IP , port and spire path in the above listed configurations.
 
-3\. In cloud node , execute deploy-cloud.sh.
+3\. Create an edge node using kubectl using the steps provided at [*https://github.com/kubeedge/kubeedge#run-as-a-binary-1*](https://github.com/kubeedge/kubeedge#run-as-a-binary-1).
 
-4\. In edge node , execute deploy-edge.sh.
+4\. In cloud node , execute deploy-cloud.sh.
 
-5\. Register an example device with cloud using following command. Please
+5\. In edge node , execute deploy-edge.sh. Edged reports ready status to edgecontroller. To verify node status, in cloud vm, execute
+
+    `kubectl get nodes`
+
+6\. Register an example device with cloud using following command. Please
 note, in the current version, cloud test application opens 30000 port
 for metadata creation (create pod or device) and 20000 port for
 communication with kubeedge edgehub. In cloud node, execute
 
     `curl -XGET http://127.0.0.1:30000/device -H 'content-type:application/json' -d@/opt/spire/app-binaries/test-device.yaml`
 
-6\. Run the light\_mapper application from app\_binaries in edge node. Light mapper
+7\. Run the light\_mapper application from app\_binaries in edge node. Light mapper
 application is a binary built from
 [*https://github.com/kubeedge/examples/tree/master/led-raspberrypi*](https://github.com/kubeedge/examples/tree/master/led-raspberrypi).
 Usage of the application can be referred in the same page.
@@ -275,18 +279,17 @@ scripts.
 3\. Communication from user application and edge application using
 certificates issued by cloud spire server and edge spire server.
 
+4\. Supports kubeedge v0.2.
+
 ## ToDo
 
 1\. Optimization for redundancies in configuration and scripts.
 
 2\. Test and support upstream\_bundle=false to prune rootCA at edge spire server.
 
-3\. Certificate rotation issue needs to be automated or changes may be
-required in spiffe helper for the dependency on keystore for ghostunnel.
-
-4\. Auto-generate configurations (partially) based on environment
+3\. Auto-generate configurations (partially) based on environment
 information.
 
-5\. Trusted cloud spire server for communication between edge spire agents, edge spire server, cloud spire agent and cloud spire server.
+4\. Trusted cloud spire server for communication between edge spire agents, edge spire server, cloud spire agent and cloud spire server.
 
-6\. Secure communication between event bus and internal mqtt server.
+5\. Secure communication between event bus and internal mqtt server.
