@@ -13,6 +13,10 @@ ret=$(sed -i "s#address: 0.0.0.0#address: $CLOUD_HUB_IP#" ./app-binaries/cloud/c
 ret=$(sed -i "s#192.168.56.101#$CLOUD_VM_IP#" ./conf/agent/agent.conf) 
 
 #spire server config
+if [ ! -f ./conf/server/server.conf.bk ]; then
+  cp ./conf/server/server.conf ./conf/server/server.conf.bk
+fi
+
 echo "\
 plugins {
     UpstreamCA \"disk\" {

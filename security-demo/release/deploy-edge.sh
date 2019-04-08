@@ -12,6 +12,7 @@ clean()
 	rm /opt/spire/certs/*
 	rm /opt/spire/user-app/certs/*
 	rm /opt/spire/event-bus/certs/*
+  cp /opt/spire/conf/server/server.conf.bk /opt/spire/conf/server/server.conf
 }
 
 check_command_status()
@@ -77,7 +78,7 @@ $COMMAND_PATH/commands.sh edge-app-node &>> deploy-edge.log
 check_command_status edge-app-node $?
 echo "..Waiting for edge downstream server to be initialized .." | tee -a deploy-edge.log
 echo ""
-sleep 5
+sleep 10
 
 echo "*Start edge core components. Components include sidecars (Spiffe-helper - for certificate acquisition rotation, ghostunnel - for mTLS tunnel) " | tee -a deploy-edge.log
 echo "*Workload attestation is performed against the unique selectors \"unix:uid:1000\"" | tee -a deploy-edge.log

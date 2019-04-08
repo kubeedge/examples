@@ -132,15 +132,8 @@ integrated with kubeege for the same.
                     
 * start-spiffe-helper.sh  : Based on the configuration (helper.conf) , starts spiffe-helper communication for certificate download and rotation. Ghostunnel is run using spiffe-helper.
 * commands.sh  : Abstracts spire cli commands.
- 
-## Prerequisites
-* Bash version 4.4.19
-* Go compiler version 1.11.4
-* Go dep and glide package managers
-* sshpass
-* Kubernetes installation based on the kubeedge installation [*https://github.com/kubeedge/kubeedge#install-kubernetes*](https://github.com/kubeedge/kubeedge#install-kubernetes)
 
-## How to configure
+## Configurations Used
 ### Cloud node configuration
 
 *Upstream CA – Cloud spire server configuration:*
@@ -231,14 +224,37 @@ Following is a sample configuration for user-app interface which invokes ghostun
     svidKeyFileName = "svid_key.pem"
     svidBundleFileName = "svid_bundle.pem"
 
+# Deployment of example setup
+## Prerequisites
+* Bash version 4.4.19
+* Go compiler version 1.11.4
+* Go dep and glide package managers
+* sshpass
+* Kubernetes installation based on the kubeedge installation guide [*https://github.com/kubeedge/kubeedge#install-kubernetes*](https://github.com/kubeedge/kubeedge#install-kubernetes)
+
+## How to configure
 ### Script Configurations
 
 Environment variable configurations : &lt;SPIRE\_PATH&gt;/edge.env
 
-    export CLOUD\_VM\_USER=vm1
-    export CLOUD\_VM\_PASS=vm1
-    export CLOUD\_VM\_IP=192.168.56.101
-    export SPIRE\_PATH=/opt/spire
+    export CLOUD_VM_USER=vm1
+    export CLOUD_VM_PASS=<cloud vm password used for ssh>
+    export CLOUD_VM_IP=192.168.56.101
+    export SPIRE_PATH=/opt/spire
+    export NODE_ID=fakenodeid
+    export PROJECT_ID=dummyprojectid
+    export MQTT_EXT_PORT=2883
+    export MQTT_INT_PORT=2884
+    export EDGE_HUB_IP=127.0.0.1
+    export EDGE_HUB_PORT=20000
+    export EDGE_VM_IP=192.168.56.102
+
+Environment variable configurations : &lt;SPIRE\_PATH&gt;/cloud.env
+    
+    export CLOUD_HUB_IP=127.0.0.1
+    export CLOUD_HUB_PORT=20000
+    export KUBECONFIG="/home/vm1/.kube/config"
+    export CLOUD_VM_IP=192.168.56.101
 
 ## How to setup and use
 

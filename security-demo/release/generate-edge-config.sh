@@ -13,7 +13,7 @@ ret=$(sed -i "s#wss://0.0.0.0:10000#wss://$EDGE_HUB_IP:$EDGE_HUB_PORT#" ./app-bi
 
 #spire agent config
 ret=$(sed -i "s#bind_address = \"192.168.56.101\"#bind_address = \"$EDGE_VM_IP\"#" ./conf/agent/agent.conf) 
-ret=$(sed -i "s#server_address = \"192.168.56.101\"#bind_address = \"$CLOUD_VM_IP\"#" ./conf/agent/agent.conf) 
+ret=$(sed -i "s#server_address = \"192.168.56.101\"#server_address = \"$CLOUD_VM_IP\"#" ./conf/agent/agent.conf) 
 
 #app spire agent config
 ret=$(sed -i "s#192.168.56.102#$EDGE_VM_IP#" ./app-agent-conf/agent/agent.conf)
@@ -25,19 +25,25 @@ ret=$(sed -i "s#192.168.56.102#$EDGE_VM_IP#" ./event-bus/event-bus-helper.conf)
 ret=$(sed -i "s#192.168.56.102#$EDGE_VM_IP#" ./user-app/user-app-helper.conf)
 
 #spire server config
-ret=$(sed -i "s#\"disk\"#\"spire\"#" ./conf/server/server.conf)
+if [ ! -f ./conf/server/server.conf.bk ]; then
+  cp ./conf/server/server.conf ./conf/server/server.conf.bk
+fi
+
 echo "\
 plugins {
     UpstreamCA \"spire\" {
         plugin_data {
-            server_address: \"$CLOUD_VM_IP\"
-            server_port: \"8081\"
-            workload_api_socket: \"/tmp/agent.sock\"
-          }
+            server_address = \"$CLOUD_VM_IP\"
+            server_port = \"8081\"
+            workload_api_socket = \"/tmp/agent.sock\"
+        }
     }
 }" >> ./conf/server/server.conf
 
 #cloud hub helper config
-ret=$(sed -i "s#127.0.0.1:20000#$CLOUD_VM_IP:40000#" ./helper.conf) 
 ret=$(sed -i "s#192.168.56.101:40000#$EDGE_HUB_IP:$EDGE_HUB_PORT#" ./helper.conf) 
+ret=$(sed -i "s#127.0.0.1:20000#$CLOUD_VM_IP:40000#" ./helper.conf) 
+ret=$(sed -i "s#server#client#" ./helper.conf) 
+ret=$(sed -i "s#--allow-uri-san#--verify-spiffe-id#" ./helper.conf) 
+ret=$(sed -i "s#spiffe://example.org/upstream-edgeapp-edge-hub#spiffe://example.org/upstream-app-cloud-hub#" ./helper.conf) 
 

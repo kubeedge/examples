@@ -8,6 +8,7 @@ clean()
   rm .data/*
   rm .agentdata/*
   rm certs/*
+  cp /opt/spire/conf/server/server.conf.bk /opt/spire/conf/server/server.conf
 }
 
 check_command_status()
