@@ -37,6 +37,10 @@ date=`date`
 echo "**Started at $date" | tee -a deploy-edge.log
 echo ""
 
+echo "*Generating configurations" | tee -a deploy-edge.log
+echo ""
+$COMMAND_PATH/generate-edge-config.sh
+
 echo "*Start SPIRE agent at edge node which registers and attests edge node to cloud " | tee -a deploy-edge.log
 echo ""
 # register edge node to upstream server

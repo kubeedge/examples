@@ -28,6 +28,10 @@ copy_binaries()
   cp build/cert.crt release/conf/server/dummy_upstream_ca.crt
   cp build/cert.key release/conf/server/dummy_upstream_ca.key
 
+  echo"Copying configuration files..."
+  cp $GOPATH/src/github.com/kubeedge/kubeedge/cloud/edgecontroller/conf/controller.yaml app-binaries/cloud/conf/controller.yaml
+  cp $GOPATH/src/github.com/kubeedge/kubeedge/edge/conf/edge.yaml app-binaries/edge/conf/edge.yaml
+
   echo "Copying libraries..."
   cp $GOPATH/src/github.com/kubeedge/examples/security-demo/cloud-stub/cmd/cloud-app release/app-binaries/cloud/cloud-app && \
   cp $GOPATH/src/github.com/kubeedge/examples/led-raspberrypi/light_mapper/light_mapper release/app-binaries/edge/light_mapper && \

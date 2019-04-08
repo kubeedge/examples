@@ -34,6 +34,10 @@ date=`date`
 echo "**Started at $date" | tee -a deploy-cloud.log
 echo ""
 
+echo "*Generating configurations" | tee -a deploy-cloud.log
+echo ""
+$COMMAND_PATH/generate-cloud-config.sh
+
 echo "*Start SPIRE server at cloud node" | tee -a deploy-cloud.log
 echo ""
 $COMMAND_PATH/commands.sh start-cloud-server &>> deploy-cloud.log
