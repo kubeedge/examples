@@ -19,6 +19,6 @@ func main() {
 
 	stub := cloudhub.NewCloudStub(config)
 
-	//go stub.Start()
+	go stub.Start()
 	stub.PlacementServer()
 }

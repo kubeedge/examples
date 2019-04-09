@@ -1,0 +1,10 @@
+{
+  "kind": "Node",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "fakenodeid",
+    "labels": {
+      "name": "edge-node"
+    }
+  }
+}

@@ -56,7 +56,6 @@ start_cloud_hub()
   cd $SPIRE_PATH/app-binaries/cloud/
   pwd=`pwd`
   echo "changed directory to $pwd"
-  nohup ./cloud-app 2>&1 1> $SPIRE_PATH/log/cloudhub.log &
   nohup ./edgecontroller 2>&1 1> $SPIRE_PATH/log/edgecontroller.log &
   cd $SPIRE_PATH/
   pwd=`pwd`

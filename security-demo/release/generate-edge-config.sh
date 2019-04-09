@@ -9,7 +9,7 @@ ret=$(sed -i "s#e632aba927ea4ac2b575ec1603d56f10#$PROJECT_ID#" ./app-binaries/ed
 ret=$(sed -i "s#1883#$MQTT_EXT_PORT#" ./app-binaries/edge/conf/edge.yaml)
 ret=$(sed -i "s#1884#$MQTT_INT_PORT#" ./app-binaries/edge/conf/edge.yaml)
 
-ret=$(sed -i "s#wss://0.0.0.0:10000#wss://$EDGE_HUB_IP:$EDGE_HUB_PORT#" ./app-binaries/edge/conf/edge.yaml)
+ret=$(sed -i "s#wss://0.0.0.0:10000#ws://$EDGE_HUB_IP:$EDGE_HUB_PORT#" ./app-binaries/edge/conf/edge.yaml)
 
 #spire agent config
 ret=$(sed -i "s#bind_address = \"192.168.56.101\"#bind_address = \"$EDGE_VM_IP\"#" ./conf/agent/agent.conf) 

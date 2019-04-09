@@ -270,14 +270,19 @@ Environment variable configurations : &lt;SPIRE\_PATH&gt;/cloud.env
 
     `kubectl get nodes`
 
-6\. Register an example device with cloud using following command. Please
+## How to test device application
+
+1\. Following hack needs to be used as v0.2 does not support device deployment using kubectl.
+Kill edgecontroller process in cloudvm. Execute cloud-app application located at $SPIRE_PATH/app-binaries/cloud/ folder. 
+
+2\. Register an example device with cloud using following command. Please
 note, in the current version, cloud test application opens 30000 port
 for metadata creation (create pod or device) and 20000 port for
 communication with kubeedge edgehub. In cloud node, execute
 
-    `curl -XGET http://127.0.0.1:30000/device -H 'content-type:application/json' -d@/opt/spire/app-binaries/test-device.yaml`
+    `curl -XGET http://127.0.0.1:30000/device -H 'content-type:application/json' -d@/opt/spire/app-binaries/cloud/test-device.yaml`
 
-7\. Run the light\_mapper application from app\_binaries in edge node. Light mapper
+3\. Run the light\_mapper application from app\_binaries in edge node. Light mapper
 application is a binary built from
 [*https://github.com/kubeedge/examples/tree/master/led-raspberrypi*](https://github.com/kubeedge/examples/tree/master/led-raspberrypi).
 Usage of the application can be referred in the same page.
@@ -303,9 +308,6 @@ certificates issued by cloud spire server and edge spire server.
 
 2\. Test and support upstream\_bundle=false to prune rootCA at edge spire server.
 
-3\. Auto-generate configurations (partially) based on environment
-information.
+3\. Trusted cloud spire server for communication between edge spire agents, edge spire server, cloud spire agent and cloud spire server.
 
-4\. Trusted cloud spire server for communication between edge spire agents, edge spire server, cloud spire agent and cloud spire server.
-
-5\. Secure communication between event bus and internal mqtt server.
+4\. Secure communication between event bus and internal mqtt server.
