@@ -132,14 +132,8 @@ integrated with kubeege for the same.
                     
 * start-spiffe-helper.sh  : Based on the configuration (helper.conf) , starts spiffe-helper communication for certificate download and rotation. Ghostunnel is run using spiffe-helper.
 * commands.sh  : Abstracts spire cli commands.
- 
-## Prerequisites
-* Bash version 4.4.19
-* Go compiler version 1.11.4
-* go dep and glide package managers
-* sshpass
 
-## How to configure
+## Configurations Used
 ### Cloud node configuration
 
 *Upstream CA – Cloud spire server configuration:*
@@ -189,7 +183,6 @@ Following fields might require modification based on the deployment environment
     server_port = "8081" // <Edge spire server port>
     socket_path ="/tmp/app-agent.sock"
 
-
 ### Spiffe helper configuration (IMPORTANT)
 
 Spiffe helper is used to execute ghostunnel for creating communciation
@@ -231,14 +224,37 @@ Following is a sample configuration for user-app interface which invokes ghostun
     svidKeyFileName = "svid_key.pem"
     svidBundleFileName = "svid_bundle.pem"
 
+# Deployment of example setup
+## Prerequisites
+* Bash version 4.4.19
+* Go compiler version 1.11.4
+* Go dep and glide package managers
+* sshpass
+* Kubernetes installation based on the kubeedge installation guide [*https://github.com/kubeedge/kubeedge#install-kubernetes*](https://github.com/kubeedge/kubeedge#install-kubernetes)
+
+## How to configure
 ### Script Configurations
 
 Environment variable configurations : &lt;SPIRE\_PATH&gt;/edge.env
 
-    export CLOUD\_VM\_USER=vm1
-    export CLOUD\_VM\_PASS=vm1
-    export CLOUD\_VM\_IP=192.168.56.101
-    export SPIRE\_PATH=/opt/spire
+    export CLOUD_VM_USER=vm1
+    export CLOUD_VM_PASS=<cloud vm password used for ssh>
+    export CLOUD_VM_IP=192.168.56.101
+    export SPIRE_PATH=/opt/spire
+    export NODE_ID=fakenodeid
+    export PROJECT_ID=dummyprojectid
+    export MQTT_EXT_PORT=2883
+    export MQTT_INT_PORT=2884
+    export EDGE_HUB_IP=127.0.0.1
+    export EDGE_HUB_PORT=20000
+    export EDGE_VM_IP=192.168.56.102
+
+Environment variable configurations : &lt;SPIRE\_PATH&gt;/cloud.env
+    
+    export CLOUD_HUB_IP=127.0.0.1
+    export CLOUD_HUB_PORT=20000
+    export KUBECONFIG="/home/vm1/.kube/config"
+    export CLOUD_VM_IP=192.168.56.101
 
 ## How to setup and use
 
@@ -246,18 +262,27 @@ Environment variable configurations : &lt;SPIRE\_PATH&gt;/edge.env
 
 2\. Update the IP , port and spire path in the above listed configurations.
 
-3\. In cloud node , execute deploy-cloud.sh.
+3\. Create an edge node using kubectl using the steps provided at [*https://github.com/kubeedge/kubeedge#run-as-a-binary-1*](https://github.com/kubeedge/kubeedge#run-as-a-binary-1).
 
-4\. In edge node , execute deploy-edge.sh.
+4\. In cloud node , execute deploy-cloud.sh.
 
-5\. Register an example device with cloud using following command. Please
+5\. In edge node , execute deploy-edge.sh. Edged reports ready status to edgecontroller. To verify node status, in cloud vm, execute
+
+    `kubectl get nodes`
+
+## How to test device application
+
+1\. Following hack needs to be used as v0.2 does not support device deployment using kubectl.
+Kill edgecontroller process in cloudvm. Execute cloud-app application located at $SPIRE_PATH/app-binaries/cloud/ folder. 
+
+2\. Register an example device with cloud using following command. Please
 note, in the current version, cloud test application opens 30000 port
 for metadata creation (create pod or device) and 20000 port for
 communication with kubeedge edgehub. In cloud node, execute
 
-    `curl -XGET http://127.0.0.1:30000/device -H 'content-type:application/json' -d@/opt/spire/app-binaries/test-device.yaml`
+    `curl -XGET http://127.0.0.1:30000/device -H 'content-type:application/json' -d@/opt/spire/app-binaries/cloud/test-device.yaml`
 
-6\. Run the light\_mapper application from app\_binaries in edge node. Light mapper
+3\. Run the light\_mapper application from app\_binaries in edge node. Light mapper
 application is a binary built from
 [*https://github.com/kubeedge/examples/tree/master/led-raspberrypi*](https://github.com/kubeedge/examples/tree/master/led-raspberrypi).
 Usage of the application can be referred in the same page.
@@ -275,18 +300,14 @@ scripts.
 3\. Communication from user application and edge application using
 certificates issued by cloud spire server and edge spire server.
 
+4\. Supports kubeedge v0.2.
+
 ## ToDo
 
 1\. Optimization for redundancies in configuration and scripts.
 
 2\. Test and support upstream\_bundle=false to prune rootCA at edge spire server.
 
-3\. Certificate rotation issue needs to be automated or changes may be
-required in spiffe helper for the dependency on keystore for ghostunnel.
+3\. Trusted cloud spire server for communication between edge spire agents, edge spire server, cloud spire agent and cloud spire server.
 
-4\. Auto-generate configurations (partially) based on environment
-information.
-
-5\. Trusted cloud spire server for communication between edge spire agents, edge spire server, cloud spire agent and cloud spire server.
-
-6\. Secure communication between event bus and internal mqtt server.
+4\. Secure communication between event bus and internal mqtt server.
