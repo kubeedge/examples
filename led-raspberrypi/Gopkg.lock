@@ -13,6 +13,14 @@
   version = "v1.1.1"
 
 [[projects]]
+  branch = "master"
+  digest = "1:1ba1d79f2810270045c328ae5d674321db34e3aae468eb4233883b473c5c0467"
+  name = "github.com/golang/glog"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "23def4e6c14b4da8ac2ed8007337bc5eb5007998"
+
+[[projects]]
   digest = "1:f3a8fd592d6f5355c3a8817ec8552e3ba1fb616799d945c3e56b006e8a26f203"
   name = "github.com/stianeikeland/go-rpio"
   packages = ["."]
@@ -45,6 +53,7 @@
   analyzer-version = 1
   input-imports = [
     "github.com/eclipse/paho.mqtt.golang",
+    "github.com/golang/glog",
     "github.com/stianeikeland/go-rpio",
     "gopkg.in/yaml.v2",
   ]

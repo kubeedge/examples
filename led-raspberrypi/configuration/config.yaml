@@ -1,0 +1,2 @@
+mqtt-mode: 0       # 0 -internal mqtt broker  1 - external mqtt broker
+device-name: led-light-instance-01

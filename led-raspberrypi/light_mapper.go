@@ -3,19 +3,26 @@ package main
 import (
 	"crypto/tls"
 	"encoding/json"
-	"fmt"
+	"errors"
+	"flag"
 	"os"
-	"strconv"
 	"strings"
 	"sync"
 	"time"
 
 	MQTT "github.com/eclipse/paho.mqtt.golang"
+	"github.com/golang/glog"
 
+	"github.com/kubeedge/examples/led-raspberrypi/configuration"
 	"github.com/kubeedge/examples/led-raspberrypi/light_driver"
 )
 
-var (
+const (
+	internalMQTTServer        = "tcp://127.0.0.1:1884"
+	externalMQTTServer        = "tcp://127.0.0.1:1883"
+	modelName                 = "LED-LIGHT"
+	powerStatus               = "power-status"
+	pinNumberConfig           = "gpio-pin-number"
 	DeviceETPrefix            = "$hw/events/device/"
 	DeviceETStateUpdateSuffix = "/state/update"
 	TwinETUpdateSuffix        = "/twin/update"
@@ -29,12 +36,9 @@ var ClientOpts *MQTT.ClientOptions
 var Client MQTT.Client
 var wg sync.WaitGroup
 var deviceTwinResult DeviceTwinUpdate
-
-//deviceID contains the device ID of the device provided as a command-line parameter
-var deviceID = os.Args[1]
-
-//pinNumber contains the pin number of the GPIO is provided as a command-line parameter
-var pinNumber, _ = strconv.ParseInt(os.Args[2], 10, 64)
+var deviceID string
+var pinNumber int64
+var configFile configuration.ReadConfigFile
 
 //Token interface to validate the MQTT connection.
 type Token interface {
@@ -92,12 +96,38 @@ type DeviceTwinUpdate struct {
 	Twin map[string]*MsgTwin `json:"twin"`
 }
 
-// Initiate the MQTT connection
+//usage is responsible for setting up the default settings of all defined command-line flags for glog.
+func usage() {
+	flag.PrintDefaults()
+	os.Exit(2)
+}
+
+//init for getting command line arguments for glog and initiating the MQTT connection
 func init() {
-	ClientOpts = HubClientInit("tcp://127.0.0.1:1884", "eventbus", "", "")
+	flag.Usage = usage
+	// NOTE: This next line is key you have to call flag.Parse() for the command line
+	// options or "flags" that are defined in the glog module to be picked up.
+	flag.Parse()
+	err := configFile.ReadFromConfigFile()
+	if err != nil {
+		glog.Error(errors.New("Error while reading from config file " + err.Error()))
+		os.Exit(1)
+	}
+	var mqttServer string
+	if configFile.MQTTMode == 1 {
+		mqttServer = externalMQTTServer
+	} else {
+		mqttServer = internalMQTTServer
+	}
+	ClientOpts = HubClientInit(mqttServer, "eventbus", "", "")
 	Client = MQTT.NewClient(ClientOpts)
 	if Token_client = Client.Connect(); Token_client.Wait() && Token_client.Error() != nil {
-		fmt.Println("client.Connect() Error is ", Token_client.Error())
+		glog.Error("client.Connect() Error is ", Token_client.Error())
+	}
+	err = LoadConfigMap()
+	if err != nil {
+		glog.Error(errors.New("Error while reading from config map " + err.Error()))
+		os.Exit(1)
 	}
 }
 
@@ -115,19 +145,45 @@ func HubClientInit(server, clientID, username, password string) *MQTT.ClientOpti
 	return opts
 }
 
+func LoadConfigMap() error {
+	var ok bool
+	readConfigMap := configuration.DeviceProfile{}
+	err := readConfigMap.ReadFromConfigMap()
+	if err != nil {
+		return errors.New("Error while reading from config map " + err.Error())
+	}
+	for _, device := range readConfigMap.DeviceInstances {
+		if strings.ToUpper(device.Model) == modelName && strings.ToUpper(device.Name) == strings.ToUpper(configFile.DeviceName) {
+			deviceID = device.ID
+		}
+	}
+	for _, deviceModel := range readConfigMap.DeviceModels {
+		if strings.ToUpper(deviceModel.Name) == modelName {
+			for _, property := range deviceModel.Properties {
+				if strings.ToUpper(property.Name) == pinNumberConfig {
+					if pinNumber, ok = property.DefaultValue.(int64); ok == false {
+						return errors.New(" Error in reading pin number from config map")
+					}
+				}
+			}
+		}
+	}
+	return nil
+}
+
 //changeDeviceState function is used to change the state of the device
 func changeDeviceState(state string) {
-	fmt.Println("Changing the state of the device to online")
+	glog.Info("Changing the state of the device to online")
 	var deviceStateUpdateMessage DeviceStateUpdate
 	deviceStateUpdateMessage.State = state
 	stateUpdateBody, err := json.Marshal(deviceStateUpdateMessage)
 	if err != nil {
-		fmt.Println("Error:   ", err)
+		glog.Error("Error:   ", err)
 	}
 	deviceStatusUpdate := DeviceETPrefix + deviceID + DeviceETStateUpdateSuffix
 	Token_client = Client.Publish(deviceStatusUpdate, 0, false, stateUpdateBody)
 	if Token_client.Wait() && Token_client.Error() != nil {
-		fmt.Println("client.publish() Error in device state update  is ", Token_client.Error())
+		glog.Error("client.publish() Error in device state update  is ", Token_client.Error())
 	}
 }
 
@@ -135,12 +191,12 @@ func changeDeviceState(state string) {
 func changeTwinValue(updateMessage DeviceTwinUpdate) {
 	twinUpdateBody, err := json.Marshal(updateMessage)
 	if err != nil {
-		fmt.Println("Error:   ", err)
+		glog.Error("Error:   ", err)
 	}
 	deviceTwinUpdate := DeviceETPrefix + deviceID + TwinETUpdateSuffix
 	Token_client = Client.Publish(deviceTwinUpdate, 0, false, twinUpdateBody)
 	if Token_client.Wait() && Token_client.Error() != nil {
-		fmt.Println("client.publish() Error in device twin update is ", Token_client.Error())
+		glog.Error("client.publish() Error in device twin update is ", Token_client.Error())
 	}
 }
 
@@ -149,11 +205,11 @@ func syncToCloud(updateMessage DeviceTwinUpdate) {
 	deviceTwinResultUpdate := DeviceETPrefix + deviceID + TwinETCloudSyncSuffix
 	twinUpdateBody, err := json.Marshal(updateMessage)
 	if err != nil {
-		fmt.Println("Error:   ", err)
+		glog.Error("Error:   ", err)
 	}
 	Token_client = Client.Publish(deviceTwinResultUpdate, 0, false, twinUpdateBody)
 	if Token_client.Wait() && Token_client.Error() != nil {
-		fmt.Println("client.publish() Error in device twin update is ", Token_client.Error())
+		glog.Error("client.publish() Error in device twin update is ", Token_client.Error())
 	}
 }
 
@@ -161,14 +217,14 @@ func syncToCloud(updateMessage DeviceTwinUpdate) {
 func OnSubMessageReceived(client MQTT.Client, message MQTT.Message) {
 	err := json.Unmarshal(message.Payload(), &deviceTwinResult)
 	if err != nil {
-		fmt.Println("Error in unmarshalling:  ", err)
+		glog.Error("Error in unmarshalling:  ", err)
 	}
 }
 
 //createActualUpdateMessage function is used to create the device twin update message
 func createActualUpdateMessage(actualValue string) DeviceTwinUpdate {
 	var deviceTwinUpdateMessage DeviceTwinUpdate
-	actualMap := map[string]*MsgTwin{"Power_Status": {Actual: &TwinValue{Value: &actualValue}, Metadata: &TypeMetadata{Type: "Updated"}}}
+	actualMap := map[string]*MsgTwin{powerStatus: {Actual: &TwinValue{Value: &actualValue}, Metadata: &TypeMetadata{Type: "Updated"}}}
 	deviceTwinUpdateMessage.Twin = actualMap
 	return deviceTwinUpdateMessage
 }
@@ -178,11 +234,11 @@ func getTwin(updateMessage DeviceTwinUpdate) {
 	getTwin := DeviceETPrefix + deviceID + TwinETGetSuffix
 	twinUpdateBody, err := json.Marshal(updateMessage)
 	if err != nil {
-		fmt.Println("Error:   ", err)
+		glog.Error("Error:   ", err)
 	}
 	Token_client = Client.Publish(getTwin, 0, false, twinUpdateBody)
 	if Token_client.Wait() && Token_client.Error() != nil {
-		fmt.Println("client.publish() Error in device twin get  is ", Token_client.Error())
+		glog.Error("client.publish() Error in device twin get  is ", Token_client.Error())
 	}
 }
 
@@ -192,7 +248,7 @@ func subscribe() {
 		getTwinResult := DeviceETPrefix + deviceID + TwinETGetResultSuffix
 		Token_client = Client.Subscribe(getTwinResult, 0, OnSubMessageReceived)
 		if Token_client.Wait() && Token_client.Error() != nil {
-			fmt.Println("subscribe() Error in device twin result get  is ", Token_client.Error())
+			glog.Error("subscribe() Error in device twin result get  is ", Token_client.Error())
 		}
 		time.Sleep(1 * time.Second)
 		if deviceTwinResult.Twin != nil {
@@ -204,40 +260,40 @@ func subscribe() {
 
 //equateTwinValue is responsible for equating the actual state of the device to the expected state that has been set
 func equateTwinValue(updateMessage DeviceTwinUpdate) {
-	fmt.Println("Watching on the device twin values for device with deviceID: ", os.Args[1])
+	glog.Info("Watching on the device twin values for device: ",configFile.DeviceName)
 	wg.Add(1)
 	go subscribe()
 	getTwin(updateMessage)
 	wg.Wait()
-	if deviceTwinResult.Twin["Power_Status"].Actual == nil || *deviceTwinResult.Twin["Power_Status"].Expected.Value != *deviceTwinResult.Twin["Power_Status"].Actual.Value {
-		fmt.Println("Expected Value : ", *deviceTwinResult.Twin["Power_Status"].Expected.Value)
-		if deviceTwinResult.Twin["Power_Status"].Actual == nil {
-			fmt.Println("Actual Value: ", deviceTwinResult.Twin["Power_Status"].Actual)
+	if deviceTwinResult.Twin[powerStatus].Actual == nil || *deviceTwinResult.Twin[powerStatus].Expected.Value != *deviceTwinResult.Twin[powerStatus].Actual.Value {
+		glog.Info("Expected Value : ", *deviceTwinResult.Twin[powerStatus].Expected.Value)
+		if deviceTwinResult.Twin[powerStatus].Actual == nil {
+			glog.Info("Actual Value: ", deviceTwinResult.Twin[powerStatus].Actual)
 		} else {
-			fmt.Println("Actual Value: ", *deviceTwinResult.Twin["Power_Status"].Actual.Value)
+			glog.Info("Actual Value: ", *deviceTwinResult.Twin[powerStatus].Actual.Value)
 		}
-		fmt.Println("Equating the actual  value to expected value")
-		switch strings.ToUpper(*deviceTwinResult.Twin["Power_Status"].Expected.Value) {
+		glog.Info("Equating the actual  value to expected value")
+		switch strings.ToUpper(*deviceTwinResult.Twin[powerStatus].Expected.Value) {
 		case "ON":
-			fmt.Println("Turning ON the light")
+			glog.Info("Turning ON the light")
 			//Turn On the light by supplying power on the pin specified
 			lightdriver.TurnON(pinNumber)
 
 		case "OFF":
-			fmt.Println("Turning OFF the light")
+			glog.Info("Turning OFF the light")
 			//Turn Off the light by cutting off power on the pin specified
 			lightdriver.TurnOff(pinNumber)
 
 		default:
-			panic("OOPS!!!!! Attempt to perform invalid operation " + *deviceTwinResult.Twin["Power_Status"].Expected.Value + " on LED light")
+			panic("OOPS!!!!! Attempt to perform invalid operation " + *deviceTwinResult.Twin[powerStatus].Expected.Value + " on LED light")
 		}
-		updateMessage = createActualUpdateMessage(*deviceTwinResult.Twin["Power_Status"].Expected.Value)
+		updateMessage = createActualUpdateMessage(*deviceTwinResult.Twin[powerStatus].Expected.Value)
 		changeTwinValue(updateMessage)
 		time.Sleep(2 * time.Second)
-		fmt.Println("Syncing to cloud.....")
+		glog.Info("Syncing to cloud.....")
 		syncToCloud(updateMessage)
 	} else {
-		fmt.Println("Actual values are in sync with Expected value")
+		glog.Info("Actual values are in sync with Expected value")
 	}
 }
 
