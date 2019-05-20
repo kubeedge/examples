@@ -18,8 +18,6 @@ import (
 )
 
 const (
-	internalMQTTServer        = "tcp://127.0.0.1:1884"
-	externalMQTTServer        = "tcp://127.0.0.1:1883"
 	modelName                 = "LED-LIGHT"
 	powerStatus               = "power-status"
 	pinNumberConfig           = "gpio-pin-number"
@@ -113,13 +111,7 @@ func init() {
 		glog.Error(errors.New("Error while reading from config file " + err.Error()))
 		os.Exit(1)
 	}
-	var mqttServer string
-	if configFile.MQTTMode == 1 {
-		mqttServer = externalMQTTServer
-	} else {
-		mqttServer = internalMQTTServer
-	}
-	ClientOpts = HubClientInit(mqttServer, "eventbus", "", "")
+	ClientOpts = HubClientInit(configFile.MQTTURL, "eventbus", "", "")
 	Client = MQTT.NewClient(ClientOpts)
 	if Token_client = Client.Connect(); Token_client.Wait() && Token_client.Error() != nil {
 		glog.Error("client.Connect() Error is ", Token_client.Error())
@@ -200,19 +192,6 @@ func changeTwinValue(updateMessage DeviceTwinUpdate) {
 	}
 }
 
-//syncToCloud function syncs the updated device twin information to the cloud
-func syncToCloud(updateMessage DeviceTwinUpdate) {
-	deviceTwinResultUpdate := DeviceETPrefix + deviceID + TwinETCloudSyncSuffix
-	twinUpdateBody, err := json.Marshal(updateMessage)
-	if err != nil {
-		glog.Error("Error:   ", err)
-	}
-	Token_client = Client.Publish(deviceTwinResultUpdate, 0, false, twinUpdateBody)
-	if Token_client.Wait() && Token_client.Error() != nil {
-		glog.Error("client.publish() Error in device twin update is ", Token_client.Error())
-	}
-}
-
 // OnSubMessageReceived callback function which is called when message is received
 func OnSubMessageReceived(client MQTT.Client, message MQTT.Message) {
 	err := json.Unmarshal(message.Payload(), &deviceTwinResult)
@@ -260,7 +239,7 @@ func subscribe() {
 
 //equateTwinValue is responsible for equating the actual state of the device to the expected state that has been set
 func equateTwinValue(updateMessage DeviceTwinUpdate) {
-	glog.Info("Watching on the device twin values for device: ",configFile.DeviceName)
+	glog.Info("Watching on the device twin values for device: ", configFile.DeviceName)
 	wg.Add(1)
 	go subscribe()
 	getTwin(updateMessage)
@@ -289,9 +268,6 @@ func equateTwinValue(updateMessage DeviceTwinUpdate) {
 		}
 		updateMessage = createActualUpdateMessage(*deviceTwinResult.Twin[powerStatus].Expected.Value)
 		changeTwinValue(updateMessage)
-		time.Sleep(2 * time.Second)
-		glog.Info("Syncing to cloud.....")
-		syncToCloud(updateMessage)
 	} else {
 		glog.Info("Actual values are in sync with Expected value")
 	}

@@ -1,2 +1,2 @@
-mqtt-mode: 0       # 0 -internal mqtt broker  1 - external mqtt broker
+mqtt-url: tcp://127.0.0.1:1884
 device-name: led-light-instance-01

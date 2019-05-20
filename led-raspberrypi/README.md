@@ -40,14 +40,15 @@ When power is provided in the pin, the LED glows (ON State) and when no power is
 
 2. Clone and run KubeEdge. 
     Please click [KubeEdge Usage](https://github.com/kubeedge/kubeedge/blob/master/docs/getting-started/usage.md) for instructions on the usage of KubeEdge.
+    Please ensure that the kubeedge setup is up and running before execution of step 4 (mentioned below).
 
-3. Clone the led_raspberrypi_demo
+3. Clone the kubeedge/examples repository.
 
        ```shell
                    git clone https://github.com/kubeedge/examples.git $GOPATH/src/github.com/kubeedge/examples
         ```
 
-4. Create the LED device in the cloud, by creating device model and device instance CRDs
+4. Create the LED device model and device instance.
 
        ```shell
                    cd $GOPATH/src/github.com/kubeedge/examples/led-raspberrypi/sample-crds
@@ -57,7 +58,7 @@ When power is provided in the pin, the LED glows (ON State) and when no power is
                    Note: You can change the CRDs to match your requirement
         ```
 
- 5. Update the name of the device (device instance name) created using the device CRD in the previous step along with the MQTT mode using which edge_core is running in the configuration file present at $GOPATH/src/github.com/kubeedge/examples/led-raspberrypi/configuration/config.yaml
+ 5. Update the name of the device (device instance name) created using the device CRD in the previous step along with the MQTT URL using which edge_core is running in the configuration file present at $GOPATH/src/github.com/kubeedge/examples/led-raspberrypi/configuration/config.yaml
  
  6. Build the mapper to run in RaspBerry-Pi.
 

@@ -15,7 +15,7 @@ var CONFIG_FILE_PATH = "configuration/config.yaml"
 //ReadConfigFile is the structure that is used to read the config file to get configuration information from the user
 type ReadConfigFile struct {
 	DeviceName string `yaml:"device-name,omitempty"`
-	MQTTMode   int    `yaml:"mqtt-mode,omitempty"`
+	MQTTURL    string `yaml:"mqtt-url,omitempty"`
 }
 
 // DeviceProfile is structure to store in configMap
