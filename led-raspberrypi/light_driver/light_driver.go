@@ -1,9 +1,9 @@
 package lightdriver
 
 import (
-	"fmt"
 	"os"
 
+	"github.com/golang/glog"
 	"github.com/stianeikeland/go-rpio"
 )
 
@@ -11,7 +11,7 @@ func TurnON(pinNumber int64) {
 	pin := rpio.Pin(pinNumber)
 	// Open and map memory to access gpio, check for errors
 	if err := rpio.Open(); err != nil {
-		fmt.Println(err)
+		glog.Error(err)
 		os.Exit(1)
 	}
 
@@ -28,7 +28,7 @@ func TurnOff(pinNumber int64) {
 	pin := rpio.Pin(pinNumber)
 	// Open and map memory to access gpio, check for errors
 	if err := rpio.Open(); err != nil {
-		fmt.Println(err)
+		glog.Error(err)
 		os.Exit(1)
 	}
 
