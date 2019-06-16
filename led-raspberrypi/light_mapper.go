@@ -244,7 +244,7 @@ func equateTwinValue(updateMessage DeviceTwinUpdate) {
 	go subscribe()
 	getTwin(updateMessage)
 	wg.Wait()
-	if deviceTwinResult.Twin[powerStatus].Actual == nil || *deviceTwinResult.Twin[powerStatus].Expected.Value != *deviceTwinResult.Twin[powerStatus].Actual.Value {
+	if deviceTwinResult.Twin[powerStatus].Expected != nil && ((deviceTwinResult.Twin[powerStatus].Actual == nil) && deviceTwinResult.Twin[powerStatus].Expected != nil || (*deviceTwinResult.Twin[powerStatus].Expected.Value != *deviceTwinResult.Twin[powerStatus].Actual.Value)) {
 		glog.Info("Expected Value : ", *deviceTwinResult.Twin[powerStatus].Expected.Value)
 		if deviceTwinResult.Twin[powerStatus].Actual == nil {
 			glog.Info("Actual Value: ", deviceTwinResult.Twin[powerStatus].Actual)
