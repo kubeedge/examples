@@ -20,7 +20,7 @@ import (
 const (
 	modelName                 = "LED-LIGHT"
 	powerStatus               = "power-status"
-	pinNumberConfig           = "gpio-pin-number"
+	pinNumberConfig           = "GPIO-PIN-NUMBER"
 	DeviceETPrefix            = "$hw/events/device/"
 	DeviceETStateUpdateSuffix = "/state/update"
 	TwinETUpdateSuffix        = "/twin/update"
@@ -35,7 +35,7 @@ var Client MQTT.Client
 var wg sync.WaitGroup
 var deviceTwinResult DeviceTwinUpdate
 var deviceID string
-var pinNumber int64
+var pinNumber float64
 var configFile configuration.ReadConfigFile
 
 //Token interface to validate the MQTT connection.
@@ -153,7 +153,7 @@ func LoadConfigMap() error {
 		if strings.ToUpper(deviceModel.Name) == modelName {
 			for _, property := range deviceModel.Properties {
 				if strings.ToUpper(property.Name) == pinNumberConfig {
-					if pinNumber, ok = property.DefaultValue.(int64); ok == false {
+					if pinNumber, ok = property.DefaultValue.(float64); ok == false {
 						return errors.New(" Error in reading pin number from config map")
 					}
 				}
@@ -256,12 +256,12 @@ func equateTwinValue(updateMessage DeviceTwinUpdate) {
 		case "ON":
 			glog.Info("Turning ON the light")
 			//Turn On the light by supplying power on the pin specified
-			lightdriver.TurnON(pinNumber)
+			lightdriver.TurnON(int64(pinNumber))
 
 		case "OFF":
 			glog.Info("Turning OFF the light")
 			//Turn Off the light by cutting off power on the pin specified
-			lightdriver.TurnOff(pinNumber)
+			lightdriver.TurnOff(int64(pinNumber))
 
 		default:
 			panic("OOPS!!!!! Attempt to perform invalid operation " + *deviceTwinResult.Twin[powerStatus].Expected.Value + " on LED light")

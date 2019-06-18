@@ -15,5 +15,5 @@ spec:
     description: Indicates whether the GPIO pin to which LED is connected 
     type:
       int:
-        accessMode: Read
+        accessMode: ReadOnly
         defaultValue: 18
