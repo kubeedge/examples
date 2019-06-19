@@ -2,13 +2,13 @@
 
 
 Users can make use of KubeEdge platform to connect and control their bluetooth devices, provided, the user is aware of the of the data sheet information for their device.
-Kubernetes Custom Resource Definition (CRD) and KubeEdge bluetooth mapper is being used to support this feature, using which users can control their device from the cloud. Texas Instruments CC2650 SensorTag device is being shown here as an example.
+Kubernetes Custom Resource Definition (CRD) and KubeEdge bluetooth mapper is being used to support this feature, using which users can control their device from the cloud. Texas Instruments [CC2650 SensorTag device](http://processors.wiki.ti.com/index.php/CC2650_SensorTag_User%27s_Guide) is being shown here as an example.
 
 
 ## Description
 
 KubeEdge support for bluetooth protocol has been demonstrated here by making use of Texas Instruments CC2650 SensorTag device.
-This section contains instructions on how to make use of bluetooth mapper of kubeedge to control CC2650 SensorTag device.  
+This section contains instructions on how to make use of bluetooth mapper of KubeEdge to control CC2650 SensorTag device.
   
   We will only be focusing on the following features of CC2650 :-
   
@@ -32,7 +32,7 @@ This section contains instructions on how to make use of bluetooth mapper of kub
    - Controller
    - Data Converter
   
-  Please click [Bluetooth_Mapper](https://github.com/kubeedge/kubeedge/blob/master/device/bluetooth_mapper/README.md) to understand the features and  the usage of bluetooth mapper.
+  More details on bluetooth mapper can be found [here](https://github.com/kubeedge/kubeedge/blob/master/device/bluetooth_mapper/README.md).
   
   
 ## Prerequisites 
@@ -71,7 +71,7 @@ This section contains instructions on how to make use of bluetooth mapper of kub
  
 4. Please ensure that bluetooth service of your device is ON
 
-5. Set 'bluetooth=true' label for the node (This label is a prerequisite for the scheduler to schedule bluetooth_mapper pod on the node)
+5. Set 'bluetooth=true' label for the node (This label is a prerequisite for the scheduler to schedule bluetooth_mapper pod on the node [which meets the hardware / software prerequisites] )
 
     ```shell
     kubectl label nodes <name-of-node> bluetooth=true
@@ -87,7 +87,7 @@ This section contains instructions on how to make use of bluetooth mapper of kub
 
     ```shell
     cd $GOPATH/src/github.com/kubeedge/kubeedge/device/bluetooth_mapper
-    make # or `make bluetooth_mapper`
+    make bluetooth_mapper_image
     docker tag bluetooth_mapper:v1.0 <your_dockerhub_username>/bluetooth_mapper:v1.0
     docker push <your_dockerhub_username>/bluetooth_mapper:v1.0
     
