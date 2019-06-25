@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    k8s-app: ke-tweeter
+    ke: ke-tweeter
+  name: ke-tweeter
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      k8s-app: ke-tweeter
+      ke: ke-tweeter
+  template:
+    metadata:
+      labels:
+        k8s-app: ke-tweeter
+        ke: ke-tweeter
+    spec:
+      hostNetwork: true
+      containers:
+      - name: ke-tweeter
+        image: rohitsardesai83/ke-tweeter:v0.1
+        volumeMounts:
+        - name: twittersecret
+          mountPath: "/etc/secret"
+          readOnly: true
+        imagePullPolicy: IfNotPresent
+        resources:
+          limits:
+            cpu: 200m
+            memory: 1Gi
+          requests:
+            cpu: 100m
+            memory: 512Mi
+      volumes:
+      - name: twittersecret
+        secret:
+          secretName: twittersecret
+      restartPolicy: Always
