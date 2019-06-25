@@ -18,4 +18,8 @@ spec:
 status:
   twins:
     - propertyName: power-status
+      desired:
+        metadata:
+          type: string
+        value: 'OFF'
 
