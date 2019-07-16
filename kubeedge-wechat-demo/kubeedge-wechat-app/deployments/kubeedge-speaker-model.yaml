@@ -1,0 +1,13 @@
+apiVersion: devices.kubeedge.io/v1alpha1
+kind: DeviceModel
+metadata:
+ name: speaker-model
+ namespace: default
+spec:
+ properties:
+  - name: track
+    description: music track to play
+    type:
+     string:
+      accessMode: ReadWrite
+      defaultValue: ''

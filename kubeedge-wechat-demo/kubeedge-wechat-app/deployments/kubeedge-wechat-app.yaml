@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    k8s-app: kubeedge-wechat-app
+  name: kubeedge-wechat-app
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      k8s-app: kubeedge-wechat-app
+  template:
+    metadata:
+      labels:
+        k8s-app: kubeedge-wechat-app
+    spec:
+      nodeSelector:
+        node-role.kubernetes.io/master: ""
+      hostNetwork: true
+      containers:
+      - name: kubeedge-wechat-app
+        image: xiangxinyong/kubeedge-wechat-app:v2.0
+        volumeMounts:
+        - name: wechatsecret
+          mountPath: "/etc/secret"
+          readOnly: true
+        imagePullPolicy: IfNotPresent
+      volumes:
+      - name: wechatsecret
+        secret:
+          secretName: wechatsecret
+      restartPolicy: Always
