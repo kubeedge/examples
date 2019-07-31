@@ -80,15 +80,15 @@
   version = "v1.1.6"
 
 [[projects]]
-  digest = "1:a2ec4177bad631597b792a5401ffefe5425418feef221ca706bb63e920585492"
+  digest = "1:932840cab55c2d27d9f1ea36115fff570f40ae77fc326522e3d1e299a0d23ba2"
   name = "github.com/kubeedge/kubeedge"
   packages = [
     "cloud/pkg/devicecontroller/apis/devices/v1alpha1",
     "cloud/pkg/devicecontroller/types",
   ]
   pruneopts = "UT"
-  revision = "ed0f102c9d916010c81cd1859d32c4c01e27e92b"
-  version = "v0.3.0"
+  revision = "81f652b559811c3d0a6348dd35c3b213c556d37d"
+  version = "v1.0.0"
 
 [[projects]]
   digest = "1:33422d238f147d247752996a26574ac48dcf472976eda7f5134015f06bf16563"

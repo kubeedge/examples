@@ -19,7 +19,7 @@ and the track is played on the speaker connected to the edge node.
 
 * A running Kubernetes cluster.
 
-* KubeEdge [0.3.0](https://github.com/kubeedge/kubeedge/releases/tag/v0.3.0)
+* KubeEdge [1.0.0](https://github.com/kubeedge/kubeedge/releases/tag/v1.0.0)
   See [instructions](https://github.com/kubeedge/kubeedge/blob/master/docs/getting-started/usage.md#run-kubeedge) on how to setup KubeEdge.
 
   *Note*:
