@@ -9,3 +9,4 @@ This repository contains some sample applications and demos to illustrate possib
 | [Security@Edge](security-demo/README.md) | Security at edge using SPIRE for identity management
 [Bluetooth-CC2650-demo](bluetooth-CC2650-demo/README.md)     |Controlling a CC2650 SensorTag bluetooth device using KubeEdge platform
 | [Play Music @Edge using WeChat and KubeEdge](kubeedge-wechat-demo/README.md) | Play music at edge based on WeChat and KubeEdge
+| [Play Music @Edge using Web and KubeEdge](kubeedge-web-demo/README.md) | Play music at edge based on Web and KubeEdge

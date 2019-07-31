@@ -1,0 +1,17 @@
+apiVersion: devices.kubeedge.io/v1alpha1
+kind: Device
+metadata:
+  name: speaker-01
+  labels:
+    description: 'Speaker'
+    manufacturer: 'test'
+spec:
+  deviceModelRef:
+    name: speaker-model
+  nodeSelector:
+    nodeSelectorTerms:
+    - matchExpressions:
+      - key: ''
+        operator: In
+        values:
+        - raspberrypi
