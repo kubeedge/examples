@@ -1,0 +1,194 @@
+@charset "UTF-8";
+/* CSS Document */
+
+body {
+	background: rgba(232,234,242,1);
+	font-family: 'Rambla', sans-serif;
+}
+a {
+	color: #00aeff;
+}
+a, a:hover, a:active {
+    outline: 0 none !important;
+}
+h2 {
+	margin-top: 1px;
+}
+input[type="button"] {
+	font-size: 16px;
+}
+.bootstrap-select:not([class*="span"]):not([class*="col-"]):not([class*="form-control"]) {
+    width: 240px;
+}
+.navbar {
+    border-radius: 0px;
+	border: none;
+}
+.navbar-inverse {
+    background: rgba(52,50,61,0.95);
+    border-color: #080808;
+}
+.navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:hover, .navbar-inverse .navbar-nav > .active > a:focus {
+    background-color: rgba(0,0,0,0.5);
+    color: #FFFFFF;
+}
+.navbar-inverse .navbar-brand {
+    color: #FFFFFF;
+}
+hr {
+    border-color: rgba(52, 50, 61, 0.3);
+	box-shadow: 0px 1px 0px rgba(255,255,255,1);
+	margin-top: 1px;
+	margin-bottom: 10px;
+}
+.alert {
+	font-size: 18px;
+}
+/*-- Scrolling Background --*/
+#top {
+  background: url(../img/posters.jpg);
+  box-shadow: 0px 0px 180px rgba(0,0,0,1) inset;
+}
+
+/*-- Overide for Responsive Styles --*/
+.row {
+    margin-left: 0px !important;
+    margin-right: 0px !important;
+}
+
+/*-- Code Section Styles --*/
+#code-section {
+	background: rgba(255,255,255,0.5);
+	border-bottom: 1px solid rgba(68,67,80,0.2);
+	box-shadow: 0px 1px 0px rgba(255,255,255,1.0);
+	padding: 0 0 30px;
+}
+#code-section textarea {
+	width: 90%;
+	min-height: 600px;
+	font-size: 20px;
+	float: left;
+	white-space: pre;
+  	word-wrap: normal;
+  	overflow-x: scroll;
+}
+#code-section {
+	width: 90%;
+	font-size: 20px;
+	float: left;
+}
+
+#code-section {
+	margin: 10px;
+}
+
+/*-- Input Section Styles --*/
+#input-section {
+}
+#input-section textarea {
+	min-height: 500px;
+}
+textarea.pasted-textarea {
+	background: none repeat scroll 0 0 #FAFBFF;
+	font-size: 20px;
+}
+textarea.result-textarea {
+	color: #090;
+	font-size: 18px;
+}
+textarea.form-control {
+    font-size: 18px;
+}
+/*-- Tab Section Styles --*/
+p.nav-text {
+	border-left: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: -1px 0 0 rgba(0, 0, 0, 0.5);
+    color: rgba(255, 255, 255, 0.8);
+    float: left;
+    font-size: 15px;
+    margin: 0;
+    padding: 15px 0 15px 15px;
+}
+.tab-pane {
+	background: #FFFFFF;
+	border-right: 1px solid #DDDDDD;
+	border-bottom: 1px solid #DDDDDD;
+	border-left: 1px solid #DDDDDD;
+	border-radius: 0px 0px 4px 4px;
+	padding: 15px 0;
+	
+}
+.tab-row {
+	 padding: 0 5px;
+}
+.tab-content {
+	padding: 0px 20px 0px 20px;
+}
+.button-row {
+	padding: 10px 0px 0px 0px;
+}
+.nav > li > a:hover, .nav > li > a:focus {
+    background-color: rgba(255,255,255,0.5);
+    text-decoration: none;
+}
+.nav-tabs > li > a {
+	font-size: 18px;
+	text-shadow: 0px 1px 0px #FFFFFF;
+}
+.nav > li > a {
+    padding: 15px 20px;
+}
+
+/*-- Overide for select --*/
+.bootstrap-select.btn-group .btn .filter-option {
+	font-size: 16px;
+}
+
+/*-- Modal --*/
+.modal-button {
+	margin-left: 10px;
+	font-size: 16px;
+	padding: 5px 12px;
+}
+
+.modal-content {
+	width: 800px;
+}
+
+.modal-dialog {
+	width: 800px;
+}
+
+.modal-body {
+	background-color: #E8EAF2;
+	padding: 10px 0px 15px 0px;
+}
+
+.modal-row {
+	 padding: 0px 0px 0px 10px;
+}
+
+.modal-footer {
+	padding: 19px 20px 20px;
+	margin-top: 0px;
+	text-align: right;
+	border-top: 0px solid #e5e5e5;
+}
+
+/*-- Lists --*/
+.list-group-item {
+    font-size: 17px;
+}
+.list-group-item.name {
+	background: none repeat scroll 0 0 #FAFBFF;
+    font-size: 20px;
+    font-weight: bold;
+}
+.list-group-item b {
+	margin: 0px 5px 0px 0px;
+}
+
+/*-- Buoy --*/
+#load-station-button, #load-station-button-json {
+	margin: 0 0 10px !important;
+}
