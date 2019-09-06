@@ -29,19 +29,19 @@ With the Device CRD APIs now installed in the cluster , we now create the device
 - The cloud app in the demo needs to watch KubeEdge tweets. For this the application needs to sign the requests with a Twitter account.
 Follow the steps mentioned here [Guide for reference](https://docs.inboundnow.com/guide/create-twitter-application/) to generate the OAuth credentials. Create a Kubernetes [Secret](https://github.com/rohitsardesai83/ke-twitter-demo) `twittersecret` with the credentials as below : 
 
-```sh
+```console
 kubectl create secret generic twittersecret --from-literal=CONSUMER_KEY=<your_consumer_key> --from-literal=CONSUMER_SECRET=<your_consumer_secret> --from-literal=ACCESS_TOKEN=<your_access_token> --from-literal=ACCESS_TOKEN_SECRET=<your_access_token_secret>
 ```
 
 ### Run the ke-tweeeter app
 - The ke-tweeter-app runs in a VM on the cloud and watches for KubeTweets. It can deployed using a Kubernetes deployment yaml
-```sh
+```console
 $ cd $GOPATH/github.com/ke-twitter-demo/ke-tweeter/deployments/
 $ kubectl create -f ke-tweeter.yaml
 ```
 ### Build the track player app
 - Cross-complie the PiApp which will run on the RPi and play the desired track.
-```sh
+```console
 ~/go/src/github.com/ke-twitter-demo$export GOARCH=arm
 ~/go/src/github.com/ke-twitter-demo$export GOOS="linux"
 ~/go/src/github.com/ke-twitter-demo$export GOARM=6                             #Pls give the appropriate arm version of your device  
@@ -54,13 +54,13 @@ $ kubectl create -f ke-tweeter.yaml
   Run the binary. The app will subscibe to the `$hw/events/device/speaker-01/twin/update/document` topic 
   and when it receives the desired track on the topic, it will play it on the speaker.
 
-```sh
+```console
 $ ./trackplayer
 ```
 
 ### Tweet to play track
 - Login to twitter and tweet the track name you wish to play. Please tweet in the following format : 
-```sh
+```console
 kubeedge play <track>
 ```
 The track info is pushed to the rpi and the track is played on the speaker.
