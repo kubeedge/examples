@@ -55,7 +55,7 @@ cd $GOPATH/src/github.com/kubeedge/examples/led-raspberrypi/sample-crds
 kubectl apply -f led-light-device-model.yaml
 kubectl apply -f led-light-device-instance.yaml
 
-Note: You can change the CRDs to match your requirement
+# Note: You can change the CRDs to match your requirement
 ```
 
  5. Update the name of the device (device instance name) created using the device CRD in the previous step along with the MQTT URL using which edge_core is running in the configuration file present at 
@@ -71,9 +71,11 @@ make # or `make led_light_mapper`
 docker tag led-light-mapper:v1.1 <your_dockerhub_username>/led-light-mapper:v1.1
 docker push <your_dockerhub_username>/led-light-mapper:v1.1
 
-                Note: Before trying to push the docker image to the remote repository please ensure that you have signed into docker from your node, if not please type the followig command to sign in
-                 docker login
-                 # Please enter your username and password when prompted
+# Note: Before trying to push the docker image to the remote repository please ensure that you have signed into docker from your node, if not please type the followig command to sign in
+
+docker login
+
+# Please enter your username and password when prompted
 
 ```
  
