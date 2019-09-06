@@ -44,47 +44,50 @@ When power is provided in the pin, the LED glows (ON State) and when no power is
 
 3. Clone the kubeedge/examples repository.
 
-       ```shell
-                   git clone https://github.com/kubeedge/examples.git $GOPATH/src/github.com/kubeedge/examples
-        ```
+```console
+git clone https://github.com/kubeedge/examples.git $GOPATH/src/github.com/kubeedge/examples
+```
 
 4. Create the LED device model and device instance.
 
-       ```shell
-                   cd $GOPATH/src/github.com/kubeedge/examples/led-raspberrypi/sample-crds
-                   kubectl apply -f led-light-device-model.yaml
-                   kubectl apply -f led-light-device-instance.yaml
+```console
+cd $GOPATH/src/github.com/kubeedge/examples/led-raspberrypi/sample-crds
+kubectl apply -f led-light-device-model.yaml
+kubectl apply -f led-light-device-instance.yaml
 
-                   Note: You can change the CRDs to match your requirement
-        ```
+Note: You can change the CRDs to match your requirement
+```
 
- 5. Update the name of the device (device instance name) created using the device CRD in the previous step along with the MQTT URL using which edge_core is running in the configuration file present at $GOPATH/src/github.com/kubeedge/examples/led-raspberrypi/configuration/config.yaml
+ 5. Update the name of the device (device instance name) created using the device CRD in the previous step along with the MQTT URL using which edge_core is running in the configuration file present at 
+ ```console
+ $GOPATH/src/github.com/kubeedge/examples/led-raspberrypi/configuration/config.yaml
+ ```
  
  6. Build the mapper to run in RaspBerry-Pi.
 
-    ```shell         
-                cd $GOPATH/src/github.com/kubeedge/examples/led-raspberrypi/
-                make # or `make led_light_mapper`
-                docker tag led-light-mapper:v1.1 <your_dockerhub_username>/led-light-mapper:v1.1
-                docker push <your_dockerhub_username>/led-light-mapper:v1.1
+```shell         
+cd $GOPATH/src/github.com/kubeedge/examples/led-raspberrypi/
+make # or `make led_light_mapper`
+docker tag led-light-mapper:v1.1 <your_dockerhub_username>/led-light-mapper:v1.1
+docker push <your_dockerhub_username>/led-light-mapper:v1.1
 
                 Note: Before trying to push the docker image to the remote repository please ensure that you have signed into docker from your node, if not please type the followig command to sign in
                  docker login
                  # Please enter your username and password when prompted
 
-    ```
+```
  
  7. Deploy the light mapper.
         
-    ```shell
-                cd $GOPATH/src/github.com/kubeedge/examples/led-raspberrypi/
+```console
+cd $GOPATH/src/github.com/kubeedge/examples/led-raspberrypi/
 
-                # Please enter the following details in the deployment.yaml :-
-                #    1. Replace <edge_node_name> with the name of your edge node at spec.template.spec.voluems.configMap.name
-                #    2. Replace <your_dockerhub_username> with your dockerhub username at spec.template.spec.containers.image
+# Please enter the following details in the deployment.yaml :-
+#    1. Replace <edge_node_name> with the name of your edge node at spec.template.spec.voluems.configMap.name
+#    2. Replace <your_dockerhub_username> with your dockerhub username at spec.template.spec.containers.image
 
-                kubectl create -f deployment.yaml
-     ```
+kubectl create -f deployment.yaml
+```
  
   8. Change the device Twin attribute (expected value) "power-state" of the device to "ON" to turn on the light, and
  "OFF" to turn off the light using the device CRDs. The mapper will control the LED to match the state mentioned in the cloud and also report back
