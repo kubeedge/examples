@@ -38,7 +38,7 @@ There are many frameworks like Hadoop, Spark, Flink, Google Cloud Dataflow etc f
 ### Deploy pipeline application:
 For demo 1.1:
 Pull the docker image from dockerhub by using following command
-```shell
+```console
    $ sudo docker pull containerise/ke_apache_beam:ke_apache_analysis_v1.1
 ```
 For demo 1.2:
@@ -47,7 +47,7 @@ Pull the docker image from dockerhub by using following command
    $ sudo docker pull containerise/ke_apache_beam:ke_apache_analysis_v1.2
 ```
 Run the command
-```shell
+```console
    $ docker images
 ```
 This will shows all images created. Check image named ke_apache_analysis_v1.1 or ke_apache_analysis_v1.2
@@ -55,23 +55,23 @@ This will shows all images created. Check image named ke_apache_analysis_v1.1 or
 Follows steps from [here](https://github.com/kubeedge/kubeedge/blob/master/README.md) to setup prerequisite environment.
 	
 Try out a application deployment by following below steps.
-```shell
+```console
    $ kubectl apply -f examples/KE-Apache-Beam-Analysis/KE-Apache-Beam-Deployment.yaml
 ```
 Then you can use below command to check if the application is normally running.
-```shell
+```console
 kubectl get pods
 ```
 
 To check result, publish dummy data by using [testmachine](MQTT_Publisher/testmachine.go). 
 
 Add following vendor packages:
-```shell
+```console
    $ go get -u github.com/yosssi/gmq/mqtt
    $ go get -u github.com/yosssi/gmq/mqtt/client
 ```
 run:
-```shell
+```console
    $ go build testmachine.go
    $ ./testmachine
 ```
