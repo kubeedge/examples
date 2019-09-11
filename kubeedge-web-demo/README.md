@@ -37,8 +37,8 @@ and the track is played on the speaker connected to the edge node.
 
 ### Clone demo code
 
-```sh
-$ git clone https://github.com/kubeedge/examples
+```console
+ git clone https://github.com/kubeedge/examples
 ```
 
 ### Create the device model and device instance for the speaker
@@ -46,10 +46,10 @@ $ git clone https://github.com/kubeedge/examples
 With the Device CRD APIs now installed in the cluster,
 we create the device model and instance for the speaker using the yaml files.
 
-```sh
-$ cd $GOPATH/src/github.com/kubeedge/examples/kubeedge-web-demo/kubeedge-web-app/deployments/
-$ kubectl create -f kubeedge-speaker-model.yaml
-$ kubectl create -f kubeedge-speaker-instance.yaml
+```console
+ cd $GOPATH/src/github.com/kubeedge/examples/kubeedge-web-demo/kubeedge-web-app/deployments/
+ kubectl create -f kubeedge-speaker-model.yaml
+ kubectl create -f kubeedge-speaker-instance.yaml
 ```
 
 ### Run KubeEdge Web App
@@ -57,23 +57,23 @@ $ kubectl create -f kubeedge-speaker-instance.yaml
 The KubeEdge Web App runs in a VM on cloud.
 It can be deployed using a Kubernetes deployment yaml.
 
-```sh
-$ cd $GOPATH/src/github.com/kubeedge/examples/kubeedge-web-demo/kubeedge-web-app/deployments/
-$ kubectl create -f kubeedge-web-app.yaml
+```console
+ cd $GOPATH/src/github.com/kubeedge/examples/kubeedge-web-demo/kubeedge-web-app/deployments/
+ kubectl create -f kubeedge-web-app.yaml
 ```
 
 ### Build PI Player App
 
 Cross-complie the PI Player App which will run on the RaspBerry PI and play the expected track.
 
-```sh
-$ cd $GOPATH/src/github.com/kubeedge/examples/kubeedge-web-demo/pi-player-app/
-$ export GOARCH=arm
-$ export GOOS="linux"
-$ export GOARM=6
-$ export CGO_ENABLED=1
-$ export CC=arm-linux-gnueabi-gcc
-$ go build -o pi-player-app main.go
+```console
+ cd $GOPATH/src/github.com/kubeedge/examples/kubeedge-web-demo/pi-player-app/
+ export GOARCH=arm
+ export GOOS="linux"
+ export GOARM=6
+ export CGO_ENABLED=1
+ export CC=arm-linux-gnueabi-gcc
+ go build -o pi-player-app main.go
 ```
 
 ### Run PI Player App
@@ -91,8 +91,8 @@ If not, please see the following link to setup `omxplayer`.
 
 https://raspberry-projects.com/pi/software_utilities/media-players/omxplayer
 
-```sh
-$ ./pi-player-app
+```console
+ ./pi-player-app
 ```
 
 ### Play music by visiting Web App Page

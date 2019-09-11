@@ -55,58 +55,60 @@ This section contains instructions on how to make use of bluetooth mapper of Kub
 
 2. Clone the kubeedge/examples repository.
 
-       ```shell
-                   git clone https://github.com/kubeedge/examples.git $GOPATH/src/github.com/kubeedge/examples
-        ```
+```console
+           git clone https://github.com/kubeedge/examples.git $GOPATH/src/github.com/kubeedge/examples
+```
 
 3. Create the CC2650 SensorTag device model and device instance.
 
-       ```shell
-                   cd $GOPATH/src/github.com/kubeedge/examples/bluetooth-CC2650-demo/sample-crds
-                   kubectl apply -f CC2650-device-model.yaml
-                   kubectl apply -f CC2650-device-instance.yaml
+```console
+           cd $GOPATH/src/github.com/kubeedge/examples/bluetooth-CC2650-demo/sample-crds
+           kubectl apply -f CC2650-device-model.yaml
+           kubectl apply -f CC2650-device-instance.yaml
 
-                   Note: You can change the CRDs to match your requirement
-        ```
+           Note: You can change the CRDs to match your requirement
+```
  
 4. Please ensure that bluetooth service of your device is ON
 
 5. Set 'bluetooth=true' label for the node (This label is a prerequisite for the scheduler to schedule bluetooth_mapper pod on the node [which meets the hardware / software prerequisites] )
 
-    ```shell
-    kubectl label nodes <name-of-node> bluetooth=true
-    ```
+```console
+kubectl label nodes <name-of-node> bluetooth=true
+```
 
 6. Copy the configuration file that has been provided, into its correct path. Please note that the configuration file can be altered as to suit your requirement
 
-    ```shell
-    cp $GOPATH/src/github.com/kubeedge/examples/bluetooth-CC2650-demo/config.yaml  $GOPATH/src/github.com/kubeedge/kubeedge/device/bluetooth_mapper/configuration/
-    ``` 
+```console
+cp $GOPATH/src/github.com/kubeedge/examples/bluetooth-CC2650-demo/config.yaml  
+
+$GOPATH/src/github.com/kubeedge/kubeedge/device/bluetooth_mapper/configuration/
+``` 
 
 7. Build the mapper by following the steps given below.
 
-    ```shell
-    cd $GOPATH/src/github.com/kubeedge/kubeedge/device/bluetooth_mapper
-    make bluetooth_mapper_image
-    docker tag bluetooth_mapper:v1.0 <your_dockerhub_username>/bluetooth_mapper:v1.0
-    docker push <your_dockerhub_username>/bluetooth_mapper:v1.0
-    
-    Note: Before trying to push the docker image to the remote repository please ensure that you have signed into docker from your node, if not please type the followig command to sign in
-    docker login
-    # Please enter your username and password when prompted
-    ```
+```console
+cd $GOPATH/src/github.com/kubeedge/kubeedge/device/bluetooth_mapper
+make bluetooth_mapper_image
+docker tag bluetooth_mapper:v1.0 <your_dockerhub_username>/bluetooth_mapper:v1.0
+docker push <your_dockerhub_username>/bluetooth_mapper:v1.0
+
+Note: Before trying to push the docker image to the remote repository please ensure that you have signed into docker from your node, if not please type the followig command to sign in
+docker login
+# Please enter your username and password when prompted
+```
 
 8. Deploy the mapper by following the steps given below.
 
-    ```shell
-    cd $GOPATH/src/github.com/kubeedge/kubeedge/device/bluetooth_mapper
-    
-    # Please enter the following details in the deployment.yaml :-
-    #    1. Replace <edge_node_name> with the name of your edge node at spec.template.spec.voluems.configMap.name
-    #    2. Replace <your_dockerhub_username> with your dockerhub username at spec.template.spec.containers.image
-    
-    kubectl create -f deployment.yaml
-    ```
+```console
+cd $GOPATH/src/github.com/kubeedge/kubeedge/device/bluetooth_mapper
+
+# Please enter the following details in the deployment.yaml :-
+#    1. Replace <edge_node_name> with the name of your edge node at spec.template.spec.voluems.configMap.name
+#    2. Replace <your_dockerhub_username> with your dockerhub username at spec.template.spec.containers.image
+
+kubectl create -f deployment.yaml
+```
 
 9. Turn ON the CC2650 SensorTag device  
 
