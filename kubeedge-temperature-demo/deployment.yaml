@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: temperature-mapper
+  labels:
+    app: temperature
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: temperature
+  template:
+    metadata:
+      labels:
+        app: temperature
+    spec:
+      hostNetwork: true
+      nodeSelector:
+        name: "raspberry-pi"
+      containers:
+      - name: temperature
+        image: kubeedge/temperature-mapper-demo:arm32
+        imagePullPolicy: IfNotPresent
+        securityContext:
+          privileged: true

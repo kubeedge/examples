@@ -1,0 +1,25 @@
+language: go
+go:
+  - "1.12"
+#  - "tip"
+
+# first part of the GOARCH workaround
+# setting the GOARCH directly doesn't work, since the value will be overwritten later
+# so set it to a temporary environment variable first
+env:
+  global:
+    TRAVIS_CGO_ENABLED=1
+    TRAVIS_GOOS=linux
+  matrix:
+    - TRAVIS_GOARCH=amd64
+    - TRAVIS_GOARCH=arm TRAVIS_CC=arm-linux-gnueabi-gcc TRAVIS_GOARM=6
+
+# second part of the GOARCH workaround
+# now actually set the GOARCH env variable to the value of the temporary variable set earlier
+before_install:
+  - sudo apt-get install gcc-arm-linux-gnueabi # for CGO ARM cross compile
+  - export CGO_ENABLED=$TRAVIS_CGO_ENABLED GOARCH=$TRAVIS_GOARCH GOARM=$TRAVIS_GOARM GOOS=$TRAVIS_GOOS CC=$TRAVIS_CC
+  - go env # for debugging
+  - go tool dist env # for debugging
+  
+  

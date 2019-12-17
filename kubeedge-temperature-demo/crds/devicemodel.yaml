@@ -1,0 +1,13 @@
+apiVersion: devices.kubeedge.io/v1alpha1
+kind: DeviceModel
+metadata:
+  name: temperature-model
+  namespace: default
+spec:
+  properties:
+    - name: temperature-status
+      description: Temperature collected from the edge device
+      type:
+        string:
+          accessMode: ReadOnly
+          defaultValue: ''
