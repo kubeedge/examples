@@ -80,7 +80,7 @@ Cross-complie the PI Player App which will run on the RaspBerry PI and play the 
 
 Make sure the MQTT broker is running on the RaspBerry PI.
 Copy the PI Player App binary to the RaspBerry PI and run it.
-The App will subscibe to the `$hw/events/device/speaker-01/twin/update/document` topic 
+The App will subscribe to the `$hw/events/device/speaker-01/twin/update/document` topic 
 and when it receives the expected track on the topic, it will play it on the speaker.
 At last, you need to copy the music files into the folder `/home/pi/music/` on the RaspBerry PI.
 The music file name is like <track>.mp3, for example: `1.mp3`
