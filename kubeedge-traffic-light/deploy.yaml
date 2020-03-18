@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: traffic-light
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: traffic-light
+  template:
+    metadata:
+      labels:
+        app: traffic-light
+    spec:
+      hostNetwork: true
+      containers:
+      - name: light
+        image: kubeedge/traffic-light:arm32-v1
+        command: ["/traffic/light"]
+        args: ["--device=traffic-light-instance-01"]
+        imagePullPolicy: Always
+        securityContext:
+          privileged: true
+        volumeMounts:
+        - name: config-volume
+          mountPath: /opt/kubeedge/
+      volumes:
+      - name: config-volume
+        configMap:
+          name: device-profile-config-raspberrypi
+      restartPolicy: Always
