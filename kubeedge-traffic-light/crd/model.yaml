@@ -1,0 +1,43 @@
+apiVersion: devices.kubeedge.io/v1alpha1
+kind: DeviceModel
+metadata:
+  name: traffic-light
+  namespace: default
+spec:
+  properties:
+    - name: red
+      description: Indicates whether the led light is ON/OFF
+      type:
+        string:
+          accessMode: ReadWrite
+          defaultValue: 'OFF'
+    - name: yellow
+      description: Indicates whether the yellow light is ON/OFF
+      type:
+        string:
+          accessMode: ReadWrite
+          defaultValue: 'OFF'
+    - name: green
+      description: Indicates whether the green light is ON/OFF
+      type:
+        string:
+          accessMode: ReadWrite
+          defaultValue: 'OFF'
+    - name: red-pin-number
+      description: Indicates red led pin munber
+      type:
+        int:
+          accessMode: ReadOnly
+          defaultValue: 25
+    - name: green-pin-number
+      description: Indicates green led pin munber
+      type:
+        int:
+          accessMode: ReadOnly
+          defaultValue: 23
+    - name: yellow-pin-number
+      description: Indicates rellow led pin munber
+      type:
+        int:
+          accessMode: ReadOnly
+          defaultValue: 24
