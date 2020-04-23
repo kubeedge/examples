@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    k8s-app: kubeedge-counter-app
+  name: kubeedge-counter-app
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      k8s-app: kubeedge-counter-app
+  template:
+    metadata:
+      labels:
+        k8s-app: kubeedge-counter-app
+    spec:
+      nodeSelector:
+        node-role.kubernetes.io/master: ""
+      hostNetwork: true
+      containers:
+      - name: kubeedge-counter-app
+        image: kubeedge/kubeedge-counter-app:v1.0.0
+        imagePullPolicy: IfNotPresent
+      tolerations:
+      - key: node-role.kubernetes.io/master
+        operator: Exists
+        effect: NoSchedule
+      restartPolicy: Always

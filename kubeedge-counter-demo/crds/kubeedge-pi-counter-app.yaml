@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    k8s-app: kubeedge-pi-counter
+  name: kubeedge-pi-counter
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      k8s-app: kubeedge-pi-counter
+  template:
+    metadata:
+      labels:
+        k8s-app: kubeedge-pi-counter
+    spec:
+      nodeSelector:
+        node-role.kubernetes.io/master: ""
+      hostNetwork: true
+      containers:
+      - name: kubeedge-pi-counter
+        image: kubeedge/kubeedge-pi-counter:v1.0.0
+        imagePullPolicy: IfNotPresent
+      nodeSelector:
+        node-role.kubernetes.io/edge: ""
+      restartPolicy: Always
