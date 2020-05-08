@@ -72,7 +72,7 @@ At last, user can get the counter status at cloud side.
 
   ![web ui](./images/web-ui.png)
 
-* Choose `ON` option, and click `Execute`, from edge side, user can see counter start to count.
+* Choose `ON` option, and click `Execute`, then user can see counter start to count by `docker logs -f counter-container-id` at edge side.
 
 * Choose `STATUS` option, then click `Execute` to get the counter status, finally counter status and current counter value will display in web.
 
