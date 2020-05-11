@@ -11,3 +11,4 @@ This repository contains some sample applications and demos to illustrate possib
 | [Play Music @Edge using WeChat and KubeEdge](kubeedge-wechat-demo/README.md) | Play music at edge based on WeChat and KubeEdge
 | [Play Music @Edge using Web and KubeEdge](kubeedge-web-demo/README.md) | Play music at edge based on Web and KubeEdge
 | [Collecting temperature @Edge using KubeEdge](kubeedge-temperature-demo/README.md) | Collecting temperature at edge based KubeEdge
+| [Control pseudo device counter and collect data](kubeedge-counter-demo/README.md) | Control pseudo device counter and collect data based KubeEdge

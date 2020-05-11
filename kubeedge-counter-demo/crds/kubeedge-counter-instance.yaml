@@ -1,0 +1,29 @@
+apiVersion: devices.kubeedge.io/v1alpha1
+kind: Device
+metadata:
+  name: counter
+  labels:
+    description: 'counter'
+    manufacturer: 'test'
+spec:
+  deviceModelRef:
+    name: counter-model
+  nodeSelector:
+    nodeSelectorTerms:
+    - matchExpressions:
+      - key: ''
+        operator: In
+        values:
+        - raspberrypi
+
+status:
+  twins:
+    - propertyName: status
+      desired:
+        metadata:
+          type: string
+        value: 'OFF'
+      reported:
+        metadata:
+          type: string
+        value: '0'
