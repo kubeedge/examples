@@ -31,9 +31,9 @@ There are many frameworks like Hadoop, Spark, Flink, Google Cloud Dataflow etc f
 ![demo1.2](Images/Demo1.2.png "Demo1.2:Reads streaming data from MQTT, filter at regular intervals")
 
 ### Prerequisites
-- Golang(version: 1.11.4)
-- KubeEdge(version: v0.1)
-- Docker(version: 18.06.1-ce)
+- Golang(version: 1.11.4+)
+- KubeEdge(version: v0.1+)
+- Docker(version: 18.06.1-ce+)
 
 ### Deploy pipeline application:
 For demo 1.1:

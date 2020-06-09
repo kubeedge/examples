@@ -21,4 +21,3 @@ spec:
       - name: kubeedge-web-app
         image: kubeedge/kubeedge-web-app:v2.6
         imagePullPolicy: IfNotPresent
-      restartPolicy: Always

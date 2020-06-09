@@ -23,8 +23,7 @@ Counter run at edge side, and user can control it in web from cloud side, also c
 
   add follows `--insecure-port=8080` and `--insecure-bind-address=0.0.0.0` options into */etc/kubernetes/manifests/kube-apiserver.yaml*
 
-* KubeEdge [1.2.1](https://github.com/kubeedge/kubeedge/tree/v1.2.1)  
-  See [instructions](http://docs.kubeedge.io/en/latest/index.html) on how to setup KubeEdge.
+* KubeEdge v1.2.1+
 
 * MQTT Broker is running on Raspi.
 

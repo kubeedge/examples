@@ -20,19 +20,17 @@ and the track is played on the speaker connected to the edge node.
 
 * A running Kubernetes cluster.
 
-* KubeEdge [0.3.0](https://github.com/kubeedge/kubeedge/releases/tag/v0.3.0)
-  See [instructions](https://github.com/kubeedge/kubeedge/blob/master/docs/getting-started/usage.md#run-kubeedge) on how to setup KubeEdge.
+* KubeEdge 0.3.0+
 
   *Note*:
 
   when you setup edgecore on the RaspBerry PI,
-  Please set the `mqtt mode` into `2` [in this line](https://github.com/kubeedge/kubeedge/blob/master/edge/conf/edge.yaml#L4),
-  and replace `0.0.0.0` with your Kubernetes master ip address [in this line](https://github.com/kubeedge/kubeedge/blob/master/edge/conf/edge.yaml#L11).
+  Please set the `mqtt mode` as `2` and replace `0.0.0.0` with your Kubernetes master ip address.
 
 * In order to control the speaker and play the expected track, we need to manage the speaker connected to the RaspBerry PI.
   KubeEdge allows us to manage devices using Kubernetes custom resource definitions.
   The design proposal is [here](https://github.com/kubeedge/kubeedge/blob/master/docs/proposals/device-crd.md).
-  Apply the CRD schema yamls available [here](https://github.com/kubeedge/kubeedge/tree/master/build/crds/devices) using kubectl. 
+  Apply the CRD schema yamls available [here](https://github.com/kubeedge/kubeedge/tree/master/build/crds/devices) using kubectl.
 
 ## Steps to run the demo
 
@@ -95,7 +93,7 @@ $ go build -o pi-player-app main.go
 
 Make sure the MQTT broker is running on the RaspBerry PI.
 Copy the PI Player App binary to the RaspBerry PI and run it.
-The App will subscribe to the `$hw/events/device/speaker-01/twin/update/document` topic 
+The App will subscribe to the `$hw/events/device/speaker-01/twin/update/document` topic
 and when it receives the expected track on the topic, it will play it on the speaker.
 At last, you need to copy the music files into the folder `/home/pi/music/` on the RaspBerry PI.
 The music file name is like <track>.mp3, for example: `1.mp3`
