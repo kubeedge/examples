@@ -2,7 +2,7 @@
 
 ## Background
 
-Security is a paramount requirement for edge computing architecture as security breaches can make a complete organization to come to a halt (IIot) , data breach can lead to privacy issues and also control of the complete edge computing infrastructure. 
+Security is a paramount requirement for edge computing architecture as security breaches can make a complete organization to come to a halt (IIot) , data breach can lead to privacy issues and also control of the complete edge computing infrastructure.
 
 To enable better security, following needs to be satisfied for kubeedge framework
 * Only verified and authorized edge nodes should be able to join cluster and connect to cloud.
@@ -16,8 +16,6 @@ To enable better security, following needs to be satisfied for kubeedge framewor
 The Secure Production Identity Framework For Everyone (SPIFFE) Project defines a framework and set of standards for identifying and securing communications between services.
 SPIFFE enables enterprises to transform their security posture from just protecting the edge to consistently securing all inter-service communications deep within their applications.
 SPIFFE recommends industry standards like TLS and JWT for forming a identity document for every service. The service-level identity AuthN and AuthZ removes the dependency of complex network-level ACL strategies.
-
-More information about SPIFFE can be found at [*https://github.com/spiffe/spiffe*](https://github.com/spiffe/spiffe).
 
 SPIRE (SPIFFE Runtime Environment) is a reference implementation of SPIFFE specification. SPIRE manages identities for node and workloads.
  It provides API for controlling attestation policies and identity issuance and rotation strategies.
@@ -118,18 +116,18 @@ integrated with kubeege for the same.
 * log : Logs for different processes run as part of the example.
 
 ## Scripts
-* deploy-cloud.sh : Deploys cloud part of identity management infrastructure. Used to 
-                    
-                    1) Start cloud spire server.                           
-                    2) Registers cloud node and cloud agent.                           
+* deploy-cloud.sh : Deploys cloud part of identity management infrastructure. Used to
+
+                    1) Start cloud spire server.
+                    2) Registers cloud node and cloud agent.
                     3) Registers and starts cloud hub (test cloud hub command simulator).
 
 * deploy-edge.sh  : Deploys edge part of identity management infrastructure.
-                           
-                    1) Registers edge node and edge agent communication with cloud spire server.                 
-                    2) Registers and starts edge spire server.                           
+
+                    1) Registers edge node and edge agent communication with cloud spire server.
+                    2) Registers and starts edge spire server.
                     3) Registers and starts edge agent for edge to user app communication interface.
-                    
+
 * start-spiffe-helper.sh  : Based on the configuration (helper.conf) , starts spiffe-helper communication for certificate download and rotation. Ghostunnel is run using spiffe-helper.
 * commands.sh  : Abstracts spire cli commands.
 
@@ -226,11 +224,11 @@ Following is a sample configuration for user-app interface which invokes ghostun
 
 # Deployment of example setup
 ## Prerequisites
-* Bash version 4.4.19
-* Go compiler version 1.11.4
+* Bash version 4.4.19+
+* Go compiler version 1.11.4+
 * Go dep and glide package managers
 * sshpass
-* Kubernetes installation based on the kubeedge installation guide [*https://github.com/kubeedge/kubeedge#install-kubernetes*](https://github.com/kubeedge/kubeedge#install-kubernetes)
+* Kubernetes cluster
 
 ## How to configure
 ### Script Configurations
@@ -250,7 +248,7 @@ Environment variable configurations : &lt;SPIRE\_PATH&gt;/edge.env
     export EDGE_VM_IP=192.168.56.102
 
 Environment variable configurations : &lt;SPIRE\_PATH&gt;/cloud.env
-    
+
     export CLOUD_HUB_IP=127.0.0.1
     export CLOUD_HUB_PORT=20000
     export KUBECONFIG="/home/vm1/.kube/config"
@@ -262,7 +260,7 @@ Environment variable configurations : &lt;SPIRE\_PATH&gt;/cloud.env
 
 2\. Update the IP , port and spire path in the above listed configurations.
 
-3\. Create an edge node using kubectl using the steps provided at [*https://github.com/kubeedge/kubeedge#run-as-a-binary-1*](https://github.com/kubeedge/kubeedge#run-as-a-binary-1).
+3\. Create an edge node.
 
 4\. In cloud node , execute deploy-cloud.sh.
 
@@ -273,7 +271,7 @@ Environment variable configurations : &lt;SPIRE\_PATH&gt;/cloud.env
 ## How to test device application
 
 1\. Following hack needs to be used as v0.2 does not support device deployment using kubectl.
-Kill edgecontroller process in cloudvm. Execute cloud-app application located at $SPIRE_PATH/app-binaries/cloud/ folder. 
+Kill edgecontroller process in cloudvm. Execute cloud-app application located at $SPIRE_PATH/app-binaries/cloud/ folder.
 
 2\. Register an example device with cloud using following command. Please
 note, in the current version, cloud test application opens 30000 port
@@ -300,7 +298,7 @@ scripts.
 3\. Communication from user application and edge application using
 certificates issued by cloud spire server and edge spire server.
 
-4\. Supports kubeedge v0.2.
+4\. Supports kubeedge v0.2+.
 
 ## ToDo
 

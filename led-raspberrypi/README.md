@@ -1,13 +1,13 @@
 # Light Mapper
- 
- 
+
+
  ## Description
- 
+
 Light Mapper contains code to control an LED light connected to a raspberry Pi through gpio.
 
 <img src="images/raspberry-pi.png">
-  
-The following diagram has been followed to make the connection with the 
+
+The following diagram has been followed to make the connection with the
 LED in this case :-
 
 <img src="images/raspberry-pi-wiring.png">
@@ -19,27 +19,26 @@ When power is provided in the pin, the LED glows (ON State) and when no power is
 
 
 
-## Prerequisites 
+## Prerequisites
 
 ### Hardware Prerequisites
 
 1. RaspBerry-Pi (RaspBerry-Pi 3 has been used for this demo)
 2. GPIO
-3. Breadboard along with wires 
+3. Breadboard along with wires
 4. LED light
 5. Push Button switch (to test the working condition of the light, this can be skipped if needed)
 
 ### Software Prerequisites
- 
-1. Golang (Version 1.11.4 has been used for this demo)
-2. KubeEdge (Version 0.3 has been used for this demo)
+
+1. Golang 1.11.4+
+2. KubeEdge 0.3+
 
 ## Steps to reproduce
 
-1. Connect the LED to the RaspBerry-Pi using the GPIO as shown in the [circuit diagram](images/raspberry-pi-wiring.png) above.   
+1. Connect the LED to the RaspBerry-Pi using the GPIO as shown in the [circuit diagram](images/raspberry-pi-wiring.png) above.
 
-2. Clone and run KubeEdge. 
-    Please click [KubeEdge Usage](https://github.com/kubeedge/kubeedge/blob/master/docs/getting-started/usage.md) for instructions on the usage of KubeEdge.
+2. Clone and run KubeEdge.
     Please ensure that the kubeedge setup is up and running before execution of step 4 (mentioned below).
 
 3. Clone the kubeedge/examples repository.
@@ -58,14 +57,14 @@ kubectl apply -f led-light-device-instance.yaml
 # Note: You can change the CRDs to match your requirement
 ```
 
- 5. Update the name of the device (device instance name) created using the device CRD in the previous step along with the MQTT URL using which edge_core is running in the configuration file present at 
+ 5. Update the name of the device (device instance name) created using the device CRD in the previous step along with the MQTT URL using which edge_core is running in the configuration file present at
  ```console
  $GOPATH/src/github.com/kubeedge/examples/led-raspberrypi/configuration/config.yaml
  ```
- 
+
  6. Build the mapper to run in RaspBerry-Pi.
 
-```shell         
+```shell
 cd $GOPATH/src/github.com/kubeedge/examples/led-raspberrypi/
 make # or `make led_light_mapper`
 docker tag led-light-mapper:v1.1 <your_dockerhub_username>/led-light-mapper:v1.1
@@ -78,9 +77,9 @@ docker login
 # Please enter your username and password when prompted
 
 ```
- 
+
  7. Deploy the light mapper.
-        
+
 ```console
 cd $GOPATH/src/github.com/kubeedge/examples/led-raspberrypi/
 
@@ -90,9 +89,9 @@ cd $GOPATH/src/github.com/kubeedge/examples/led-raspberrypi/
 
 kubectl create -f deployment.yaml
 ```
- 
+
   8. Change the device Twin attribute (expected value) "power-state" of the device to "ON" to turn on the light, and
  "OFF" to turn off the light using the device CRDs. The mapper will control the LED to match the state mentioned in the cloud and also report back
  the actual state of the light to the cloud after updating.
 
- 
+
