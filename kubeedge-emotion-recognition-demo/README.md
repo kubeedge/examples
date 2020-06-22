@@ -6,6 +6,9 @@ KubeEdge Emotion Recognition is demo of emotion recognition with raspberry Pi. R
 
 <img src="images/raspberry-video.jpg">
 
+## Deployment Diagram 
+
+<img src="images/emotion-recognition-arch.jpg">
 
 ## Prerequisites
 
@@ -29,7 +32,7 @@ git clone https://github.com/kubeedge/examples.git /root/examples
 kubectl apply -f  /root/examples/kubeedge-emotion-recognition-demo/emotion-server.yaml
 ```
 
-2. Deploy Emotion Recognition Client To raspberry Pi.
+3. Deploy Emotion Recognition Client To raspberry Pi.
 
 ```console
 kubectl apply -f  /root/examples/kubeedge-emotion-recognition-demo/emotion-client.yaml
@@ -59,3 +62,5 @@ kubectl apply -f  /root/examples/kubeedge-emotion-recognition-demo/emotion-clien
         hostPath:
           path: /dev/video0        #match your camera device
 ```
+
+**Note:**  Only when a face is detected , the expression will appear on the display. 
