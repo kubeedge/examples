@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels: 
+    app: motion-detection
+  name: motion-detection
+spec:
+  replicas: 1
+  selector:
+    matchLabels: 
+      app: motion-detection
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: motion-detection
+    spec:
+      containers:
+      - name: motion-detection
+        image: motion-detection:dev
+        imagePullPolicy: IfNotPresent
+        command: ["python","-u", "/motion_detection/detec_fram.py","--camera=http://admin:admin@192.168.1.8:8081"]
+        volumeMounts:
+          - name: video-data
+            mountPath: /motion_detection/data/video/
+      restartPolicy: Always
+      volumes:
+        - name: video-data
+          hostPath:
+            path: /data/video
+status: {}

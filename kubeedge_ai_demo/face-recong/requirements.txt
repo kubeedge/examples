@@ -1,0 +1,8 @@
+pillow
+six==1.11.0
+tensorflow==1.8.0
+numpy==1.17.0
+scipy==1.2.0
+opencv_python==3.4.0.12
+scikit_learn==0.23.2
+
