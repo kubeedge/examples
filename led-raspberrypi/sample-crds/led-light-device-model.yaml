@@ -12,7 +12,7 @@ spec:
         accessMode: ReadWrite
         defaultValue: 'OFF'
   - name: gpio-pin-number
-    description: Indicates whether the GPIO pin to which LED is connected 
+    description: Indicates whether the GPIO pin to which LED is connected
     type:
       int:
         accessMode: ReadOnly
