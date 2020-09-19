@@ -1,0 +1,16 @@
+# Installation
+> `npm install --save @types/serialport`
+
+# Summary
+This package contains type definitions for serialport (https://github.com/node-serialport/node-serialport).
+
+# Details
+Files were exported from https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/serialport.
+
+### Additional Details
+ * Last updated: Fri, 15 May 2020 13:12:36 GMT
+ * Dependencies: [@types/node](https://npmjs.com/package/@types/node)
+ * Global values: none
+
+# Credits
+These definitions were written by [Jeremy Foster](https://github.com/codefoster), [Andrew Pearson](https://github.com/apearson), [Cameron Tacklind](https://github.com/cinderblock), and [Doug Brunner](https://github.com/doug-a-brunner).

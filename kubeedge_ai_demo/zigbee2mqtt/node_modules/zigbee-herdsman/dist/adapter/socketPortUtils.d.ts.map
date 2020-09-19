@@ -1,0 +1,1 @@
+{"version":3,"file":"socketPortUtils.d.ts","sourceRoot":"","sources":["../../src/adapter/socketPortUtils.ts"],"names":[],"mappings":"AAAA,iBAAS,SAAS,CAAC,IAAI,EAAE,MAAM,GAAG,OAAO,CAKxC;AAED,iBAAS,YAAY,CAAC,IAAI,EAAE,MAAM,GAAG;IAAC,IAAI,EAAE,MAAM,CAAC;IAAC,IAAI,EAAE,MAAM,CAAA;CAAC,CAMhE;;;;;AAED,wBAAyC"}

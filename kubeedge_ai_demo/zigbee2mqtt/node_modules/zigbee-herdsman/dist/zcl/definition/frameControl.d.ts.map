@@ -1,0 +1,1 @@
+{"version":3,"file":"frameControl.d.ts","sourceRoot":"","sources":["../../../src/zcl/definition/frameControl.ts"],"names":[],"mappings":"AAAA,OAAO,SAAS,MAAM,aAAa,CAAC;AACpC,OAAO,SAAS,MAAM,aAAa,CAAC;AAEpC,UAAU,YAAY;IAClB,YAAY,EAAE,MAAM,CAAC;IACrB,SAAS,EAAE,SAAS,CAAC;IACrB,oBAAoB,EAAE,OAAO,CAAC;IAC9B,SAAS,EAAE,SAAS,CAAC;IACrB,sBAAsB,EAAE,OAAO,CAAC;CACnC;AAED,eAAe,YAAY,CAAC"}

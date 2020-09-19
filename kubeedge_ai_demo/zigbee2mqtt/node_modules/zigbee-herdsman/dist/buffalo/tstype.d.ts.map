@@ -1,0 +1,1 @@
+{"version":3,"file":"tstype.d.ts","sourceRoot":"","sources":["../../src/buffalo/tstype.ts"],"names":[],"mappings":"AAAA,UAAU,OAAO;IACb,MAAM,CAAC,EAAE,MAAM,CAAC;IAEhB,OAAO,CAAC,EAAE;QAAC,CAAC,GAAG,EAAE,MAAM,GAAG,GAAG,CAAA;KAAC,CAAC;CAClC;AAGD,aAAK,KAAK,GAAG,GAAG,CAAC;AAEjB,OAAO,EAAC,OAAO,EAAE,KAAK,EAAC,CAAC"}
