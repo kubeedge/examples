@@ -1,5 +1,6 @@
 # -!- coding: utf-8 -!-
 import json
+import threading
 
 import cv2
 import numpy as np
@@ -11,6 +12,8 @@ import time
 import os
 import sys
 import argparse
+import paho.mqtt.client as mqtt
+import queue
 
 minsize = 20
 threshold = [ 0.6, 0.7, 0.7 ]
@@ -82,9 +85,14 @@ def  main(args,model_dir):
                 compare_list.append(i.split(".")[0])
                 compare_emb.append(np.load(dir+i))
             compare_emb=np.array(compare_emb)
-            print(compare_emb)
+            if (compare_emb.shape[0] == 0):
+                compare_emb = np.zeros([1, 1, 128])
+                compare_list.append("unknown")
+            print( compare_emb.shape)
             cap = cv2.VideoCapture(camera)
             cap.set(3,160)
+            thread = threading.Thread(target=publicInfo, args=(cap,))
+            thread.start()
             while cap.isOpened():
                 fin_obj=[]
                 ok,img=cap.read()
@@ -126,15 +134,18 @@ def  main(args,model_dir):
                                 print(str(dist))
                                 dist_list.append(dist)
                             min_value = min(dist_list)
-                            if (min_value > 1):
+                            if (min_value > 0.9):
                                 fin_obj.append('unknow')
                                 print('unknown')
+                                queue.put('unknown')
                             else:
                                 fin_obj.append(compare_list[dist_list.index(min_value)])
                                 print(compare_list[dist_list.index(min_value)])
+                                queue.put(compare_list[dist_list.index(min_value)])
                     else:
                         for i in range(temp_num):
                             fin_obj.append('unknow')
+                            queue.put('unknown')
                             print('unknown')
 
                     for rec_position in range(temp_num):
@@ -173,6 +184,17 @@ def parse_arguments(argv):
                         help='display or not ',
                         default=False)
     return parser.parse_args(argv)
-
+queue = queue.Queue()
+client = mqtt.Client()
+client.connect("10.28.160.123")
+def publicInfo(stream):
+    while stream.isOpened():
+        for i in range(5):
+            queue.get()
+        if(queue.get()=='unknown'):
+            state="OFF"
+        else:state="ON"
+        client.publish('faceRecon', state)
+        time.sleep(1)
 if __name__ == '__main__':
     main(parse_arguments(sys.argv[1:]),"model/facenet/facenet.pb")
