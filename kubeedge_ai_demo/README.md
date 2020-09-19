@@ -6,7 +6,8 @@ This demo contains two general modeule:AI algorithm moudel and zigbee device mou
 1. CC2531 USB sniffer with firmware has been refreshe
 <img src="./image/cc2531.jpg" width=256 height=256 />
 2. Xiao Mi zigbee power plug ZNCZ02LM
-<img src="./image/switch.jpg" width=256 height=256 />
+<img src="./image/switch.jpg" width=256 height=256 />     
+
 ### Software Prerequisites  
 1. KubeEdge (v1.3.1)  
 ## Steps to reproduce
