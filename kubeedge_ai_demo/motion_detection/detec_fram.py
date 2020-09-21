@@ -4,7 +4,7 @@ import itertools
 import sys
 import threading
 import time
-
+import numpy as np
 import cv2
 
 
@@ -39,7 +39,7 @@ def main(args):
     while camera.isOpened():
         (ret, frame) = camera.read()
         image=frame
-        frame = cv2.resize(frame, (500, 400), interpolation=cv2.INTER_CUBIC)
+        frame = cv2.resize(frame, (640, 480), interpolation=cv2.INTER_CUBIC)
         if lastFrame2 is None:
             if lastFrame1 is None:
                 lastFrame1 = frame
@@ -102,13 +102,17 @@ def storeVideo(num):
     global over
     over = False
     global flag
-    out_fps = 15.0  # 输出文件的帧率
-    fourcc = cv2.VideoWriter_fourcc(*'MP42')
+    out_fps = 20.0  # 输出文件的帧率
+    fourcc = cv2.VideoWriter_fourcc(*'XVID')
     out1 = cv2.VideoWriter('./data/video/' + str(num) + ".avi", fourcc, out_fps, (640,480))
     start = time.time()
     count = 5
+    image0=np.zeros(image.shape)
     while (True):
-        out1.write(image)
+        if(image!=image0).all():
+            out1.write(image)
+            image=image0
+        else:continue
         end = time.time()
         if(flag==False):
             if (end - start >= 10):
