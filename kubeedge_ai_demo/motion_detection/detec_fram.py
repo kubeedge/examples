@@ -48,14 +48,14 @@ def main(args):
                 global frameDelta1
                 frameDelta1 = cv2.absdiff(lastFrame1, lastFrame2)
             continue
-        frameDelta2 = cv2.absdiff(lastFrame2, frame)  # 帧差二
-        thresh = cv2.bitwise_and(frameDelta1, frameDelta2)  # 图像与运算
+        frameDelta2 = cv2.absdiff(lastFrame2, frame)  # 帧差�?
+        thresh = cv2.bitwise_and(frameDelta1, frameDelta2)  # 图像与运�?
         thresh2 = thresh.copy()
-        # 当前帧设为下一帧的前帧,前帧设为下一帧的前前帧,帧差二设为帧差一
+        # 当前帧设为下一帧的前帧,前帧设为下一帧的前前�?帧差二设为帧差一
         lastFrame1 = lastFrame2
         lastFrame2 = frame.copy()
         frameDelta1 = frameDelta2
-        # 结果转为灰度图
+        # 结果转为灰度�?
         thresh = cv2.cvtColor(thresh, cv2.COLOR_BGR2GRAY)
         # 图像二值化
         thresh = cv2.threshold(thresh, 25, 255, cv2.THRESH_BINARY)[1]
@@ -66,16 +66,16 @@ def main(args):
         # 通过像素数量判断是否存在运动物体
         if (List.count(255) > 1000):
             if (count == 5):
-                print("检测到运动物体")
+                print("Moving object detected")
                 flag = True
                 if (over):
-                    print("开始录像")
+                    print("Start the video")
                     num += 1
                     threading.Thread(target=storeVideo, args=(num,)).start()
             else:
                 count = count + 1
         else:
-            print("静止画面")
+            print("Still picture")
             flag = False
             count = 0
         cv2.putText(frame, "FPS:   " + str(fps.__round__(2)), (20, 100),cv2.FONT_ITALIC, 0.8, (0, 255, 0), 1,
@@ -85,10 +85,10 @@ def main(args):
             cv2.imshow("frame", frame)
             cv2.imshow("thresh", thresh)
             cv2.imshow("threst2", thresh2)
-        # 如果q键被按下，跳出循环
+        # 如果q键被按下，跳出循�?
         if cv2.waitKey(200) & 0xFF == ord('q'):
             break
-    # 清理资源并关闭打开的窗口
+    # 清理资源并关闭打开的窗�?
         now = time.time()
         frame_time = now - frame_start_time
         fps = 1.0 / frame_time
@@ -102,7 +102,7 @@ def storeVideo(num):
     global over
     over = False
     global flag
-    out_fps = 20.0  # 输出文件的帧率
+    out_fps = 20.0  # 输出文件的帧�?
     fourcc = cv2.VideoWriter_fourcc(*'XVID')
     out1 = cv2.VideoWriter('./data/video/' + str(num) + ".avi", fourcc, out_fps, (640,480))
     start = time.time()
@@ -123,7 +123,7 @@ def storeVideo(num):
                 else:
                     if (count == 5):
                         over = True
-                        print("录像结束")
+                        print("End of the video")
                         break
                     else:
                         count += 1

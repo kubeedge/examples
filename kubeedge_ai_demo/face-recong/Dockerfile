@@ -1,16 +1,11 @@
-FROM python:3.6-slim-stretch
-RUN  sed -i s@/deb.debian.org/@/mirrors.aliyun.com/@g /etc/apt/sources.list
-RUN  sed -i s@/security.debian.org/@/mirrors.aliyun.com/@g /etc/apt/sources.list
-RUN  apt-get clean
-RUN apt-get -y update && \
-    apt-get install -y --fix-missing \
-    libglib2.0-dev\
-    python-qt4\
-    && apt-get clean && rm -rf /tmp/* /var/tmp/*
+FROM sixsq/opencv-python:master-arm
 
 WORKDIR /code
 COPY . /face-recongition
 WORKDIR /face-recongition
 
-RUN pip  --default-timeout=10000  install -r requirements.txt -i https://pypi.doubanio.com/simple/
-ENTRYPOINT ["python","-u","/face-recongition/face_recong.py"]
+RUN pip  --default-timeout=10000  install -r requirements.txt -i https://mirrors.aliyun.com/pypi/simple
+
+
+RUN pip install https://www.piwheels.org/simple/scikit-learn/scikit_learn-0.21.3-cp35-cp35m-linux_armv7l.whl
+ENTRYPOINT ["python3","-u","/face-recongition/face_recong.py"]

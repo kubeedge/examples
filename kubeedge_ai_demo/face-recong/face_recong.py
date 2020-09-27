@@ -98,7 +98,6 @@ def  main(args,model_dir):
                 ok,img=cap.read()
                 image=cv2.resize(img, (0, 0), fx=0.5, fy=0.5, interpolation=cv2.INTER_NEAREST)
                 kk = cv2.waitKey(1)
-                # 按下 q 键退出 / Press 'q' to quit
                 if kk == ord('q'):
                     break
                 start1=time.time()
@@ -110,13 +109,11 @@ def  main(args,model_dir):
                 #     count=len(bounding_box)
                 #     frame=image
                 end1=time.time()
-                print("提取特征时间："+str(end1-start1))
                 if mark:
                     start2 = time.time()
                     feed_dict = {images_placeholder: crop_image,phase_train_placeholder:False}
                     emb = sess.run(embeddings, feed_dict=feed_dict)
                     end2=time.time()
-                    print("特征计算时间："+str(end2-start2))
                     if kk == ord('s'):
                         name=input("please input your name:")
                         np.save("people/"+name,emb)
@@ -183,10 +180,14 @@ def parse_arguments(argv):
     parser.add_argument('--show', action='store_true',
                         help='display or not ',
                         default=False)
+    parser.add_argument('--broker', type=str,
+                        help='mqtt broker ',
+                        default=False)
     return parser.parse_args(argv)
 queue = queue.Queue()
 client = mqtt.Client()
-client.connect("10.28.160.123")
+broker= parse_arguments(sys.argv[1:]).broker
+client.connect(broker)
 def publicInfo(stream):
     while stream.isOpened():
         for i in range(5):

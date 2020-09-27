@@ -1,8 +1,6 @@
 pillow
-six==1.11.0
+six
 numpy==1.17.0
 scipy==1.0.0
-opencv_python==3.4.0.12
-tensorflow==1.13.0rc1
-paho_mqtt==1.5.0
-scikit_learn==0.23.2
+tensorflow
+paho_mqtt
