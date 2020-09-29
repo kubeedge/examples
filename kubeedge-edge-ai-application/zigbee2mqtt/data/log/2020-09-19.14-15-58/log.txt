@@ -1,0 +1,25 @@
+info  2020-09-19 14:15:58: Logging to console and directory: '/opt/zigbee2mqtt/data/log/2020-09-19.14-15-58' filename: log.txt
+info  2020-09-19 14:15:59: Starting Zigbee2MQTT version 1.14.4 (commit #037d54a)
+info  2020-09-19 14:15:59: Starting zigbee-herdsman...
+info  2020-09-19 14:16:03: zigbee-herdsman started
+info  2020-09-19 14:16:03: Coordinator firmware version: '{"meta":{"maintrel":3,"majorrel":2,"minorrel":6,"product":0,"revision":20190608,"transportrev":2},"type":"zStack12"}'
+info  2020-09-19 14:16:03: Currently 2 devices are joined:
+info  2020-09-19 14:16:03: 0x00158d0005410c75 (0x00158d0005410c75): WXKG12LM - Xiaomi Aqara wireless switch (with gyroscope) (EndDevice)
+info  2020-09-19 14:16:03: 0x00158d0003933562 (0x00158d0003933562): ZNCZ02LM - Xiaomi Mi power plug ZigBee (Router)
+warn  2020-09-19 14:16:03: `permit_join` set to  `true` in configuration.yaml.
+warn  2020-09-19 14:16:03: Allowing new devices to join.
+warn  2020-09-19 14:16:03: Set `permit_join` to `false` once you joined all devices.
+info  2020-09-19 14:16:03: Zigbee: allowing new devices to join.
+info  2020-09-19 14:16:03: Connecting to MQTT server at mqtt://10.28.160.123
+info  2020-09-19 14:16:03: Connected to MQTT server
+info  2020-09-19 14:16:03: MQTT publish: topic 'zigbee2mqtt/bridge/state', payload 'online'
+info  2020-09-19 14:16:03: MQTT publish: topic 'zigbee2mqtt/0x00158d0005410c75', payload '{"battery":100,"linkquality":126,"voltage":3055}'
+info  2020-09-19 14:16:03: MQTT publish: topic 'zigbee2mqtt/0x00158d0003933562', payload '{"consumption":0,"linkquality":147,"power":0,"state":"OFF","temperature":25}'
+info  2020-09-19 14:16:03: MQTT publish: topic 'zigbee2mqtt/bridge/config', payload '{"commit":"037d54a","coordinator":{"meta":{"maintrel":3,"majorrel":2,"minorrel":6,"product":0,"revision":20190608,"transportrev":2},"type":"zStack12"},"log_level":"info","network":{"channel":11,"extendedPanID":"0xdddddddddddddddd","panID":6754},"permit_join":true,"version":"1.14.4"}'
+info  2020-09-19 14:16:27: MQTT publish: topic 'zigbee2mqtt/0x00158d0003933562', payload '{"consumption":0,"linkquality":147,"power":0,"state":"OFF","temperature":25}'
+info  2020-09-19 14:16:27: MQTT publish: topic 'zigbee2mqtt/0x00158d0003933562', payload '{"consumption":0,"linkquality":126,"power":0,"state":"OFF","temperature":25}'
+info  2020-09-19 14:16:57: MQTT publish: topic 'zigbee2mqtt/0x00158d0003933562', payload '{"consumption":0,"linkquality":126,"power":0,"state":"ON","temperature":25}'
+info  2020-09-19 14:16:57: MQTT publish: topic 'zigbee2mqtt/0x00158d0003933562', payload '{"consumption":0,"linkquality":131,"power":0,"state":"ON","temperature":25}'
+info  2020-09-19 14:17:03: MQTT publish: topic 'zigbee2mqtt/bridge/state', payload 'offline'
+info  2020-09-19 14:17:03: Disconnecting from MQTT server
+info  2020-09-19 14:17:04: zigbee-herdsman stopped

@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mapper
+  labels:
+    app: mapper
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mapper
+  template:
+    metadata:
+      labels:
+        app: mapper
+    spec:
+      hostNetwork: true
+      nodeSelector:
+        name: pi
+      containers:
+      - name: mapper
+        image: liwade/mapper:arm32
+        imagePullPolicy: IfNotPresent
+        securityContext:
+          privileged: true
