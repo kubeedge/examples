@@ -16,10 +16,10 @@ spec:
     spec:
       hostNetwork: true
       nodeSelector:
-        name: edge-node1
+        name: pi
       containers:
       - name: zigbee2mqtt
-        image: zigbee2mqtt:v1
+        image: liwade/zigbee2mqtt:arm32
         volumeMounts:
           - name: device
             mountPath: /dev/ttyACM0

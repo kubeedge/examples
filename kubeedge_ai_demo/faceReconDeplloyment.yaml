@@ -16,11 +16,13 @@ spec:
       labels:
         app: face-recon
     spec:
+      nodeSelector:
+        name: pi
       containers:
       - name: face-recon
-        image: face-recon:dev
+        image: liwade/face-recognition:arm32
         imagePullPolicy: IfNotPresent
-        command: ["python","-u","/face-recongition/face_recong.py","--camera=http://admin:admin@192.168.1.8:8081"]
+        command: ["python","-u","/face-recongition/face_recong.py","--camera=http://admin:admin@192.168.1.8:8081","--broker="]
         volumeMounts:
           - name: people
             mountPath: /face-recongition/people

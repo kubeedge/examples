@@ -16,9 +16,11 @@ spec:
       labels:
         app: motion-detection
     spec:
+      nodeSelector:
+        name: pi
       containers:
       - name: motion-detection
-        image: motion-detection:dev
+        image: liwade/motion-detection:arm32
         imagePullPolicy: IfNotPresent
         command: ["python","-u", "/motion_detection/detec_fram.py","--camera=http://admin:admin@192.168.1.8:8081"]
         volumeMounts:
