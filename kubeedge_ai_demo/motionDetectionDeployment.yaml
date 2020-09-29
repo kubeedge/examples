@@ -22,7 +22,7 @@ spec:
       - name: motion-detection
         image: liwade/motion-detection:arm32
         imagePullPolicy: IfNotPresent
-        command: ["python","-u", "/motion_detection/detec_fram.py","--camera=http://admin:admin@192.168.1.8:8081"]
+        command: ["python3","-u", "/motion_detection/detec_fram.py","--camera=http://admin:admin@192.168.1.8:8081"]
         volumeMounts:
           - name: video-data
             mountPath: /motion_detection/data/video/
