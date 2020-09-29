@@ -4,4 +4,3 @@ RUN wget https://project-downloads.drogon.net/wiringpi-latest.deb && dpkg -i wir
 RUN mkdir -p /traffic
 COPY ./light /traffic/
 WORKDIR  traffic
-#ENTRYPOINT ["/traffic/led"]

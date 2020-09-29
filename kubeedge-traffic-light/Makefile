@@ -10,8 +10,6 @@ image: bin
 bin:
 	go build -o light
 
-.PHONY: run 
+.PHONY: run
 run: bin
-	./led
-
-
+	./light
