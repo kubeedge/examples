@@ -9,6 +9,7 @@ This demo contains two general modeule:AI algorithm moudel and zigbee device mou
 <img src="./image/switch.jpg" width=256 height=256 />  
 3. Raspberry pi 4b 
 <img src="./image/raspberrypi.jpg" width=256 height=256 /> 
+
 ### Software Prerequisites  
 1. KubeEdge (v1.4.0)  
 ## Steps to reproduce
