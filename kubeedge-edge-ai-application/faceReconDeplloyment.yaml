@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: face-recon
+  name: face-recon
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: face-recon
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: face-recon
+    spec:
+      nodeSelector:
+        name: pi
+      containers:
+      - name: face-recon
+        image: liwade/face-recognition:arm32
+        imagePullPolicy: IfNotPresent
+        command: ["python3","-u","/face-recongition/face_recong.py","--camera=http://admin:admin@192.168.1.8:8081","--broker="]
+        volumeMounts:
+          - name: people
+            mountPath: /face-recongition/people
+          - name: model
+            mountPath: /face-recongition/model/facenet
+      restartPolicy: Always
+      volumes:
+        - name: people
+          hostPath:
+            path: /people
+        - name: model
+          hostPath:
+            path: /model/facenet
+status: {}

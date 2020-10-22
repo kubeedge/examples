@@ -1,0 +1,4 @@
+info  2020-09-18 16:54:24: Logging to console and directory: '/opt/zigbee2mqtt/data/log/2020-09-18.16-54-24' filename: log.txt
+info  2020-09-18 16:54:24: Starting Zigbee2MQTT version 1.14.4 (commit #037d54a)
+info  2020-09-18 16:54:24: Starting zigbee-herdsman...
+error 2020-09-18 16:54:44: Error while starting zigbee-herdsman

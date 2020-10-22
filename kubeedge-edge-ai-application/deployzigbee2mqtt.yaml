@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zigbee2mqtt
+  labels:
+    app: zigbee2mqtt
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: zigbee2mqtt
+  template:
+    metadata:
+      labels:
+        app: zigbee2mqtt
+    spec:
+      hostNetwork: true
+      nodeSelector:
+        name: pi
+      containers:
+      - name: zigbee2mqtt
+        image: liwade/zigbee2mqtt:arm32
+        volumeMounts:
+          - name: device
+            mountPath: /dev/ttyACM0
+        imagePullPolicy: IfNotPresent
+        securityContext:
+          privileged: true
+      volumes:
+        - name: device
+          hostPath:
+            path: /dev/ttyACM0
