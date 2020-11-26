@@ -34,8 +34,8 @@ This demo contains two general modeule:AI algorithm modules and a zigbee device 
  ```    
 1. The camera information configuration is the same as face recognition
 2. When a moving object appears in front of the camera, the program will record the video and save the result to the local directory /data/video
-### Device moudle
-#### Device&DeviceModel
+### Device module
+#### Device & DeviceModel
 ``` $ cd crds
     $ kubectl apply -f devicemodel.yaml
     $ kubectl apply -f device.yaml
