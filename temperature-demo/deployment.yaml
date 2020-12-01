@@ -16,7 +16,7 @@ spec:
     spec:
       hostNetwork: true
       nodeSelector:
-        name: "raspberry-pi"
+        name: "edge-node"
       containers:
       - name: temperature
         image: kubeedge/temperature-mapper-demo:arm32

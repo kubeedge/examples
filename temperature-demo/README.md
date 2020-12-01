@@ -26,8 +26,8 @@ Depending on the expected state of the temperature sensor, the program collect t
 
 ### Software Prerequisites
 
-1. Golang 1.12+
-2. KubeEdge 1.1+
+1. Golang 1.14+
+2. KubeEdge 1.5+
 
 ## Steps to reproduce
 
@@ -38,23 +38,22 @@ Depending on the expected state of the temperature sensor, the program collect t
 3. Clone the kubeedge/examples repository.
 
 ```console
-git clone https://github.com/kubeedge/examples.git $GOPATH/src/github.com/kubeedge/examples
+$ git clone https://github.com/kubeedge/examples.git $GOPATH/src/github.com/kubeedge/examples
 ```
 
 4. Create the temperature device model and device instance.
 
 ```console
-cd $GOPATH/src/github.com/kubeedge/examples/kubeedge-temperature-demo/crds
-kubectl apply -f devicemodel.yaml
-kubectl apply -f device.yaml
-
-# Note: Update the nodename to your own edge node name in device.yaml.
+$ cd $GOPATH/src/github.com/kubeedge/examples/temperature-demo/crds
+$ kubectl apply -f devicemodel.yaml
+$ sed -i "s#edge-node#<your-edge-node-name>#g" instance.yaml
+$ kubectl apply -f device.yaml
 ```
 
  6. Build the mapper to run in RaspBerry-Pi.
 
 ```shell
-cd $GOPATH/src/github.com/kubeedge/examples/kubeedge-temperature-demo
+cd $GOPATH/src/github.com/kubeedge/examples/temperature-demo
 docker build -t <your_dockerhub_username>/kubeedge-temperature-mapper:<your_tag> .
 docker push <your_dockerhub_username>/kubeedge-temperature-mapper:<your_tag>
 
@@ -64,11 +63,11 @@ docker push <your_dockerhub_username>/kubeedge-temperature-mapper:<your_tag>
  7. Deploy the temperature mapper.
 
 ```console
-cd $GOPATH/src/github.com/kubeedge/examples/kubeedge-temperature-demo/
+cd $GOPATH/src/github.com/kubeedge/examples/temperature-demo/
 
 # Please enter the following details in the deployment.yaml :-
-#    1. Replace <edge_node_name> with the name of your edge node at spec.template.spec.nodeSelector.name
-#    2. Replace <your_image> at spec.template.spec.containers.image
+#    1. Replace "edge-node" with the name of your edge node at spec.template.spec.nodeSelector.name
+#    2. Replace "kubeedge/temperature-mapper-demo:arm32" with your own image at spec.template.spec.containers.image
 
 kubectl create -f deployment.yaml
 ```
