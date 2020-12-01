@@ -46,7 +46,7 @@ With the Device CRD APIs now installed in the cluster,
 we create the device model and instance for the speaker using the yaml files.
 
 ```sh
-$ cd $GOPATH/src/github.com/kubeedge/examples/kubeedge-wechat-demo/kubeedge-wechat-app/deployments/
+$ cd $GOPATH/src/github.com/kubeedge/examples/wechat-demo/kubeedge-wechat-app/deployments/
 $ kubectl create -f kubeedge-speaker-model.yaml
 $ kubectl create -f kubeedge-speaker-instance.yaml
 ```
@@ -71,7 +71,7 @@ The KubeEdge WeChat App runs in a VM on cloud and serve for WeChat.
 It can be deployed using a Kubernetes deployment yaml.
 
 ```sh
-$ cd $GOPATH/src/github.com/kubeedge/examples/kubeedge-wechat-demo/kubeedge-wechat-app/deployments/
+$ cd $GOPATH/src/github.com/kubeedge/examples/wechat-demo/kubeedge-wechat-app/deployments/
 $ kubectl create -f kubeedge-wechat-app.yaml
 ```
 
@@ -80,7 +80,7 @@ $ kubectl create -f kubeedge-wechat-app.yaml
 Cross-complie the PI Player App which will run on the RaspBerry PI and play the expected track.
 
 ```sh
-$ cd $GOPATH/src/github.com/kubeedge/examples/kubeedge-wechat-demo/pi-player-app/
+$ cd $GOPATH/src/github.com/kubeedge/examples/wechat-demo/pi-player-app/
 $ export GOARCH=arm
 $ export GOOS="linux"
 $ export GOARM=6
