@@ -11,7 +11,7 @@ This demo contains two general modeule:AI algorithm moudel and zigbee device mou
 <img src="./image/raspberrypi.jpg" width=256 height=256 /> 
 
 ### Software Prerequisites  
-1. KubeEdge (v1.4.0)  
+1. KubeEdge (v1.4+)
 ## Steps to reproduce
 1. Clone the project 
 2. Run KubEdge
