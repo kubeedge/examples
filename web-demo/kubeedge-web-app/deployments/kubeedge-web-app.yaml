@@ -21,3 +21,27 @@ spec:
       - name: kubeedge-web-app
         image: kubeedge/kubeedge-web-app:v2.6
         imagePullPolicy: IfNotPresent
+---
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: Role
+metadata:
+  name: kubeedge-web-app
+  namespace: default
+rules:
+- apiGroups: ["devices.kubeedge.io"]
+  resources: ["devices"]
+  verbs: ["get", "patch"]
+
+---
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: RoleBinding
+metadata:
+  name: kubeedge-web-app-rbac
+  namespace: default
+subjects:
+  - kind: ServiceAccount
+    name: default
+roleRef:
+  kind: Role
+  name: kubeedge-web-app
+  apiGroup: rbac.authorization.k8s.io
