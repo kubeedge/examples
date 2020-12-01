@@ -44,8 +44,8 @@ This section contains instructions on how to make use of bluetooth mapper of Kub
 
 ### Software Prerequisites
 
-1. Golang (1.11.4+)
-2. KubeEdge (v0.3+)
+1. Golang (1.14+)
+2. KubeEdge (v1.5+)
 
 ## Steps to reproduce
 
@@ -61,11 +61,10 @@ This section contains instructions on how to make use of bluetooth mapper of Kub
 3. Create the CC2650 SensorTag device model and device instance.
 
 ```console
-           cd $GOPATH/src/github.com/kubeedge/examples/bluetooth-CC2650-demo/sample-crds
+           cd $GOPATH/src/github.com/kubeedge/examples/bluetooth-CC2650-demo/crds
            kubectl apply -f CC2650-device-model.yaml
+           sed -i "s#edge-node#<your-edge-node-name>#g" CC2650-device-instance.yaml
            kubectl apply -f CC2650-device-instance.yaml
-
-           Note: You can change the CRDs to match your requirement
 ```
 
 4. Please ensure that bluetooth service of your device is ON
@@ -73,7 +72,7 @@ This section contains instructions on how to make use of bluetooth mapper of Kub
 5. Set 'bluetooth=true' label for the node (This label is a prerequisite for the scheduler to schedule bluetooth_mapper pod on the node [which meets the hardware / software prerequisites] )
 
 ```console
-kubectl label nodes <name-of-node> bluetooth=true
+kubectl label nodes <your-edge-node-name> bluetooth=true
 ```
 
 6. Copy the configuration file that has been provided, into its correct path. Please note that the configuration file can be altered as to suit your requirement
@@ -81,14 +80,14 @@ kubectl label nodes <name-of-node> bluetooth=true
 ```console
 cp $GOPATH/src/github.com/kubeedge/examples/bluetooth-CC2650-demo/config.yaml
 
-$GOPATH/src/github.com/kubeedge/kubeedge/device/bluetooth_mapper/configuration/
+$GOPATH/src/github.com/kubeedge/kubeedge/mappers/bluetooth_mapper/configuration/
 ```
 
 7. Build the mapper by following the steps given below.
 
 ```console
-cd $GOPATH/src/github.com/kubeedge/kubeedge/device/bluetooth_mapper
-make bluetooth_mapper_image
+cd $GOPATH/src/github.com/kubeedge/kubeedge
+make bluetoothdevice_image
 docker tag bluetooth_mapper:v1.0 <your_dockerhub_username>/bluetooth_mapper:v1.0
 docker push <your_dockerhub_username>/bluetooth_mapper:v1.0
 
@@ -100,7 +99,7 @@ docker login
 8. Deploy the mapper by following the steps given below.
 
 ```console
-cd $GOPATH/src/github.com/kubeedge/kubeedge/device/bluetooth_mapper
+cd $GOPATH/src/github.com/kubeedge/kubeedge/mappers/bluetooth_mapper
 
 # Please enter the following details in the deployment.yaml :-
 #    1. Replace <edge_node_name> with the name of your edge node at spec.template.spec.voluems.configMap.name
