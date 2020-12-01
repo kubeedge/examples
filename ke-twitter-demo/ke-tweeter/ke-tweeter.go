@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"log"
@@ -14,15 +15,15 @@ import (
 
 	"github.com/dghubble/go-twitter/twitter"
 	"k8s.io/client-go/rest"
-	"github.com/ke-twitter-demo/ke-tweeter/constants"
-	
-	"github.com/ke-twitter-demo/ke-tweeter/utils"
-	"github.com/kubeedge/kubeedge/cloud/pkg/devicecontroller/apis/devices/v1alpha1"
+
+	"github.com/kubeedge/examples/ke-twitter-demo/ke-tweeter/constants"
+	"github.com/kubeedge/examples/ke-twitter-demo/ke-tweeter/utils"
+	"github.com/kubeedge/kubeedge/cloud/pkg/apis/devices/v1alpha2"
 )
 
 // DeviceStatus is used to patch device status
 type DeviceStatus struct {
-	Status v1alpha1.DeviceStatus `json:"status"`
+	Status v1alpha2.DeviceStatus `json:"status"`
 }
 
 // The device id of the speaker
@@ -143,7 +144,7 @@ func UpdateDeviceTwinWithDesiredTrack(track string) bool {
 		log.Fatalf("Failed to marshal device status %v", deviceStatus)
 		return false
 	}
-	result := crdClient.Patch(constants.MergePatchType).Namespace(namespace).Resource(constants.ResourceTypeDevices).Name(deviceID).Body(body).Do()
+	result := crdClient.Patch(constants.MergePatchType).Namespace(namespace).Resource(constants.ResourceTypeDevices).Name(deviceID).Body(body).Do(context.TODO())
 	if result.Error() != nil {
 		log.Fatalf("Failed to patch device status %v of device %v in namespace %v \n error:%+v", deviceStatus, deviceID, namespace, result.Error())
 		return false
@@ -153,11 +154,11 @@ func UpdateDeviceTwinWithDesiredTrack(track string) bool {
 	return true
 }
 
-func buildStatusWithDesiredTrack(song string) v1alpha1.DeviceStatus {
+func buildStatusWithDesiredTrack(song string) v1alpha2.DeviceStatus {
 	metadata := map[string]string{"timestamp": strconv.FormatInt(time.Now().Unix()/1e6, 10),
 		"type": "string",
 	}
-	twins := []v1alpha1.Twin{{PropertyName: "track", Desired: v1alpha1.TwinProperty{Value: song, Metadata: metadata}}}
-	devicestatus := v1alpha1.DeviceStatus{Twins: twins}
+	twins := []v1alpha2.Twin{{PropertyName: "track", Desired: v1alpha2.TwinProperty{Value: song, Metadata: metadata}}}
+	devicestatus := v1alpha2.DeviceStatus{Twins: twins}
 	return devicestatus
 }
