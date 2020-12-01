@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"encoding/json"
 	"log"
 	"regexp"
@@ -9,21 +10,20 @@ import (
 	"time"
 
 	"github.com/astaxie/beego"
-	"github.com/astaxie/beego/context"
+	beegoContext "github.com/astaxie/beego/context"
 	"github.com/yaotian/gowechat"
 	"github.com/yaotian/gowechat/mp/message"
 	"github.com/yaotian/gowechat/mp/user"
 	"github.com/yaotian/gowechat/wxcontext"
-
-	"github.com/kubeedge/examples/kubeedge-wechat-demo/kubeedge-wechat-app/utils"
-	"github.com/kubeedge/kubeedge/cloud/pkg/devicecontroller/apis/devices/v1alpha1"
-
 	"k8s.io/client-go/rest"
+
+	"github.com/kubeedge/examples/wechat-demo/kubeedge-wechat-app/utils"
+	"github.com/kubeedge/kubeedge/cloud/pkg/apis/devices/v1alpha2"
 )
 
 // DeviceStatus is used to patch device status
 type DeviceStatus struct {
-	Status v1alpha1.DeviceStatus `json:"status"`
+	Status v1alpha2.DeviceStatus `json:"status"`
 }
 
 // The device id of the speaker
@@ -114,7 +114,7 @@ func getWeChatConfigFromSecret() error {
 }
 
 //wxOAuth 微信公众平台，网页授权
-func wxOAuth(ctx *context.Context) {
+func wxOAuth(ctx *beegoContext.Context) {
 	var wechat = gowechat.NewWechat(config)
 	mp, err := wechat.MpMgr()
 	if err != nil {
@@ -140,7 +140,7 @@ func wxOAuth(ctx *context.Context) {
 }
 
 // textHandler
-func textHandler(ctx *context.Context) {
+func textHandler(ctx *beegoContext.Context) {
 	// 微信平台mp
 	var wechat = gowechat.NewWechat(config)
 	mp, err := wechat.MpMgr()
@@ -206,7 +206,7 @@ func UpdateDeviceTwinWithDesiredTrack(track string) bool {
 		log.Printf("Failed to marshal device status %v", deviceStatus)
 		return false
 	}
-	result := crdClient.Patch(utils.MergePatchType).Namespace(namespace).Resource(utils.ResourceTypeDevices).Name(deviceID).Body(body).Do()
+	result := crdClient.Patch(utils.MergePatchType).Namespace(namespace).Resource(utils.ResourceTypeDevices).Name(deviceID).Body(body).Do(context.TODO())
 	if result.Error() != nil {
 		log.Printf("Failed to patch device status %v of device %v in namespace %v \n error:%+v", deviceStatus, deviceID, namespace, result.Error())
 		return false
@@ -216,11 +216,11 @@ func UpdateDeviceTwinWithDesiredTrack(track string) bool {
 	return true
 }
 
-func buildStatusWithDesiredTrack(song string) v1alpha1.DeviceStatus {
+func buildStatusWithDesiredTrack(song string) v1alpha2.DeviceStatus {
 	metadata := map[string]string{"timestamp": strconv.FormatInt(time.Now().Unix()/1e6, 10),
 		"type": "string",
 	}
-	twins := []v1alpha1.Twin{{PropertyName: "track", Desired: v1alpha1.TwinProperty{Value: song, Metadata: metadata}, Reported: v1alpha1.TwinProperty{Value: "unknown", Metadata: metadata}}}
-	devicestatus := v1alpha1.DeviceStatus{Twins: twins}
+	twins := []v1alpha2.Twin{{PropertyName: "track", Desired: v1alpha2.TwinProperty{Value: song, Metadata: metadata}, Reported: v1alpha2.TwinProperty{Value: "unknown", Metadata: metadata}}}
+	devicestatus := v1alpha2.DeviceStatus{Twins: twins}
 	return devicestatus
 }
