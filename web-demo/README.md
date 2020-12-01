@@ -19,7 +19,7 @@ and the track is played on the speaker connected to the edge node.
 
 * A running Kubernetes cluster.
 
-* KubeEdge v1.0+
+* KubeEdge v1.5+
 
   *Note*:
 
@@ -46,7 +46,7 @@ With the Device CRD APIs now installed in the cluster,
 we create the device model and instance for the speaker using the yaml files.
 
 ```console
- cd $GOPATH/src/github.com/kubeedge/examples/kubeedge-web-demo/kubeedge-web-app/deployments/
+ cd $GOPATH/src/github.com/kubeedge/examples/web-demo/kubeedge-web-app/deployments/
  kubectl create -f kubeedge-speaker-model.yaml
  kubectl create -f kubeedge-speaker-instance.yaml
 ```
@@ -57,7 +57,7 @@ The KubeEdge Web App runs in a VM on cloud.
 It can be deployed using a Kubernetes deployment yaml.
 
 ```console
- cd $GOPATH/src/github.com/kubeedge/examples/kubeedge-web-demo/kubeedge-web-app/deployments/
+ cd $GOPATH/src/github.com/kubeedge/examples/web-demo/kubeedge-web-app/deployments/
  kubectl create -f kubeedge-web-app.yaml
 ```
 
@@ -66,7 +66,7 @@ It can be deployed using a Kubernetes deployment yaml.
 Cross-complie the PI Player App which will run on the RaspBerry PI and play the expected track.
 
 ```console
- cd $GOPATH/src/github.com/kubeedge/examples/kubeedge-web-demo/pi-player-app/
+ cd $GOPATH/src/github.com/kubeedge/examples/web-demo/pi-player-app/
  export GOARCH=arm
  export GOOS="linux"
  export GOARM=6
