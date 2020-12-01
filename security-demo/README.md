@@ -298,7 +298,7 @@ scripts.
 3\. Communication from user application and edge application using
 certificates issued by cloud spire server and edge spire server.
 
-4\. Supports kubeedge v0.2+.
+4\. Supports kubeedge v1.5+.
 
 ## ToDo
 
