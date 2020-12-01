@@ -31,8 +31,8 @@ When power is provided in the pin, the LED glows (ON State) and when no power is
 
 ### Software Prerequisites
 
-1. Golang 1.11.4+
-2. KubeEdge 0.3+
+1. Golang 1.14+
+2. KubeEdge 1.5+
 
 ## Steps to reproduce
 
@@ -50,7 +50,7 @@ git clone https://github.com/kubeedge/examples.git $GOPATH/src/github.com/kubeed
 4. Create the LED device model and device instance.
 
 ```console
-cd $GOPATH/src/github.com/kubeedge/examples/led-raspberrypi/sample-crds
+cd $GOPATH/src/github.com/kubeedge/examples/led-raspberrypi/crds
 kubectl apply -f led-light-device-model.yaml
 kubectl apply -f led-light-device-instance.yaml
 

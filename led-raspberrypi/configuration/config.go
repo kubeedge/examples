@@ -2,8 +2,9 @@ package configuration
 
 import (
 	"encoding/json"
-	"gopkg.in/yaml.v2"
 	"io/ioutil"
+
+	"gopkg.in/yaml.v2"
 )
 
 //CONFIG_MAP_PATH contains the location of the configuration file loaded from config map
