@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/astaxie/beego"
-	"github.com/kubeedge/examples/kubeedge-counter-demo/web-controller-app/controller"
+	controllers "github.com/kubeedge/examples/kubeedge-counter-demo/web-controller-app/controller"
 )
 
 func main() {

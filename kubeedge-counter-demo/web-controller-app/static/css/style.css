@@ -27,20 +27,20 @@
 		font-weight: bold;
 		text-rendering: optimizelegibility;
 	}
-	
-	a:link { 
+
+	a:link {
 		color: #000000;
 	}
-	
-	a:visited { 
+
+	a:visited {
 		color: #000000;
 	}
-	
-	a:hover { 
+
+	a:hover {
 		color: blue;
 	}
 
-	a:active { 
+	a:active {
 		color: #000000;
 	}
 
@@ -53,23 +53,23 @@
 	.title {
 		font-size: 25px;
 	}
-	
+
 	.subtitle {
 		padding-top: 5px;
 		padding-left: 5px;
 		font-size: 20px;
 	}
-	
+
 	.description {
 		padding-top: 5px;
 		padding-left: 5px;
 		font-size: 20px;
 	}
-	
+
 	.list {
 		width: 100%;
 	}
-	
+
 	.list th {
 		text-align: left;
 		font-size: 20px;

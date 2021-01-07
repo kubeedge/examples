@@ -23,7 +23,7 @@ Counter run at edge side, and user can control it in web from cloud side, also c
 
   add follows `--insecure-port=8080` and `--insecure-bind-address=0.0.0.0` options into */etc/kubernetes/manifests/kube-apiserver.yaml*
 
-* KubeEdge v1.2.1+
+* KubeEdge v1.5+
 
 * MQTT Broker is running on Raspi.
 
@@ -34,30 +34,37 @@ Counter run at edge side, and user can control it in web from cloud side, also c
 With the Device CRD APIs now installed in the cluster, we create the device model and instance for the counter using the yaml files.
 
 ```console
- cd $GOPATH/src/github.com/kubeedge/examples/kubeedge-counter-demo/crds
- kubectl create -f kubeedge-counter-model.yaml
- kubectl create -f kubeedge-counter-instance.yaml
+$ cd $GOPATH/src/github.com/kubeedge/examples/kubeedge-counter-demo
+# replace "<your edge node name>" with your edge node name
+$ sed -i "s#edge-node#<your edge node name>#" crds/kubeedge-counter-instance.yaml
+$ kubectl create -f crds/kubeedge-counter-model.yaml
+$ kubectl create -f crds/kubeedge-counter-instance.yaml
 ```
-
-*NOTE*:
-in *crds/kubeedge-counter-instance.yaml*, make sure *nodeSelector* value match with correct edge node name.
 
 ### Run KubeEdge Web App
 
 The KubeEdge Web App runs in a VM on cloud.
 
 ```console
- cd $GOPATH/src/github.com/kubeedge/examples/kubeedge-counter-demo/crds
- kubectl create -f kubeedge-web-controller-app.yaml
+$ cd $GOPATH/src/github.com/kubeedge/examples/kubeedge-counter-demo/web-controller-app
+$ make
+$ make docker
+$ cd $GOPATH/src/github.com/kubeedge/examples/kubeedge-counter-demo/templates
+$ kubectl create -f kubeedge-web-controller-app.yaml
 ```
+
+**Note: instance must be created after model and deleted before model.**
 
 ### Run KubeEdge Pi Counter App
 
 The KubeEdge Counter App run in raspi.
 
 ```console
- cd $GOPATH/src/github.com/kubeedge/examples/kubeedge-counter-demo/crds
- kubectl create -f kubeedge-pi-counter-app.yaml
+$ cd $GOPATH/src/github.com/kubeedge/examples/kubeedge-counter-demo/counter-mapper
+$ make
+$ make docker
+$ cd $GOPATH/src/github.com/kubeedge/examples/kubeedge-counter-demo/templates
+$ kubectl create -f kubeedge-pi-counter-app.yaml
 ```
 
 The App will subscribe to the `$hw/events/device/counter/twin/update/document` topic, and when it receives the expected control command on the topic, it will turn on/off the counter, also it will fresh counter value and publish value to `$hw/events/device/counter/twin/update` topic, then the latest counter status will be sychronized between edge and cloud.

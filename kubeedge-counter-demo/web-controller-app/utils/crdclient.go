@@ -3,7 +3,7 @@ package utils
 import (
 	"log"
 
-	"github.com/kubeedge/kubeedge/cloud/pkg/devicecontroller/apis/devices/v1alpha1"
+	devices "github.com/kubeedge/kubeedge/cloud/pkg/apis/devices/v1alpha2"
 
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime"
@@ -23,9 +23,9 @@ func NewCRDClient(cfg *rest.Config) (*rest.RESTClient, error) {
 
 	config := *cfg
 	config.APIPath = "/apis"
-	config.GroupVersion = &v1alpha1.SchemeGroupVersion
+	config.GroupVersion = &devices.SchemeGroupVersion
 	config.ContentType = runtime.ContentTypeJSON
-	config.NegotiatedSerializer = serializer.DirectCodecFactory{CodecFactory: serializer.NewCodecFactory(scheme)}
+	config.NegotiatedSerializer = serializer.NewCodecFactory(scheme)
 
 	client, err := rest.RESTClientFor(&config)
 	if err != nil {
@@ -38,11 +38,11 @@ func NewCRDClient(cfg *rest.Config) (*rest.RESTClient, error) {
 
 func addDeviceCrds(scheme *runtime.Scheme) error {
 	// Add Device
-	scheme.AddKnownTypes(v1alpha1.SchemeGroupVersion, &v1alpha1.Device{}, &v1alpha1.DeviceList{})
-	v1.AddToGroupVersion(scheme, v1alpha1.SchemeGroupVersion)
+	scheme.AddKnownTypes(devices.SchemeGroupVersion, &devices.Device{}, &devices.DeviceList{})
+	v1.AddToGroupVersion(scheme, devices.SchemeGroupVersion)
 	// Add DeviceModel
-	scheme.AddKnownTypes(v1alpha1.SchemeGroupVersion, &v1alpha1.DeviceModel{}, &v1alpha1.DeviceModelList{})
-	v1.AddToGroupVersion(scheme, v1alpha1.SchemeGroupVersion)
+	scheme.AddKnownTypes(devices.SchemeGroupVersion, &devices.DeviceModel{}, &devices.DeviceModelList{})
+	v1.AddToGroupVersion(scheme, devices.SchemeGroupVersion)
 
 	return nil
 }

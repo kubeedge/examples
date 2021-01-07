@@ -5,8 +5,7 @@ import (
 	"k8s.io/client-go/tools/clientcmd"
 )
 
-// replace this with the K8s Master IP
-var KubeMaster = "http://127.0.0.1:8080"
+var KubeMaster = ""
 var Kubeconfig = ""
 var KubeQPS = float32(5.000000)
 var KubeBurst = 10
