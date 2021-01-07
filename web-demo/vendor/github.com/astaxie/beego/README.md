@@ -4,11 +4,18 @@
 beego is used for rapid development of RESTful APIs, web apps and backend services in Go.
 It is inspired by Tornado, Sinatra and Flask. beego has some Go-specific features such as interfaces and struct embedding.
 
- Response time ranking: [web-frameworks](https://github.com/the-benchmarker/web-frameworks).
-
 ###### More info at [beego.me](http://beego.me).
 
 ## Quick Start
+
+#### Create `hello` directory, cd `hello` directory
+
+    mkdir hello
+    cd hello
+ 
+#### Init module
+
+    go mod init
 
 #### Download and install
 
@@ -35,6 +42,8 @@ Congratulations! You've just built your first **beego** app.
 
 ###### Please see [Documentation](http://beego.me/docs) for more.
 
+###### [beego-example](https://github.com/beego-dev/beego-example)
+
 ## Features
 
 * RESTful support
@@ -56,6 +65,7 @@ Congratulations! You've just built your first **beego** app.
 
 * [http://beego.me/community](http://beego.me/community)
 * Welcome to join us in Slack: [https://beego.slack.com](https://beego.slack.com), you can get invited from [here](https://github.com/beego/beedoc/issues/232)
+* QQ Group Group ID:523992905
 
 ## License
 
