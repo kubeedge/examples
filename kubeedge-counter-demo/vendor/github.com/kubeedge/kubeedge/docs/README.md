@@ -1,1 +1,0 @@
-The documentation for the KubeEdge project resides at [https://docs.kubeedge.io](https://docs.kubeedge.io).
