@@ -27,6 +27,7 @@ import (
 	"regexp"
 	"strconv"
 	"strings"
+	"sync"
 
 	"github.com/astaxie/beego/session"
 )
@@ -49,6 +50,7 @@ type BeegoInput struct {
 	pnames        []string
 	pvalues       []string
 	data          map[interface{}]interface{} // store some values in this context when calling context in filter or controller.
+	dataLock      sync.RWMutex
 	RequestBody   []byte
 	RunMethod     string
 	RunController reflect.Type
@@ -69,7 +71,9 @@ func (input *BeegoInput) Reset(ctx *Context) {
 	input.CruSession = nil
 	input.pnames = input.pnames[:0]
 	input.pvalues = input.pvalues[:0]
+	input.dataLock.Lock()
 	input.data = nil
+	input.dataLock.Unlock()
 	input.RequestBody = []byte{}
 }
 
@@ -85,7 +89,7 @@ func (input *BeegoInput) URI() string {
 
 // URL returns request url path (without query string, fragment).
 func (input *BeegoInput) URL() string {
-	return input.Context.Request.URL.Path
+	return input.Context.Request.URL.EscapedPath()
 }
 
 // Site returns base site url as scheme://domain type.
@@ -204,6 +208,7 @@ func (input *BeegoInput) AcceptsXML() bool {
 func (input *BeegoInput) AcceptsJSON() bool {
 	return acceptsJSONRegex.MatchString(input.Header("Accept"))
 }
+
 // AcceptsYAML Checks if request accepts json response
 func (input *BeegoInput) AcceptsYAML() bool {
 	return acceptsYAMLRegex.MatchString(input.Header("Accept"))
@@ -279,6 +284,11 @@ func (input *BeegoInput) ParamsLen() int {
 func (input *BeegoInput) Param(key string) string {
 	for i, v := range input.pnames {
 		if v == key && i <= len(input.pvalues) {
+			// we cannot use url.PathEscape(input.pvalues[i])
+			// for example, if the value is /a/b
+			// after url.PathEscape(input.pvalues[i]), the value is %2Fa%2Fb
+			// However, the value is used in ControllerRegister.ServeHTTP
+			// and split by "/", so function crash...
 			return input.pvalues[i]
 		}
 	}
@@ -323,8 +333,14 @@ func (input *BeegoInput) Query(key string) string {
 		return val
 	}
 	if input.Context.Request.Form == nil {
-		input.Context.Request.ParseForm()
+		input.dataLock.Lock()
+		if input.Context.Request.Form == nil {
+			input.Context.Request.ParseForm()
+		}
+		input.dataLock.Unlock()
 	}
+	input.dataLock.RLock()
+	defer input.dataLock.RUnlock()
 	return input.Context.Request.Form.Get(key)
 }
 
@@ -377,6 +393,8 @@ func (input *BeegoInput) CopyBody(MaxMemory int64) []byte {
 
 // Data return the implicit data in the input
 func (input *BeegoInput) Data() map[interface{}]interface{} {
+	input.dataLock.Lock()
+	defer input.dataLock.Unlock()
 	if input.data == nil {
 		input.data = make(map[interface{}]interface{})
 	}
@@ -385,6 +403,8 @@ func (input *BeegoInput) Data() map[interface{}]interface{} {
 
 // GetData returns the stored data in this context.
 func (input *BeegoInput) GetData(key interface{}) interface{} {
+	input.dataLock.Lock()
+	defer input.dataLock.Unlock()
 	if v, ok := input.data[key]; ok {
 		return v
 	}
@@ -394,6 +414,8 @@ func (input *BeegoInput) GetData(key interface{}) interface{} {
 // SetData stores data with given key in this context.
 // This data are only available in this context.
 func (input *BeegoInput) SetData(key, val interface{}) {
+	input.dataLock.Lock()
+	defer input.dataLock.Unlock()
 	if input.data == nil {
 		input.data = make(map[interface{}]interface{})
 	}
