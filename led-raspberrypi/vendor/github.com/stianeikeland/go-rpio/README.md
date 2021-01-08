@@ -22,16 +22,8 @@ There's a tiny bit of additional information over at my [blog](https://blog.eike
 - 4.0.0 - Adds support for PWM and Clock modes, by @Drahoslav7
 - 4.1.0 - Adds support for edge detection, by @Drahoslav7
 - 4.2.0 - Faster write and toggle of output pins, by @Drahoslav7
-- 4.3.0 - Adds support for SPI, by @Drahoslav7
-- 4.4.0 - Support for disabling interrupts (workaround for #35), by @Drahoslav7
 
 ## Usage ##
-
-```go
-import "github.com/stianeikeland/go-rpio/v4"
-```
-
-If you're using an older go.mod incompatible you should instead use:
 
 ```go
 import "github.com/stianeikeland/go-rpio"
@@ -78,23 +70,6 @@ rpio.Close()
 ```
 
 Also see example [examples/blinker/blinker.go](examples/blinker/blinker.go)
-
-### SPI
-
-#### setup/teardown
-  - `rpio.SpiBegin(rpio.Spi0)` has to be called first before using any Spi func. It will change pin modes to `Spi` and initialize default setting.
-  - `rpio.SpiEnd(rpio.Spi0)` should be called at the end, it will switch pin modes to `Input`.
-
-#### transferring data
-  - `rpio.SpiTransmit(byte)` or `rpio.SpiTransmit(bytes...)` will transmit byte or bytes to slave.
-  - `rpio.SpiReceive(n)` will return n bytes received from slave.
-  - `rpio.SpiExchange(buffer)` will simultaneously transmit data from the buffer to slave and data from slave to the same buffer in full duplex way.
-
-#### settings
-  - `rpio.SpiSpeed(hz)` will set transmit speed of SPI
-  - `rpio.SpiChipSelect(n)` will select chip/slave (ce0, ce1, or ce2) to which transferring will be done
-  - `rpio.SpiChipSelectPolarity(n, pol)` set chip select polarity (low enabled is used by default which usually works most of the time)
-  - `rpio.SpiMode(cpol, cpha)` set clock/communication mode (=combination of clock polarity and clock phase; cpol=0, cpha=0 is used by default which usually works most of the time)
 
 ## Other ##
 
