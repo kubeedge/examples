@@ -58,9 +58,15 @@ This section contains instructions on how to make use of bluetooth mapper of Kub
            git clone https://github.com/kubeedge/examples.git $GOPATH/src/github.com/kubeedge/examples
 ```
 
-3. Create the CC2650 SensorTag device model and device instance.
+3. Create the CC2650 SensorTag device model and device instance. Please change the device model name "CC2650-sensortag" to the name your node get. You can use `hcitool lescan` to get the name.
 
 ```console
+           hcitool lescan
+           LE Scan ...
+           58:20:59:31:8E:BB CC2650 Sen
+
+           Note: In this case, you need to change the device model name to "CC2650-Sen" in config and yaml files.
+
            cd $GOPATH/src/github.com/kubeedge/examples/bluetooth-CC2650-demo/sample-crds
            kubectl apply -f CC2650-device-model.yaml
            kubectl apply -f CC2650-device-instance.yaml
