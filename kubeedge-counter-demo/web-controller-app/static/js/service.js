@@ -4,13 +4,13 @@ function ServiceResult() {
 			this.Data = data;
 			this.SuccessCallback.call(this);
 		}
-		
+
         catch (e) {
             // TODO: Add Err Handler. Localize Message.
             alert("Error Processing Request : " + e);
         }
 	};
-	
+
     var processJSONData = function (data) {
         try {
             this.Result = data.Result;
@@ -51,7 +51,7 @@ function ServiceResult() {
                     break;
             }
         }
-		
+
         catch (e) {
             // TODO: Add Err Handler. Localize Message.
             alert("Error Processing Request : " + e);
@@ -102,7 +102,7 @@ function ServiceResult() {
                 type: 'POST'
             });
         },
-		
+
 		// Method to Post Data via JSON
         getJSONDataRaw: function (url, data, callback) {
 			this.SuccessCallback = callback;

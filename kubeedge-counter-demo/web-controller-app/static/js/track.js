@@ -44,7 +44,7 @@ function Standard_Callback() {
     try {
         alert(this.ResultString);
     }
-    catch (e) {   
+    catch (e) {
         alert(e);
     }
 }
@@ -53,7 +53,7 @@ function Standard_ValidationCallback() {
     try {
         alert(this.ResultString);
     }
-    catch (e) {   
+    catch (e) {
         alert(e);
     }
 }
@@ -62,7 +62,7 @@ function Standard_ErrorCallback() {
     try {
         alert(this.ResultString);
     }
-    catch (e) {   
+    catch (e) {
         alert(e);
     }
 }

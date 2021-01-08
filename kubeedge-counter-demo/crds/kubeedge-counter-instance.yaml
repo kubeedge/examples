@@ -4,7 +4,6 @@ metadata:
   name: counter
   labels:
     description: 'counter'
-    manufacturer: 'test'
 spec:
   deviceModelRef:
     name: counter-model
@@ -14,7 +13,7 @@ spec:
       - key: ''
         operator: In
         values:
-        - raspberrypi
+        - edge-node
 
 status:
   twins:
