@@ -1,7 +1,7 @@
 kubeedge::https://github.com/trilokgm/kubeedge.git -b test::mkdir -p $GOPATH/src/github.com/kubeedge/; cp -R $GOPATH/src/github.com/trilokgm/kubeedge/ $GOPATH/src/github.com/kubeedge/;  cd $GOPATH/src/github.com/kubeedge/kubeedge/; make edge_core
 kubeedge::https://github.com/trilokgm/kubeedge.git -b test::mkdir -p $GOPATH/src/github.com/kubeedge/; cp -R $GOPATH/src/github.com/trilokgm/kubeedge/ $GOPATH/src/github.com/kubeedge/;  cd $GOPATH/src/github.com/kubeedge/kubeedge/; make edgecontroller
-examples::https://github.com/kubeedge/examples.git::cd security-demo/cloud-stub/cmd; dep ensure; go build -o cloud-app
-examples::https://github.com/kubeedge/examples.git::cd led-raspberrypi/light_mapper; dep ensure; go build -o light_mapper
+examples::https://github.com/kubeedge/examples.git::cd security-demo/cloud-stub/cmd; go build -o cloud-app
+examples::https://github.com/kubeedge/examples.git::cd led-raspberrypi/light_mapper; go build -o light_mapper
 spire::https://github.com/trilokgm/spire.git -b kubeedge-demo::mkdir -p $GOPATH/src/github.com/spiffe/; cp -R $GOPATH/src/github.com/trilokgm/spire $GOPATH/src/github.com/spiffe/; cd $GOPATH/src/github.com/spiffe/spire/; make build
 spiffe-helper::https://github.com/trilokgm/spiffe-helper.git -b append-mode-ghostunnel::mkdir -p $GOPATH/src/github.com/spiffe/;  cp -R $GOPATH/src/github.com/trilokgm/spiffe-helper $GOPATH/src/github.com/spiffe/; glide install; make
 ghostunnel::https://github.com/spiffe/ghostunnel.git -b spiffe-support::go build

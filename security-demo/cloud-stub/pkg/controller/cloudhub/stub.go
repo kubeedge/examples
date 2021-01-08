@@ -7,13 +7,12 @@ import (
 	"io/ioutil"
 	"net/http"
 
-	"k8s.io/api/core/v1"
-
-	"github.com/kubeedge/examples/security-demo/cloud-stub/cmd/config"
-	"github.com/kubeedge/kubeedge/common/beehive/pkg/core/model"
-
 	"github.com/gorilla/mux"
 	"github.com/gorilla/websocket"
+	v1 "k8s.io/api/core/v1"
+
+	"github.com/kubeedge/beehive/pkg/core/model"
+	"github.com/kubeedge/examples/security-demo/cloud-stub/cmd/config"
 )
 
 type StubCloudHub struct {
@@ -198,8 +197,8 @@ func (tm *StubCloudHub) wsHandler(w http.ResponseWriter, req *http.Request) {
 func (tm *StubCloudHub) Start() {
 	router := mux.NewRouter()
 	router.HandleFunc("/v1/placement_external/message_queue", tm.placementHandler) // for cloudhub url placement handler
-	router.HandleFunc("/{group_id}/events", tm.serveEvent)            // for edge-hub
-	router.HandleFunc("/{project_id}/{node_id}/events", tm.wsHandler) // for cloudhub url placement handler
+	router.HandleFunc("/{group_id}/events", tm.serveEvent)                         // for edge-hub
+	router.HandleFunc("/{project_id}/{node_id}/events", tm.wsHandler)              // for cloudhub url placement handler
 	s := http.Server{
 		Addr:    "127.0.0.1:20000",
 		Handler: router,
@@ -215,7 +214,7 @@ func (tm *StubCloudHub) Start() {
 func (tm *StubCloudHub) PlacementServer() {
 	fmt.Println("started placement server")
 	router := mux.NewRouter()
-	router.HandleFunc("/pod", tm.podHandler)                                       // for pod test
+	router.HandleFunc("/pod", tm.podHandler) // for pod test
 	router.HandleFunc("/device", tm.deviceHandler)
 
 	s := http.Server{
