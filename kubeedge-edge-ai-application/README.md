@@ -1,6 +1,6 @@
 # kubeedge ai demo
 ## Description
-This demo contains two general modeule:AI algorithm modules and a zigbee device module.
+This demo contains two general modules: AI algorithm module and a zigbee device module.
 ## Prerequisites  
 ### Hardware Prerequisites  
 1. CC2531 USB sniffer with firmware has been refreshe
@@ -56,4 +56,3 @@ When the device is connected, you can view the results of the cloud device synch
     $ kubectl apply -f deployMapper.yaml  
 ```  
 During face recognition, the ZigBee switch will be turned on if the recognition result exists in the face database. If the result is unknown, the Zigbee switch will be turned off. The status information of the switch can be viewed through the Device Switch in the cloud.
-
