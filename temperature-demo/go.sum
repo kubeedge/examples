@@ -1,0 +1,10 @@
+github.com/d2r2/go-dht v0.0.0-20190501193753-b6103ae97a4b h1:leyHWzcQM15PG2OTEZ+ZzUJ8jVeOX1ELngYheX3Dl6M=
+github.com/d2r2/go-dht v0.0.0-20190501193753-b6103ae97a4b/go.mod h1:AzSqP4S4/6pINOKg3VC79WC7YY3zskQcrXMFzphCry0=
+github.com/d2r2/go-logger v0.0.0-20181221090742-9998a510495e h1:ZG3JBA6rPRl0xxQ+nNSfO7tor8w+CNCTs05DNJQYbLM=
+github.com/d2r2/go-logger v0.0.0-20181221090742-9998a510495e/go.mod h1:oA+9PUt8F1aKJ6o4YU1T120i7sgo1T6/1LWEEBy0BSs=
+github.com/d2r2/go-shell v0.0.0-20191113051817-7664ea33645f h1:VrZEIdW45kHrPChbu4fvZnolG9l9Wu70znnLQUY/yFg=
+github.com/d2r2/go-shell v0.0.0-20191113051817-7664ea33645f/go.mod h1:FdrNob+jQ3UkEpNVeZFVn8mW86Aa2wa6U5z0vGQOEXQ=
+github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
+github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
+github.com/yosssi/gmq v0.0.1 h1:GhlDVaAQoi3Mvjul/qJXXGfL4JBeE0GQwbWp3eIsja8=
+github.com/yosssi/gmq v0.0.1/go.mod h1:mReykazh0U1JabvuWh1PEbzzJftqOQWsjr0Lwg5jL1Y=
