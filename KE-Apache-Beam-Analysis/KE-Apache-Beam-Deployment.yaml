@@ -14,6 +14,7 @@ spec:
       labels:
         app: ke-apachebeam-analysis
     spec:
+      hostNetwork: true
       containers:
       - name: ke-apachebeam-analysis
-        image: containerise/ke_apache_beam:ke_apache_analysis_v1.2
+        image: containerise/ke_apache_beam:ke_apache_analysis_v1.1
