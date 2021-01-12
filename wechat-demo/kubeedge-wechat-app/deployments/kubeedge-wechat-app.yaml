@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    k8s-app: kubeedge-wechat-app
+  name: kubeedge-wechat-app
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      k8s-app: kubeedge-wechat-app
+  template:
+    metadata:
+      labels:
+        k8s-app: kubeedge-wechat-app
+    spec:
+      nodeSelector:
+        node-role.kubernetes.io/master: ""
+      hostNetwork: true
+      containers:
+      - name: kubeedge-wechat-app
+        image: xiangxinyong/kubeedge-wechat-app:v2.0
+        volumeMounts:
+        - name: wechatsecret
+          mountPath: "/etc/secret"
+          readOnly: true
+        imagePullPolicy: IfNotPresent
+      volumes:
+      - name: wechatsecret
+        secret:
+          secretName: wechatsecret
+      restartPolicy: Always
+---
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: Role
+metadata:
+  name: kubeedge-wechat-app
+  namespace: default
+rules:
+- apiGroups: ["devices.kubeedge.io"]
+  resources: ["devices"]
+  verbs: ["get", "patch"]
+
+---
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: RoleBinding
+metadata:
+  name: kubeedge-wechat-app-rbac
+  namespace: default
+subjects:
+  - kind: ServiceAccount
+    name: default
+roleRef:
+  kind: Role
+  name: kubeedge-wechat-app
+  apiGroup: rbac.authorization.k8s.io
