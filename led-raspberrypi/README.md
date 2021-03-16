@@ -54,6 +54,7 @@ cd $GOPATH/src/github.com/kubeedge/examples/led-raspberrypi/crds
 kubectl apply -f led-light-device-model.yaml
 kubectl apply -f led-light-device-instance.yaml
 
+# Note: You need to modify led-light-device-instance.yaml: replace string litearl 'edge-node1' with your edge node name at spec.nodeSelector.nodeSelectorTerms.matchExpressions.values
 # Note: You can change the CRDs to match your requirement
 ```
 
