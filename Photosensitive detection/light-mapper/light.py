@@ -39,10 +39,10 @@ try:
         status = GPIO.input(pin_pqrs)
         if status == False:
             print('1')
-            clicent_main('light')
+            clicent_main('1')
         else:
             print('0')
-            clicent_main('no_light')
+            clicent_main('0')
         time.sleep(0.5)
 except KeyboradInterrupt:
     GPIO.cleanup()
