@@ -50,7 +50,6 @@ $ cd $GOPATH/src/github.com/kubeedge/examples/kubeedge-counter-demo/web-controll
 $ make
 $ make docker
 $ cd $GOPATH/src/github.com/kubeedge/examples/kubeedge-counter-demo/crds
-$ kubectl taint nodes --all node-role.kubernetes.io/control-plane-
 $ kubectl create -f kubeedge-web-controller-app.yaml
 ```
 
