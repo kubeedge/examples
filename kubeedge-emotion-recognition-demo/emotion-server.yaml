@@ -1,0 +1,26 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+  labels:
+    app: emotion-server
+  name: emotion-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: emotion-server
+  template:
+    metadata:
+      labels:
+        app: emotion-server
+    spec:
+      containers:
+      - image: kuramal/faceemotion-server
+        imagePullPolicy: Always
+        name: server
+        ports:
+        - hostPort: $HOSTPORT
+          containerPort: 3330
+      nodeSelector:
+        kubernetes.io/hostname: $HOSTNAME
