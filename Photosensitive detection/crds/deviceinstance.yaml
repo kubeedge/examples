@@ -1,0 +1,24 @@
+apiVersion: devices.kubeedge.io/v1alpha2
+kind: Device
+metadata:
+  name: light
+  labels:
+    description: 'light'
+    manufacturer: 'test'
+spec:
+  deviceModelRef:
+    name: light-model
+  nodeSelector:
+    nodeSelectorTerms:
+      - matchExpressions:
+          - key: ''
+            operator: In
+            values:
+              - pi32-1
+status:
+  twins:
+    - propertyName: light-status
+      desired:
+        metadata:
+          type: string
+        value: ''
