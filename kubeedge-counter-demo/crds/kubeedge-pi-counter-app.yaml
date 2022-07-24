@@ -14,8 +14,6 @@ spec:
       labels:
         k8s-app: kubeedge-pi-counter
     spec:
-      nodeSelector:
-        node-role.kubernetes.io/master: ""
       hostNetwork: true
       containers:
       - name: kubeedge-pi-counter
