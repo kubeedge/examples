@@ -4,7 +4,7 @@ import (
 	"os"
 
 	"github.com/golang/glog"
-	"github.com/stianeikeland/go-rpio"
+	"github.com/stianeikeland/go-rpio/v4"
 )
 
 func TurnON(pinNumber int64) {
