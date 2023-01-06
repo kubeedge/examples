@@ -5,14 +5,14 @@
 
 Light Mapper contains code to control an LED light connected to a raspberry Pi through gpio.
 
-<img src="images/raspberry-pi.png">
+<img src="images/raspberry-pi.jpg">
 
 The following diagram has been followed to make the connection with the
 LED in this case :-
 
 <img src="images/raspberry-pi-wiring.png">
 
-Here we are using a push button  switch to test the working condition of the LED, through an independent  circuit.
+Important: For safety, please use a protection resistor in this circuit.
 
 Depending on the expected state of the light, the program controls whether or not to provide power in pin-18 of the gpio.
 When power is provided in the pin, the LED glows (ON State) and when no power is provided on it then it does not glow (OFF state).
@@ -27,7 +27,7 @@ When power is provided in the pin, the LED glows (ON State) and when no power is
 2. GPIO
 3. Breadboard along with wires
 4. LED light
-5. Push Button switch (to test the working condition of the light, this can be skipped if needed)
+
 
 ### Software Prerequisites
 
@@ -60,13 +60,13 @@ kubectl apply -f led-light-device-instance.yaml
 
  5. Update the name of the device (device instance name) created using the device CRD in the previous step along with the MQTT URL using which edge_core is running in the configuration file present at
  ```console
- $GOPATH/src/github.com/kubeedge/examples/led-raspberrypi/configuration/config.yaml
+ $GOPATH/src/github.com/kubeedge/examples/led-raspberrypi/light_mapper/configuration/config.yaml
  ```
 
  6. Build the mapper to run in RaspBerry-Pi.
 
 ```shell
-cd $GOPATH/src/github.com/kubeedge/examples/led-raspberrypi/
+cd $GOPATH/src/github.com/kubeedge/examples/led-raspberrypi/light_mapper
 make # or `make led_light_mapper`
 docker tag led-light-mapper:v1.1 <your_dockerhub_username>/led-light-mapper:v1.1
 docker push <your_dockerhub_username>/led-light-mapper:v1.1
@@ -82,7 +82,7 @@ docker login
  7. Deploy the light mapper.
 
 ```console
-cd $GOPATH/src/github.com/kubeedge/examples/led-raspberrypi/
+cd $GOPATH/src/github.com/kubeedge/examples/led-raspberrypi/light_mapper
 
 # Please enter the following details in the deployment.yaml :-
 #    1. Replace <edge_node_name> with the name of your edge node at spec.template.spec.voluems.configMap.name
@@ -95,4 +95,34 @@ kubectl create -f deployment.yaml
  "OFF" to turn off the light using the device CRDs. The mapper will control the LED to match the state mentioned in the cloud and also report back
  the actual state of the light to the cloud after updating.
 
+## A New Way to Control in Web
+<img src="images/raspberry-pi.gif">
 
+1. Build the web-controller-app
+
+```console
+cd $GOPATH/src/github.com/kubeedge/examples/led-raspberrypi/web-controller-app
+make 
+docker tag kubeedge/kubeedge-counter-app:v1.0.0 <your_dockerhub_username>/kubeedge-counter-app:v1.0.0
+docker push <your_dockerhub_username>/kubeedge-counter-app:v1.0.0
+
+# Note: Before trying to push the docker image to the remote repository please ensure that you have signed into docker from your node, if not please type the followig command to sign in
+
+docker login
+
+# Please enter your username and password when prompted
+```
+
+2. Deploy the light mapper.
+
+```console
+cd $GOPATH/src/github.com/kubeedge/examples/led-raspberrypi/crds
+
+# Please enter the following details in the kubeedge-web-controller-app.yaml :-
+#    1. Replace <edge_node_name> with the name of your edge node at spec.template.spec.voluems.configMap.name
+#    2. Replace <your_dockerhub_username> with your dockerhub username at spec.template.spec.containers.image
+
+kubectl create -f kubeedge-web-controller-app.yaml
+```
+
+3. Change Status in your web app link `MASTER_NODE_IP:80`.

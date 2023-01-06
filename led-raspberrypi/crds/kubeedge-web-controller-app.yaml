@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    k8s-app: kubeedge-counter-app
+  name: kubeedge-counter-app
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      k8s-app: kubeedge-counter-app
+  template:
+    metadata:
+      labels:
+        k8s-app: kubeedge-counter-app
+    spec:
+      nodeSelector:
+        node-role.kubernetes.io/master: ""
+      containers:
+      - name: kubeedge-counter-app
+        image: <your_dockerhub_username>/kubeedge-counter-app:v1.0.0
+        imagePullPolicy: IfNotPresent
+        ports: 
+        - containerPort: 80
+          hostPort: 80
+      tolerations:
+      - key: node-role.kubernetes.io/master
+        operator: Exists
+        effect: NoSchedule
+      - key: node-role.kubernetes.io/control-plane
+        operator: Exists
+        effect: NoSchedule
+      restartPolicy: Always
+---
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: Role
+metadata:
+  name: kubeedge-counter
+  namespace: default
+rules:
+- apiGroups: ["devices.kubeedge.io"]
+  resources: ["devices"]
+  verbs: ["get", "patch"]
+
+---
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: RoleBinding
+metadata:
+  name: kubeedge-counter-rbac
+  namespace: default
+subjects:
+  - kind: ServiceAccount
+    name: default
+roleRef:
+  kind: Role
+  name: kubeedge-counter
+  apiGroup: rbac.authorization.k8s.io
