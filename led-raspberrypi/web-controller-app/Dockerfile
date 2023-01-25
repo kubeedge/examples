@@ -4,7 +4,7 @@ LABEL maintainers="KubeEdge Community Developer"
 LABEL description="KubeEdge Counter Web Controller App"
 
 # Copy from build directory
-COPY kubeedge-counter-controller /kubeedge-counter-controller
+COPY kubeedge-light-controller /kubeedge-light-controller
 COPY static /static
 COPY views /views
 

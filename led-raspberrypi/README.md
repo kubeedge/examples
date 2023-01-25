@@ -82,13 +82,13 @@ docker login
  7. Deploy the light mapper.
 
 ```console
-cd $GOPATH/src/github.com/kubeedge/examples/led-raspberrypi/light_mapper
+cd $GOPATH/src/github.com/kubeedge/examples/led-raspberrypi/crds
 
 # Please enter the following details in the deployment.yaml :-
 #    1. Replace <edge_node_name> with the name of your edge node at spec.template.spec.voluems.configMap.name
 #    2. Replace <your_dockerhub_username> with your dockerhub username at spec.template.spec.containers.image
 
-kubectl create -f deployment.yaml
+kubectl create -f light-mapper-deployment.yaml
 ```
 
   8. Change the device Twin attribute (expected value) "power-state" of the device to "ON" to turn on the light, and

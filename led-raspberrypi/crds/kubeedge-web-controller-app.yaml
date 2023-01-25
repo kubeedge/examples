@@ -8,11 +8,11 @@ metadata:
 spec:
   selector:
     matchLabels:
-      k8s-app: kubeedge-counter-app
+      k8s-app: kubeedge-light-app
   template:
     metadata:
       labels:
-        k8s-app: kubeedge-counter-app
+        k8s-app: kubeedge-light-app
     spec:
       nodeSelector:
         node-role.kubernetes.io/master: ""
