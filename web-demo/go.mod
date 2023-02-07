@@ -41,6 +41,6 @@ require (
 	github.com/astaxie/beego v1.12.3
 	github.com/kubeedge/kubeedge v1.5.0
 	github.com/yosssi/gmq v0.0.1
-	k8s.io/apimachinery v0.19.3
-	k8s.io/client-go v0.19.3
+	k8s.io/apimachinery v0.20.0
+	k8s.io/client-go v0.20.0
 )
