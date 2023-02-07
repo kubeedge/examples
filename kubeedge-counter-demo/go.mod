@@ -41,6 +41,6 @@ require (
 	github.com/astaxie/beego v1.12.3
 	github.com/eclipse/paho.mqtt.golang v1.3.1
 	github.com/kubeedge/kubeedge v1.5.0
-	k8s.io/apimachinery v0.19.3
-	k8s.io/client-go v0.19.3
+	k8s.io/apimachinery v0.20.0
+	k8s.io/client-go v0.20.0
 )
