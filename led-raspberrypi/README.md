@@ -67,6 +67,7 @@ kubectl apply -f led-light-device-instance.yaml
 
 ```shell
 cd $GOPATH/src/github.com/kubeedge/examples/led-raspberrypi/light_mapper
+# Note: If you are in china, Before trying to make, you can Run 'GOPROXY=https://goproxy.cn,direct' to Speed up modules download.
 make # or `make led_light_mapper`
 docker tag led-light-mapper:v1.1 <your_dockerhub_username>/led-light-mapper:v1.1
 docker push <your_dockerhub_username>/led-light-mapper:v1.1
@@ -102,6 +103,7 @@ kubectl create -f light-mapper-deployment.yaml
 
 ```console
 cd $GOPATH/src/github.com/kubeedge/examples/led-raspberrypi/web-controller-app
+# Note: If you are in china, Before trying to make, you can Run 'GOPROXY=https://goproxy.cn,direct' to Speed up modules download.
 make 
 docker tag kubeedge/kubeedge-counter-app:v1.0.0 <your_dockerhub_username>/kubeedge-counter-app:v1.0.0
 docker push <your_dockerhub_username>/kubeedge-counter-app:v1.0.0

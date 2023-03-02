@@ -5,11 +5,9 @@ import (
 	"encoding/json"
 	"log"
 
-	"github.com/kubeedge/examples/kubeedge-counter-demo/web-controller-app/utils"
+	"github.com/kubeedge/examples/led-raspberrypi/web-controller-app/utils"
 	devices "github.com/kubeedge/kubeedge/cloud/pkg/apis/devices/v1alpha2"
-
 	"github.com/astaxie/beego"
-
 	"k8s.io/client-go/rest"
 )
 

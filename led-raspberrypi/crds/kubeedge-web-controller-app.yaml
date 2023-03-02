@@ -2,8 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    k8s-app: kubeedge-counter-app
-  name: kubeedge-counter-app
+    k8s-app: kubeedge-light-app
+  name: kubeedge-light-app
   namespace: default
 spec:
   selector:
@@ -17,8 +17,8 @@ spec:
       nodeSelector:
         node-role.kubernetes.io/master: ""
       containers:
-      - name: kubeedge-counter-app
-        image: <your_dockerhub_username>/kubeedge-counter-app:v1.0.0
+      - name: kubeedge-light-app
+        image: <your_dockerhub_username>/kubeedge-light-app:v1.0.0
         imagePullPolicy: IfNotPresent
         ports: 
         - containerPort: 80
