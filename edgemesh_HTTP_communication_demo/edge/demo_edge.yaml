@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demo-edge
+  labels:
+    app: demo-edge
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: demo-edge
+  template:
+    metadata:
+      labels:
+        app: demo-edge
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                - key: node-role.kubernetes.io/edge
+                  operator: Exists
+                - key: node-role.kubernetes.io/agent
+                  operator: Exists
+      containers:
+        - name: demo-edge
+          image: demo:v1
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: demo-edge
+spec:
+  selector:
+    app: demo-edge
+  ports:
+    - name: http-0
+      port: 8000
+      protocol: TCP
+      targetPort: 8000
