@@ -1,0 +1,17 @@
+First
+
+Install Kubeedge edgemesh and sedna
+reference:
+https://kubeedge.io/zh/docs/setup/keadm/
+https://edgemesh.netlify.app/zh/
+https://github.com/kubeedge/sedna/blob/main/docs/setup/install.md
+
+Second
+
+Test sedna in Using Joint Inference Service in Helmet Detection Scenario
+reference:
+https://github.com/kubeedge/sedna/blob/main/examples/joint_inference/helmet_detection_inference/README.md
+
+Third
+
+Check in virtual machine
