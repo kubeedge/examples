@@ -42,6 +42,6 @@ require (
 	github.com/kubeedge/kubeedge v1.5.0
 	github.com/yaotian/gowechat v0.0.0-20180129120839-42de4f86cb0f
 	github.com/yosssi/gmq v0.0.1
-	k8s.io/apimachinery v0.19.3
-	k8s.io/client-go v0.19.3
+	k8s.io/apimachinery v0.19.6
+	k8s.io/client-go v0.19.6
 )
