@@ -1,0 +1,1307 @@
+nohup: 忽略输入
+W1015 16:34:13.279228    2720 validation.go:165] TLSTunnelPrivateKeyFile does not exist in /etc/kubeedge/certs/server.key, will load from secret
+W1015 16:34:13.279302    2720 validation.go:168] TLSTunnelCertFile does not exist in /etc/kubeedge/certs/server.crt, will load from secret
+W1015 16:34:13.279313    2720 validation.go:171] TLSTunnelCAFile does not exist in /etc/kubeedge/ca/rootCA.crt, will load from secret
+I1015 16:34:13.279328    2720 server.go:64] Version: v1.6.0
+I1015 16:34:13.281516    2720 module.go:34] Module cloudhub registered successfully
+I1015 16:34:13.299120    2720 module.go:34] Module edgecontroller registered successfully
+I1015 16:34:13.299179    2720 module.go:34] Module devicecontroller registered successfully
+I1015 16:34:13.299210    2720 module.go:34] Module synccontroller registered successfully
+I1015 16:34:13.299232    2720 module.go:34] Module cloudStream registered successfully
+W1015 16:34:13.299240    2720 module.go:37] Module router is disabled, do not register
+W1015 16:34:13.299247    2720 module.go:37] Module dynamiccontroller is disabled, do not register
+I1015 16:34:13.299288    2720 core.go:24] Starting module edgecontroller
+I1015 16:34:13.299320    2720 core.go:24] Starting module devicecontroller
+I1015 16:34:13.299351    2720 core.go:24] Starting module synccontroller
+I1015 16:34:13.299373    2720 upstream.go:110] start upstream controller
+I1015 16:34:13.299377    2720 downstream.go:870] Start downstream devicecontroller
+I1015 16:34:13.299385    2720 core.go:24] Starting module cloudStream
+I1015 16:34:13.299467    2720 core.go:24] Starting module cloudhub
+I1015 16:34:13.302334    2720 downstream.go:550] start downstream controller
+I1015 16:34:13.400906    2720 server.go:269] Ca and CaKey don't exist in local directory, and will read from the secret
+W1015 16:34:13.400987    2720 channelq.go:294] nodeQueue for edge node pi-64g not found and created now
+W1015 16:34:13.401028    2720 channelq.go:322] nodeStore for edge node pi-64g not found and created now
+W1015 16:34:13.401048    2720 channelq.go:294] nodeQueue for edge node pi32-1 not found and created now
+W1015 16:34:13.401066    2720 channelq.go:322] nodeStore for edge node pi32-1 not found and created now
+W1015 16:34:13.401081    2720 channelq.go:294] nodeQueue for edge node node01 not found and created now
+W1015 16:34:13.401095    2720 channelq.go:322] nodeStore for edge node node01 not found and created now
+I1015 16:34:13.403494    2720 server.go:317] CloudCoreCert and key don't exist in local directory, and will read from the secret
+I1015 16:34:13.418856    2720 tunnelserver.go:131] Succeed in loading TunnelCA from CloudHub
+I1015 16:34:13.419003    2720 tunnelserver.go:144] Succeed in loading TunnelCert and Key from CloudHub
+I1015 16:34:13.419205    2720 streamserver.go:283] Prepare to start stream server ...
+I1015 16:34:13.426641    2720 tunnelserver.go:164] Prepare to start tunnel server ...
+I1015 16:34:13.432474    2720 signcerts.go:98] Succeed to creating token
+I1015 16:34:13.432523    2720 server.go:44] start unix domain socket server
+I1015 16:34:13.432602    2720 uds.go:72] listening on: //var/lib/kubeedge/kubeedge.sock
+I1015 16:34:13.432884    2720 server.go:63] Starting cloudhub websocket server
+E1015 16:34:13.450902    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:temperature-mapper-68b488ddfb-d9hg7), pods "temperature-mapper-68b488ddfb-d9hg7" not found
+E1015 16:34:13.452481    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:kubeedge-pi-counter-68c86dc747-zt94h), pods "kubeedge-pi-counter-68c86dc747-zt94h" not found
+E1015 16:34:13.455679    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:night-detection-64c6ddcfb5-8nhxg), pods "night-detection-64c6ddcfb5-8nhxg" not found
+I1015 16:34:13.854640    2720 tunnelserver.go:105] get a new tunnel agent hostname node01, internalIP 192.168.1.200
+W1015 16:34:14.299607    2720 downstream.go:373] Device doesn't support valid protocol
+W1015 16:34:14.306826    2720 channelq.go:308] nodeListQueue for edge node pi-64g not found and created now
+W1015 16:34:14.306898    2720 channelq.go:336] nodeListStore for edge node pi-64g not found and created now
+I1015 16:34:15.299752    2720 upstream.go:63] Start upstream devicecontroller
+E1015 16:34:18.501736    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:kubeedge-pi-counter-68c86dc747-zt94h), pods "kubeedge-pi-counter-68c86dc747-zt94h" not found
+E1015 16:34:18.505548    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:temperature-mapper-68b488ddfb-d9hg7), pods "temperature-mapper-68b488ddfb-d9hg7" not found
+E1015 16:34:18.515662    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:night-detection-64c6ddcfb5-8nhxg), pods "night-detection-64c6ddcfb5-8nhxg" not found
+E1015 16:34:23.559625    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:kubeedge-pi-counter-68c86dc747-zt94h), pods "kubeedge-pi-counter-68c86dc747-zt94h" not found
+E1015 16:34:23.563441    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:temperature-mapper-68b488ddfb-d9hg7), pods "temperature-mapper-68b488ddfb-d9hg7" not found
+E1015 16:34:23.573279    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:night-detection-64c6ddcfb5-8nhxg), pods "night-detection-64c6ddcfb5-8nhxg" not found
+E1015 16:34:28.595090    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:kubeedge-pi-counter-68c86dc747-zt94h), pods "kubeedge-pi-counter-68c86dc747-zt94h" not found
+E1015 16:34:28.596539    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:temperature-mapper-68b488ddfb-d9hg7), pods "temperature-mapper-68b488ddfb-d9hg7" not found
+E1015 16:34:28.600579    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:night-detection-64c6ddcfb5-8nhxg), pods "night-detection-64c6ddcfb5-8nhxg" not found
+E1015 16:34:33.654178    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:kubeedge-pi-counter-68c86dc747-zt94h), pods "kubeedge-pi-counter-68c86dc747-zt94h" not found
+E1015 16:34:33.657859    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:temperature-mapper-68b488ddfb-d9hg7), pods "temperature-mapper-68b488ddfb-d9hg7" not found
+E1015 16:34:33.669283    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:night-detection-64c6ddcfb5-8nhxg), pods "night-detection-64c6ddcfb5-8nhxg" not found
+I1015 16:34:35.297101    2720 messagehandler.go:286] edge node pi32-1 for project e632aba927ea4ac2b575ec1603d56f10 connected
+W1015 16:34:35.297149    2720 upstream.go:185] parse message: 7a69b696-7bd9-4194-8810-15416923761e resource type with error: resource type not found
+I1015 16:34:35.312377    2720 upstream.go:88] Dispatch message: 107050c4-b651-45aa-a785-fd860db49c4f
+W1015 16:34:35.312406    2720 upstream.go:92] Parse message: 107050c4-b651-45aa-a785-fd860db49c4f resource type with error: unknown resource
+I1015 16:34:36.275361    2720 upstream.go:379] node: pi32-1 already exists, do nothing
+E1015 16:34:38.709064    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:temperature-mapper-68b488ddfb-d9hg7), pods "temperature-mapper-68b488ddfb-d9hg7" not found
+E1015 16:34:38.713190    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:kubeedge-pi-counter-68c86dc747-zt94h), pods "kubeedge-pi-counter-68c86dc747-zt94h" not found
+E1015 16:34:38.721434    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:night-detection-64c6ddcfb5-8nhxg), pods "night-detection-64c6ddcfb5-8nhxg" not found
+E1015 16:34:43.781435    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:kubeedge-pi-counter-68c86dc747-zt94h), pods "kubeedge-pi-counter-68c86dc747-zt94h" not found
+E1015 16:34:43.785150    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:temperature-mapper-68b488ddfb-d9hg7), pods "temperature-mapper-68b488ddfb-d9hg7" not found
+E1015 16:34:43.795071    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:night-detection-64c6ddcfb5-8nhxg), pods "night-detection-64c6ddcfb5-8nhxg" not found
+I1015 16:34:46.026939    2720 messagehandler.go:286] edge node node01 for project e632aba927ea4ac2b575ec1603d56f10 connected
+W1015 16:34:46.026972    2720 upstream.go:185] parse message: 2a1b3e16-ace2-4814-a7f6-99d2b4a8c425 resource type with error: resource type not found
+I1015 16:34:46.030164    2720 upstream.go:88] Dispatch message: d62f8da1-26e2-474e-a690-0f6038482009
+W1015 16:34:46.030182    2720 upstream.go:92] Parse message: d62f8da1-26e2-474e-a690-0f6038482009 resource type with error: unknown resource
+E1015 16:34:48.858662    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:kubeedge-pi-counter-68c86dc747-zt94h), pods "kubeedge-pi-counter-68c86dc747-zt94h" not found
+E1015 16:34:48.862933    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:temperature-mapper-68b488ddfb-d9hg7), pods "temperature-mapper-68b488ddfb-d9hg7" not found
+E1015 16:34:48.872563    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:night-detection-64c6ddcfb5-8nhxg), pods "night-detection-64c6ddcfb5-8nhxg" not found
+E1015 16:34:53.901886    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:temperature-mapper-68b488ddfb-d9hg7), pods "temperature-mapper-68b488ddfb-d9hg7" not found
+E1015 16:34:53.905347    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:kubeedge-pi-counter-68c86dc747-zt94h), pods "kubeedge-pi-counter-68c86dc747-zt94h" not found
+E1015 16:34:53.910850    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:night-detection-64c6ddcfb5-8nhxg), pods "night-detection-64c6ddcfb5-8nhxg" not found
+E1015 16:34:58.940760    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:night-detection-64c6ddcfb5-8nhxg), pods "night-detection-64c6ddcfb5-8nhxg" not found
+E1015 16:34:58.995561    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:temperature-mapper-68b488ddfb-d9hg7), pods "temperature-mapper-68b488ddfb-d9hg7" not found
+E1015 16:34:58.999227    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:kubeedge-pi-counter-68c86dc747-zt94h), pods "kubeedge-pi-counter-68c86dc747-zt94h" not found
+E1015 16:35:04.290360    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:kubeedge-pi-counter-68c86dc747-zt94h), pods "kubeedge-pi-counter-68c86dc747-zt94h" not found
+E1015 16:35:04.294362    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:temperature-mapper-68b488ddfb-d9hg7), pods "temperature-mapper-68b488ddfb-d9hg7" not found
+E1015 16:35:04.306103    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:night-detection-64c6ddcfb5-8nhxg), pods "night-detection-64c6ddcfb5-8nhxg" not found
+E1015 16:35:09.329250    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:kubeedge-pi-counter-68c86dc747-zt94h), pods "kubeedge-pi-counter-68c86dc747-zt94h" not found
+E1015 16:35:09.332900    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:temperature-mapper-68b488ddfb-d9hg7), pods "temperature-mapper-68b488ddfb-d9hg7" not found
+E1015 16:35:09.342666    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:night-detection-64c6ddcfb5-8nhxg), pods "night-detection-64c6ddcfb5-8nhxg" not found
+E1015 16:35:14.424879    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:kubeedge-pi-counter-68c86dc747-zt94h), pods "kubeedge-pi-counter-68c86dc747-zt94h" not found
+E1015 16:35:14.428990    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:temperature-mapper-68b488ddfb-d9hg7), pods "temperature-mapper-68b488ddfb-d9hg7" not found
+E1015 16:35:14.439357    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:night-detection-64c6ddcfb5-8nhxg), pods "night-detection-64c6ddcfb5-8nhxg" not found
+E1015 16:35:19.464813    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:kubeedge-pi-counter-68c86dc747-zt94h), pods "kubeedge-pi-counter-68c86dc747-zt94h" not found
+E1015 16:35:19.468554    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:temperature-mapper-68b488ddfb-d9hg7), pods "temperature-mapper-68b488ddfb-d9hg7" not found
+E1015 16:35:19.480256    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:night-detection-64c6ddcfb5-8nhxg), pods "night-detection-64c6ddcfb5-8nhxg" not found
+E1015 16:35:24.527387    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:kubeedge-pi-counter-68c86dc747-zt94h), pods "kubeedge-pi-counter-68c86dc747-zt94h" not found
+E1015 16:35:24.532615    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:temperature-mapper-68b488ddfb-d9hg7), pods "temperature-mapper-68b488ddfb-d9hg7" not found
+E1015 16:35:24.547699    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:night-detection-64c6ddcfb5-8nhxg), pods "night-detection-64c6ddcfb5-8nhxg" not found
+E1015 16:35:29.584139    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:temperature-mapper-68b488ddfb-d9hg7), pods "temperature-mapper-68b488ddfb-d9hg7" not found
+E1015 16:35:29.589812    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:kubeedge-pi-counter-68c86dc747-zt94h), pods "kubeedge-pi-counter-68c86dc747-zt94h" not found
+E1015 16:35:29.598775    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:night-detection-64c6ddcfb5-8nhxg), pods "night-detection-64c6ddcfb5-8nhxg" not found
+E1015 16:35:34.648229    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:night-detection-64c6ddcfb5-8nhxg), pods "night-detection-64c6ddcfb5-8nhxg" not found
+E1015 16:35:34.685801    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:temperature-mapper-68b488ddfb-d9hg7), pods "temperature-mapper-68b488ddfb-d9hg7" not found
+E1015 16:35:34.687166    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:kubeedge-pi-counter-68c86dc747-zt94h), pods "kubeedge-pi-counter-68c86dc747-zt94h" not found
+E1015 16:35:39.697853    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:night-detection-64c6ddcfb5-8nhxg), pods "night-detection-64c6ddcfb5-8nhxg" not found
+E1015 16:35:39.755966    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:kubeedge-pi-counter-68c86dc747-zt94h), pods "kubeedge-pi-counter-68c86dc747-zt94h" not found
+E1015 16:35:39.768366    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:temperature-mapper-68b488ddfb-d9hg7), pods "temperature-mapper-68b488ddfb-d9hg7" not found
+E1015 16:35:44.824976    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:temperature-mapper-68b488ddfb-d9hg7), pods "temperature-mapper-68b488ddfb-d9hg7" not found
+E1015 16:35:44.828886    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:kubeedge-pi-counter-68c86dc747-zt94h), pods "kubeedge-pi-counter-68c86dc747-zt94h" not found
+E1015 16:35:44.901434    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:night-detection-64c6ddcfb5-8nhxg), pods "night-detection-64c6ddcfb5-8nhxg" not found
+E1015 16:35:49.929720    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:kubeedge-pi-counter-68c86dc747-zt94h), pods "kubeedge-pi-counter-68c86dc747-zt94h" not found
+E1015 16:35:49.933596    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:temperature-mapper-68b488ddfb-d9hg7), pods "temperature-mapper-68b488ddfb-d9hg7" not found
+E1015 16:35:49.945083    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:night-detection-64c6ddcfb5-8nhxg), pods "night-detection-64c6ddcfb5-8nhxg" not found
+I1015 16:35:51.947745    2720 upstream.go:88] Dispatch message: d62f8da1-26e2-474e-a690-0f6038482009
+W1015 16:35:51.947780    2720 upstream.go:92] Parse message: d62f8da1-26e2-474e-a690-0f6038482009 resource type with error: unknown resource
+I1015 16:35:51.947805    2720 upstream.go:88] Dispatch message: c1fff175-ae67-462c-80f0-de770441e572
+W1015 16:35:51.947816    2720 upstream.go:92] Parse message: c1fff175-ae67-462c-80f0-de770441e572 resource type with error: unknown resource
+E1015 16:35:54.987551    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:night-detection-64c6ddcfb5-8nhxg), pods "night-detection-64c6ddcfb5-8nhxg" not found
+E1015 16:35:55.061756    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:temperature-mapper-68b488ddfb-d9hg7), pods "temperature-mapper-68b488ddfb-d9hg7" not found
+E1015 16:35:55.065378    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:kubeedge-pi-counter-68c86dc747-zt94h), pods "kubeedge-pi-counter-68c86dc747-zt94h" not found
+E1015 16:36:00.076278    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:night-detection-64c6ddcfb5-8nhxg), pods "night-detection-64c6ddcfb5-8nhxg" not found
+E1015 16:36:00.129256    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:kubeedge-pi-counter-68c86dc747-zt94h), pods "kubeedge-pi-counter-68c86dc747-zt94h" not found
+E1015 16:36:00.132743    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:temperature-mapper-68b488ddfb-d9hg7), pods "temperature-mapper-68b488ddfb-d9hg7" not found
+E1015 16:36:05.144244    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:temperature-mapper-68b488ddfb-d9hg7), pods "temperature-mapper-68b488ddfb-d9hg7" not found
+E1015 16:36:05.148037    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:kubeedge-pi-counter-68c86dc747-zt94h), pods "kubeedge-pi-counter-68c86dc747-zt94h" not found
+E1015 16:36:05.154313    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:night-detection-64c6ddcfb5-8nhxg), pods "night-detection-64c6ddcfb5-8nhxg" not found
+E1015 16:36:10.119356    2720 streamserver.go:106] Can not find 192.168.1.204 session 
+E1015 16:36:10.246231    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:kubeedge-pi-counter-68c86dc747-zt94h), pods "kubeedge-pi-counter-68c86dc747-zt94h" not found
+E1015 16:36:10.249790    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:temperature-mapper-68b488ddfb-d9hg7), pods "temperature-mapper-68b488ddfb-d9hg7" not found
+E1015 16:36:10.259691    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:night-detection-64c6ddcfb5-8nhxg), pods "night-detection-64c6ddcfb5-8nhxg" not found
+E1015 16:36:14.698375    2720 streamserver.go:106] Can not find 192.168.1.204 session 
+E1015 16:36:15.333793    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:kubeedge-pi-counter-68c86dc747-zt94h), pods "kubeedge-pi-counter-68c86dc747-zt94h" not found
+E1015 16:36:15.337479    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:temperature-mapper-68b488ddfb-d9hg7), pods "temperature-mapper-68b488ddfb-d9hg7" not found
+E1015 16:36:15.350328    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:night-detection-64c6ddcfb5-8nhxg), pods "night-detection-64c6ddcfb5-8nhxg" not found
+E1015 16:36:20.369925    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:kubeedge-pi-counter-68c86dc747-zt94h), pods "kubeedge-pi-counter-68c86dc747-zt94h" not found
+E1015 16:36:20.373552    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:temperature-mapper-68b488ddfb-d9hg7), pods "temperature-mapper-68b488ddfb-d9hg7" not found
+E1015 16:36:20.375350    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:night-detection-64c6ddcfb5-8nhxg), pods "night-detection-64c6ddcfb5-8nhxg" not found
+E1015 16:36:25.428002    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:kubeedge-pi-counter-68c86dc747-zt94h), pods "kubeedge-pi-counter-68c86dc747-zt94h" not found
+E1015 16:36:25.431980    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:temperature-mapper-68b488ddfb-d9hg7), pods "temperature-mapper-68b488ddfb-d9hg7" not found
+E1015 16:36:25.442953    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:night-detection-64c6ddcfb5-8nhxg), pods "night-detection-64c6ddcfb5-8nhxg" not found
+E1015 16:36:30.499482    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:temperature-mapper-68b488ddfb-d9hg7), pods "temperature-mapper-68b488ddfb-d9hg7" not found
+E1015 16:36:30.503793    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:kubeedge-pi-counter-68c86dc747-zt94h), pods "kubeedge-pi-counter-68c86dc747-zt94h" not found
+E1015 16:36:30.510590    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:night-detection-64c6ddcfb5-8nhxg), pods "night-detection-64c6ddcfb5-8nhxg" not found
+I1015 16:36:35.180819    2720 upstream.go:88] Dispatch message: 107050c4-b651-45aa-a785-fd860db49c4f
+W1015 16:36:35.180839    2720 upstream.go:92] Parse message: 107050c4-b651-45aa-a785-fd860db49c4f resource type with error: unknown resource
+E1015 16:36:35.565121    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:temperature-mapper-68b488ddfb-d9hg7), pods "temperature-mapper-68b488ddfb-d9hg7" not found
+E1015 16:36:35.569425    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:kubeedge-pi-counter-68c86dc747-zt94h), pods "kubeedge-pi-counter-68c86dc747-zt94h" not found
+E1015 16:36:35.574791    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:night-detection-64c6ddcfb5-8nhxg), pods "night-detection-64c6ddcfb5-8nhxg" not found
+E1015 16:36:40.627087    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:temperature-mapper-68b488ddfb-d9hg7), pods "temperature-mapper-68b488ddfb-d9hg7" not found
+E1015 16:36:40.628824    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:kubeedge-pi-counter-68c86dc747-zt94h), pods "kubeedge-pi-counter-68c86dc747-zt94h" not found
+E1015 16:36:40.631990    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:night-detection-64c6ddcfb5-8nhxg), pods "night-detection-64c6ddcfb5-8nhxg" not found
+E1015 16:36:45.660481    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:kubeedge-pi-counter-68c86dc747-zt94h), pods "kubeedge-pi-counter-68c86dc747-zt94h" not found
+E1015 16:36:45.662487    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:temperature-mapper-68b488ddfb-d9hg7), pods "temperature-mapper-68b488ddfb-d9hg7" not found
+E1015 16:36:45.667038    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:night-detection-64c6ddcfb5-8nhxg), pods "night-detection-64c6ddcfb5-8nhxg" not found
+E1015 16:36:50.681975    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:temperature-mapper-68b488ddfb-d9hg7), pods "temperature-mapper-68b488ddfb-d9hg7" not found
+E1015 16:36:50.685985    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:kubeedge-pi-counter-68c86dc747-zt94h), pods "kubeedge-pi-counter-68c86dc747-zt94h" not found
+E1015 16:36:50.693051    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:night-detection-64c6ddcfb5-8nhxg), pods "night-detection-64c6ddcfb5-8nhxg" not found
+I1015 16:36:51.883741    2720 upstream.go:88] Dispatch message: c1fff175-ae67-462c-80f0-de770441e572
+W1015 16:36:51.883775    2720 upstream.go:92] Parse message: c1fff175-ae67-462c-80f0-de770441e572 resource type with error: unknown resource
+I1015 16:36:51.884616    2720 upstream.go:88] Dispatch message: d62f8da1-26e2-474e-a690-0f6038482009
+W1015 16:36:51.884639    2720 upstream.go:92] Parse message: d62f8da1-26e2-474e-a690-0f6038482009 resource type with error: unknown resource
+E1015 16:36:55.753049    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:temperature-mapper-68b488ddfb-d9hg7), pods "temperature-mapper-68b488ddfb-d9hg7" not found
+E1015 16:36:55.755061    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:kubeedge-pi-counter-68c86dc747-zt94h), pods "kubeedge-pi-counter-68c86dc747-zt94h" not found
+E1015 16:36:55.759601    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:night-detection-64c6ddcfb5-8nhxg), pods "night-detection-64c6ddcfb5-8nhxg" not found
+E1015 16:37:00.773786    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:kubeedge-pi-counter-68c86dc747-zt94h), pods "kubeedge-pi-counter-68c86dc747-zt94h" not found
+E1015 16:37:00.775750    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:temperature-mapper-68b488ddfb-d9hg7), pods "temperature-mapper-68b488ddfb-d9hg7" not found
+E1015 16:37:00.780296    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:night-detection-64c6ddcfb5-8nhxg), pods "night-detection-64c6ddcfb5-8nhxg" not found
+E1015 16:37:05.815768    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:kubeedge-pi-counter-68c86dc747-zt94h), pods "kubeedge-pi-counter-68c86dc747-zt94h" not found
+E1015 16:37:05.819562    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:temperature-mapper-68b488ddfb-d9hg7), pods "temperature-mapper-68b488ddfb-d9hg7" not found
+E1015 16:37:05.830567    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:night-detection-64c6ddcfb5-8nhxg), pods "night-detection-64c6ddcfb5-8nhxg" not found
+E1015 16:37:10.887356    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:kubeedge-pi-counter-68c86dc747-zt94h), pods "kubeedge-pi-counter-68c86dc747-zt94h" not found
+E1015 16:37:10.891596    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:temperature-mapper-68b488ddfb-d9hg7), pods "temperature-mapper-68b488ddfb-d9hg7" not found
+E1015 16:37:10.906689    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:night-detection-64c6ddcfb5-8nhxg), pods "night-detection-64c6ddcfb5-8nhxg" not found
+E1015 16:37:15.957131    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:temperature-mapper-68b488ddfb-d9hg7), pods "temperature-mapper-68b488ddfb-d9hg7" not found
+E1015 16:37:15.961095    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:kubeedge-pi-counter-68c86dc747-zt94h), pods "kubeedge-pi-counter-68c86dc747-zt94h" not found
+E1015 16:37:15.967402    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:night-detection-64c6ddcfb5-8nhxg), pods "night-detection-64c6ddcfb5-8nhxg" not found
+E1015 16:37:21.034107    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:temperature-mapper-68b488ddfb-d9hg7), pods "temperature-mapper-68b488ddfb-d9hg7" not found
+E1015 16:37:21.037573    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:kubeedge-pi-counter-68c86dc747-zt94h), pods "kubeedge-pi-counter-68c86dc747-zt94h" not found
+E1015 16:37:21.041736    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:night-detection-64c6ddcfb5-8nhxg), pods "night-detection-64c6ddcfb5-8nhxg" not found
+E1015 16:37:26.084034    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:temperature-mapper-68b488ddfb-d9hg7), pods "temperature-mapper-68b488ddfb-d9hg7" not found
+E1015 16:37:26.088125    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:kubeedge-pi-counter-68c86dc747-zt94h), pods "kubeedge-pi-counter-68c86dc747-zt94h" not found
+E1015 16:37:26.094625    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:night-detection-64c6ddcfb5-8nhxg), pods "night-detection-64c6ddcfb5-8nhxg" not found
+E1015 16:37:31.141489    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:kubeedge-pi-counter-68c86dc747-zt94h), pods "kubeedge-pi-counter-68c86dc747-zt94h" not found
+E1015 16:37:31.144644    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:temperature-mapper-68b488ddfb-d9hg7), pods "temperature-mapper-68b488ddfb-d9hg7" not found
+E1015 16:37:31.152787    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:night-detection-64c6ddcfb5-8nhxg), pods "night-detection-64c6ddcfb5-8nhxg" not found
+E1015 16:37:31.200340    2720 streamserver.go:106] Can not find 192.168.1.204 session 
+E1015 16:37:36.209433    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:temperature-mapper-68b488ddfb-d9hg7), pods "temperature-mapper-68b488ddfb-d9hg7" not found
+E1015 16:37:36.213415    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:kubeedge-pi-counter-68c86dc747-zt94h), pods "kubeedge-pi-counter-68c86dc747-zt94h" not found
+E1015 16:37:36.219694    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:night-detection-64c6ddcfb5-8nhxg), pods "night-detection-64c6ddcfb5-8nhxg" not found
+E1015 16:37:41.317983    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:kubeedge-pi-counter-68c86dc747-zt94h), pods "kubeedge-pi-counter-68c86dc747-zt94h" not found
+E1015 16:37:41.319485    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:temperature-mapper-68b488ddfb-d9hg7), pods "temperature-mapper-68b488ddfb-d9hg7" not found
+E1015 16:37:41.323384    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:night-detection-64c6ddcfb5-8nhxg), pods "night-detection-64c6ddcfb5-8nhxg" not found
+E1015 16:37:46.363229    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:kubeedge-pi-counter-68c86dc747-zt94h), pods "kubeedge-pi-counter-68c86dc747-zt94h" not found
+E1015 16:37:46.365093    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:temperature-mapper-68b488ddfb-d9hg7), pods "temperature-mapper-68b488ddfb-d9hg7" not found
+E1015 16:37:46.369120    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:night-detection-64c6ddcfb5-8nhxg), pods "night-detection-64c6ddcfb5-8nhxg" not found
+E1015 16:37:51.419606    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:kubeedge-pi-counter-68c86dc747-zt94h), pods "kubeedge-pi-counter-68c86dc747-zt94h" not found
+E1015 16:37:51.421253    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:temperature-mapper-68b488ddfb-d9hg7), pods "temperature-mapper-68b488ddfb-d9hg7" not found
+E1015 16:37:51.425163    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:night-detection-64c6ddcfb5-8nhxg), pods "night-detection-64c6ddcfb5-8nhxg" not found
+I1015 16:37:51.888441    2720 upstream.go:88] Dispatch message: c1fff175-ae67-462c-80f0-de770441e572
+W1015 16:37:51.888463    2720 upstream.go:92] Parse message: c1fff175-ae67-462c-80f0-de770441e572 resource type with error: unknown resource
+I1015 16:37:51.889033    2720 upstream.go:88] Dispatch message: d62f8da1-26e2-474e-a690-0f6038482009
+W1015 16:37:51.889045    2720 upstream.go:92] Parse message: d62f8da1-26e2-474e-a690-0f6038482009 resource type with error: unknown resource
+E1015 16:37:56.475329    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:temperature-mapper-68b488ddfb-d9hg7), pods "temperature-mapper-68b488ddfb-d9hg7" not found
+E1015 16:37:56.477006    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:kubeedge-pi-counter-68c86dc747-zt94h), pods "kubeedge-pi-counter-68c86dc747-zt94h" not found
+E1015 16:37:56.480021    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:night-detection-64c6ddcfb5-8nhxg), pods "night-detection-64c6ddcfb5-8nhxg" not found
+E1015 16:38:01.505188    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:kubeedge-pi-counter-68c86dc747-zt94h), pods "kubeedge-pi-counter-68c86dc747-zt94h" not found
+E1015 16:38:01.507838    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:temperature-mapper-68b488ddfb-d9hg7), pods "temperature-mapper-68b488ddfb-d9hg7" not found
+E1015 16:38:01.509150    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:night-detection-64c6ddcfb5-8nhxg), pods "night-detection-64c6ddcfb5-8nhxg" not found
+E1015 16:38:02.563704    2720 streamserver.go:106] Can not find 192.168.1.204 session 
+E1015 16:38:06.539655    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:temperature-mapper-68b488ddfb-d9hg7), pods "temperature-mapper-68b488ddfb-d9hg7" not found
+E1015 16:38:06.543854    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:kubeedge-pi-counter-68c86dc747-zt94h), pods "kubeedge-pi-counter-68c86dc747-zt94h" not found
+E1015 16:38:06.550996    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:night-detection-64c6ddcfb5-8nhxg), pods "night-detection-64c6ddcfb5-8nhxg" not found
+E1015 16:38:11.628548    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:kubeedge-pi-counter-68c86dc747-zt94h), pods "kubeedge-pi-counter-68c86dc747-zt94h" not found
+E1015 16:38:11.631501    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:temperature-mapper-68b488ddfb-d9hg7), pods "temperature-mapper-68b488ddfb-d9hg7" not found
+E1015 16:38:11.638008    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:night-detection-64c6ddcfb5-8nhxg), pods "night-detection-64c6ddcfb5-8nhxg" not found
+E1015 16:38:16.690211    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:kubeedge-pi-counter-68c86dc747-zt94h), pods "kubeedge-pi-counter-68c86dc747-zt94h" not found
+E1015 16:38:16.692198    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:temperature-mapper-68b488ddfb-d9hg7), pods "temperature-mapper-68b488ddfb-d9hg7" not found
+E1015 16:38:16.697609    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:night-detection-64c6ddcfb5-8nhxg), pods "night-detection-64c6ddcfb5-8nhxg" not found
+E1015 16:38:21.735735    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:kubeedge-pi-counter-68c86dc747-zt94h), pods "kubeedge-pi-counter-68c86dc747-zt94h" not found
+E1015 16:38:21.738150    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:temperature-mapper-68b488ddfb-d9hg7), pods "temperature-mapper-68b488ddfb-d9hg7" not found
+E1015 16:38:21.744670    2720 objectsync.go:38] failed to get obj(gvr:/v1, Resource=pods,namespace:default,name:night-detection-64c6ddcfb5-8nhxg), pods "night-detection-64c6ddcfb5-8nhxg" not found
+I1015 16:38:21.959367    2720 core.go:35] Get os signal terminated
+I1015 16:38:21.959614    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.959667    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.959701    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.959710    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.959707    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.959723    2720 upstream.go:110] Stop updateDeviceStatus
+W1015 16:38:21.959684    2720 upstream.go:346] stop updateNodeStatus
+I1015 16:38:21.959750    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.959753    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.959732    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.959733    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.959747    2720 upstream.go:110] Stop updateDeviceStatus
+W1015 16:38:21.959724    2720 downstream.go:211] Stop edgecontroller downstream syncEdgeNodes loop
+I1015 16:38:21.959768    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.959773    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.959773    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.959812    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.959813    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.959793    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.959795    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.959806    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.959850    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.959860    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960845    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.959852    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960867    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960843    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960887    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960892    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.959787    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.959824    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.959833    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.959834    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960927    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.959806    2720 core.go:40] Cleanup module cloudStream
+I1015 16:38:21.960944    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960952    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960947    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960951    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960972    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.959893    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.959894    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.959905    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.959912    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961002    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961009    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961016    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961033    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961012    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.959931    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.959937    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961058    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961085    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961092    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961099    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961095    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961116    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961125    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961136    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961142    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961149    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961060    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961163    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961163    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961177    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961186    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961192    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961202    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961117    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961214    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.959950    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.959953    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.959967    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.959968    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.959968    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.959984    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.959986    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.959991    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960004    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960005    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961283    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961290    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960021    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960023    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960023    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960029    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960042    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960042    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960042    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960047    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960060    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960062    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960065    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960070    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960079    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960081    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960089    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960098    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960099    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961392    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961399    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960108    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960116    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960116    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960127    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960132    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960134    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960149    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960152    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960153    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960162    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960167    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961482    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961490    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960171    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960182    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960187    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960189    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960190    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960207    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961551    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961563    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961567    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961578    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961564    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961593    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961593    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961571    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960223    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961616    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960228    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960241    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961635    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960245    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960247    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960257    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960263    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960267    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960277    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961676    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961683    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960283    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960286    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960295    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960299    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960302    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961718    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960318    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960321    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961739    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961747    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960315    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961758    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961766    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960341    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960342    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960351    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960359    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960361    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960373    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960379    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960380    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960391    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960398    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960399    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960410    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960416    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960420    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960419    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.959679    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960427    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960435    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960438    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960446    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960446    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960455    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960457    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960467    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960474    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960476    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960484    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960493    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960495    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960501    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960512    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960514    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960518    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960531    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960532    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960537    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960544    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960558    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960549    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962001    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962016    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962025    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962033    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962042    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962019    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962053    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960558    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960576    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960583    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960582    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960592    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960594    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960602    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960605    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960611    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960612    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962120    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960620    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960624    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962139    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962139    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962153    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962160    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962162    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960639    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962180    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960642    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960650    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960651    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960654    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960658    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960661    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960668    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960670    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960675    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960677    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960680    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962255    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960714    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962269    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960717    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960725    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960729    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960730    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960731    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960736    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962310    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962317    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962315    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962332    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962337    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962344    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962352    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962359    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960751    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960745    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960755    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960764    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960767    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960767    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960770    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960773    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960781    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960783    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960787    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960789    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960792    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960797    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960801    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960806    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960808    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960810    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960814    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960820    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960824    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960826    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960829    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960831    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960838    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960847    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960847    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960855    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962526    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962534    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960868    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960874    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960871    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960884    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960885    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960893    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960902    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960908    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960908    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960913    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960914    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960927    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960927    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.959840    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960932    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960933    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960951    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.959888    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960964    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960970    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960972    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960981    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960983    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960988    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960991    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960993    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961000    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961006    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.959920    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.959922    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961023    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961026    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961031    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961036    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961041    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961042    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961051    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961054    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961055    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.959947    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961069    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961074    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961074    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961079    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961080    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961099    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961107    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961113    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961124    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961128    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961140    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961146    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961154    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961159    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961168    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961172    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961183    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961186    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961198    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961205    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961205    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961214    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961219    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961224    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961224    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961232    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961235    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961236    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961243    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961243    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961249    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961252    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961253    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961264    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961265    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961268    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961269    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961272    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961284    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960010    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961286    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961286    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961302    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961303    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961305    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961311    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961313    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961321    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961322    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961323    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961330    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961334    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961338    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961340    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961342    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961345    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961353    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961355    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961359    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961361    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961361    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961371    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961372    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961376    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961378    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961380    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961389    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961393    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961397    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961407    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961409    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961415    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961420    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961422    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961426    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961423    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961435    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961439    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961441    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961441    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961443    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961454    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961457    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961460    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961460    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961460    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961472    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961474    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961477    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961480    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960170    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961492    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961493    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961497    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961505    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961511    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961514    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961512    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961517    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961515    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961523    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961530    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961531    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961534    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961536    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961544    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961548    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961549    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961553    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960207    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961573    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961579    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961589    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961596    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961597    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961608    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961610    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961613    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961616    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960225    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961626    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961628    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961632    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961639    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961644    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961644    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961650    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961656    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961657    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961661    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961664    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961666    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961676    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961678    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960279    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961683    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961693    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961694    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961700    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961700    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961706    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961711    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960305    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961720    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961720    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961724    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961729    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961740    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960324    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961743    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961739    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961759    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961761    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961762    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960332    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961778    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961778    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961779    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961784    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961788    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961795    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961797    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961797    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961802    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961806    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961812    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961815    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961817    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961819    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961825    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961831    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961833    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961836    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961837    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961844    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961850    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961852    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961853    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961856    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961862    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961866    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961869    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961871    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961877    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961881    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961882    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961887    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961889    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961896    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961898    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961900    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961903    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961908    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961913    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961915    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961919    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961921    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961926    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961930    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961934    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961937    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961938    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961946    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961947    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961954    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961956    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961957    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961964    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961965    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961973    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961974    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961976    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961983    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961984    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961990    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961994    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.961994    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962000    2720 upstream.go:110] Stop updateDeviceStatus
+W1015 16:38:21.960558    2720 upstream.go:236] stop updatePodStatus
+I1015 16:38:21.962008    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962014    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960563    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962022    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962037    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962037    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962044    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962052    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962056    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962061    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962063    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962070    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962073    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962079    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962074    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962087    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962090    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962097    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962098    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962100    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962103    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962108    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962116    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960209    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962118    2720 upstream.go:110] Stop updateDeviceStatus
+W1015 16:38:21.960611    2720 downstream.go:62] Stop edgecontroller downstream syncPod loop
+I1015 16:38:21.962126    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962134    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962137    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960630    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962144    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962155    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960631    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962159    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960635    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962172    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962176    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962176    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962188    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962189    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962192    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962197    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962200    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962207    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962212    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962212    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962216    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962219    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962223    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962230    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962230    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962235    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962237    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962241    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962249    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962251    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962254    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962258    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960709    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962268    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962273    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962274    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962279    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962283    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962290    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962291    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962292    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962298    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962300    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962309    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962309    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960745    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960748    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962327    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962333    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962334    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962352    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962352    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962365    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962366    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962370    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962373    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962379    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962385    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962385    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962388    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962392    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962398    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962401    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962405    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962407    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962408    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962416    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962418    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962424    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962426    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962427    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962433    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962434    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962443    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962445    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962446    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962451    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962452    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962462    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962462    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962466    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962472    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962475    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962481    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962482    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962482    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962490    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962491    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962499    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962500    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962502    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962508    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962508    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962517    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962518    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962522    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962523    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.960864    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962538    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962539    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962541    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962547    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962555    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962556    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962558    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962560    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962566    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962573    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962577    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962577    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962578    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962584    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962592    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962596    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962597    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962595    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962603    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962610    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962603    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962614    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962617    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962621    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962616    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962629    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962632    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962633    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962634    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962639    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962643    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962646    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962650    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962651    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962657    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962660    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962665    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962667    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962667    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962677    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962678    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962679    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962684    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962685    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962684    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962696    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962696    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962703    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962704    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962715    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962717    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962721    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962722    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962731    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962732    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962733    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962738    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962743    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962749    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962752    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962758    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962761    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962765    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962767    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962771    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962775    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962780    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962782    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962787    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962790    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962795    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962799    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962809    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962814    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962817    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962830    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962833    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962833    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962838    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962849    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962850    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962854    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962856    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962867    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962871    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962872    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962881    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962887    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962888    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962897    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962867    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962905    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962905    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962913    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962916    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962923    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962925    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962930    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962933    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962940    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962943    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962948    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962950    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962957    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962959    2720 downstream.go:153] Stop syncDevice
+I1015 16:38:21.962972    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962974    2720 upstream.go:110] Stop updateDeviceStatus
+W1015 16:38:21.962975    2720 downstream.go:158] Stop edgecontroller downstream syncSecret loop
+I1015 16:38:21.962982    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962993    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962989    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.962999    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963010    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963012    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963011    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963017    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963028    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963031    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963032    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963031    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963033    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963046    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963051    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963052    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963054    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963065    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963070    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963071    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963073    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963083    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963089    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963092    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963092    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963102    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963108    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963110    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963112    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963119    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963129    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963126    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963137    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963149    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963153    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963159    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963169    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963171    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963175    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963189    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963190    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963192    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963207    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963211    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963213    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963226    2720 upstream.go:110] Stop updateDeviceStatus
+W1015 16:38:21.963226    2720 downstream.go:323] Stop edgecontroller downstream syncService loop
+I1015 16:38:21.963230    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963233    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963243    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963252    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963253    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963263    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963270    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963272    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963282    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963288    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963290    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963300    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963307    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963307    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963319    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963326    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963327    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963337    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963343    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963356    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963358    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963361    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963376    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963378    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963377    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963395    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963396    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963398    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963414    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963412    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963432    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963433    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963448    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963449    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963452    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963464    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963469    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963472    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963476    2720 downstream.go:85] stop syncDeviceModel
+I1015 16:38:21.963481    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963487    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963493    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963501    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963501    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963506    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963512    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963518    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963525    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963530    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963537    2720 upstream.go:110] Stop updateDeviceStatus
+W1015 16:38:21.963538    2720 downstream.go:376] Stop edgecontroller downstream syncEndpoints loop
+I1015 16:38:21.963541    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963542    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963548    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963543    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963554    2720 upstream.go:110] Stop updateDeviceStatus
+W1015 16:38:21.963560    2720 downstream.go:106] Stop edgecontroller downstream syncConfigMap loop
+I1015 16:38:21.963564    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963566    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963567    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963565    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963571    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963583    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963586    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963587    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963586    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963590    2720 upstream.go:110] Stop updateDeviceStatus
+W1015 16:38:21.963592    2720 upstream.go:703] stop updateNode
+I1015 16:38:21.963599    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963603    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963606    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963607    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963608    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963616    2720 upstream.go:110] Stop updateDeviceStatus
+W1015 16:38:21.963617    2720 upstream.go:703] stop updateNode
+I1015 16:38:21.963623    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963624    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963625    2720 upstream.go:110] Stop updateDeviceStatus
+W1015 16:38:21.963626    2720 upstream.go:679] stop queryPersistentVolumeClaim
+I1015 16:38:21.963632    2720 upstream.go:110] Stop updateDeviceStatus
+W1015 16:38:21.963633    2720 upstream.go:679] stop queryPersistentVolumeClaim
+I1015 16:38:21.963634    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963642    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963643    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963647    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963649    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963651    2720 upstream.go:110] Stop updateDeviceStatus
+W1015 16:38:21.963659    2720 upstream.go:703] stop updateNode
+I1015 16:38:21.963661    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963665    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963667    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963668    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963668    2720 upstream.go:110] Stop updateDeviceStatus
+W1015 16:38:21.963676    2720 downstream.go:466] Stop edgecontroller downstream syncRule loop
+I1015 16:38:21.963680    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963683    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963685    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963686    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963690    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963696    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963702    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963703    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963709    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963712    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963715    2720 upstream.go:110] Stop updateDeviceStatus
+W1015 16:38:21.963716    2720 upstream.go:796] stop deletePod
+I1015 16:38:21.963720    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963721    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963727    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963731    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963733    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963737    2720 upstream.go:110] Stop updateDeviceStatus
+W1015 16:38:21.963738    2720 upstream.go:691] stop queryVolumeAttachment
+I1015 16:38:21.963739    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963744    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963750    2720 upstream.go:110] Stop updateDeviceStatus
+W1015 16:38:21.963751    2720 upstream.go:796] stop deletePod
+I1015 16:38:21.963752    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963755    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963761    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963765    2720 upstream.go:110] Stop updateDeviceStatus
+W1015 16:38:21.963767    2720 upstream.go:835] stop queryNode
+I1015 16:38:21.963769    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963771    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963773    2720 upstream.go:110] Stop updateDeviceStatus
+W1015 16:38:21.963775    2720 upstream.go:835] stop queryNode
+I1015 16:38:21.963780    2720 upstream.go:110] Stop updateDeviceStatus
+W1015 16:38:21.963781    2720 upstream.go:835] stop queryNode
+I1015 16:38:21.963783    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963788    2720 upstream.go:110] Stop updateDeviceStatus
+W1015 16:38:21.963788    2720 upstream.go:691] stop queryVolumeAttachment
+I1015 16:38:21.963789    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963789    2720 upstream.go:110] Stop updateDeviceStatus
+W1015 16:38:21.963795    2720 upstream.go:679] stop queryPersistentVolumeClaim
+I1015 16:38:21.963799    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963802    2720 upstream.go:110] Stop updateDeviceStatus
+W1015 16:38:21.963804    2720 upstream.go:679] stop queryPersistentVolumeClaim
+I1015 16:38:21.963805    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963807    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963810    2720 upstream.go:110] Stop updateDeviceStatus
+W1015 16:38:21.963810    2720 upstream.go:667] stop queryPersistentVolume
+W1015 16:38:21.963818    2720 upstream.go:667] stop queryPersistentVolume
+I1015 16:38:21.963820    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963823    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963823    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963822    2720 upstream.go:110] Stop updateDeviceStatus
+W1015 16:38:21.963824    2720 upstream.go:667] stop queryPersistentVolume
+I1015 16:38:21.963828    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963838    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963841    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963843    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963845    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963847    2720 upstream.go:110] Stop updateDeviceStatus
+W1015 16:38:21.963848    2720 upstream.go:703] stop updateNode
+W1015 16:38:21.963855    2720 upstream.go:667] stop queryPersistentVolume
+I1015 16:38:21.963857    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963857    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963860    2720 upstream.go:110] Stop updateDeviceStatus
+W1015 16:38:21.963861    2720 upstream.go:655] stop queryEndpoints
+I1015 16:38:21.963864    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963869    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963873    2720 upstream.go:110] Stop updateDeviceStatus
+W1015 16:38:21.963877    2720 upstream.go:796] stop deletePod
+I1015 16:38:21.963878    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963879    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963882    2720 upstream.go:110] Stop updateDeviceStatus
+W1015 16:38:21.963885    2720 upstream.go:655] stop queryEndpoints
+W1015 16:38:21.963892    2720 upstream.go:655] stop queryEndpoints
+I1015 16:38:21.963894    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963896    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963900    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963900    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963910    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963910    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963914    2720 upstream.go:110] Stop updateDeviceStatus
+W1015 16:38:21.963917    2720 upstream.go:655] stop queryEndpoints
+I1015 16:38:21.963919    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963922    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963925    2720 upstream.go:110] Stop updateDeviceStatus
+W1015 16:38:21.963929    2720 upstream.go:796] stop deletePod
+I1015 16:38:21.963930    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963932    2720 upstream.go:110] Stop updateDeviceStatus
+W1015 16:38:21.963936    2720 upstream.go:643] stop queryService
+I1015 16:38:21.963938    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963941    2720 upstream.go:110] Stop updateDeviceStatus
+W1015 16:38:21.963943    2720 upstream.go:691] stop queryVolumeAttachment
+I1015 16:38:21.963944    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963948    2720 upstream.go:110] Stop updateDeviceStatus
+W1015 16:38:21.963950    2720 upstream.go:643] stop queryService
+I1015 16:38:21.963951    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963957    2720 upstream.go:110] Stop updateDeviceStatus
+W1015 16:38:21.963956    2720 upstream.go:643] stop queryService
+I1015 16:38:21.963959    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963963    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963964    2720 upstream.go:110] Stop updateDeviceStatus
+W1015 16:38:21.963965    2720 upstream.go:835] stop queryNode
+I1015 16:38:21.963970    2720 upstream.go:110] Stop updateDeviceStatus
+W1015 16:38:21.963975    2720 upstream.go:643] stop queryService
+I1015 16:38:21.963978    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963975    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963982    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963983    2720 upstream.go:110] Stop updateDeviceStatus
+W1015 16:38:21.963982    2720 upstream.go:631] stop querySecret
+I1015 16:38:21.963988    2720 upstream.go:110] Stop updateDeviceStatus
+W1015 16:38:21.963993    2720 upstream.go:631] stop querySecret
+I1015 16:38:21.963997    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.963997    2720 upstream.go:110] Stop updateDeviceStatus
+W1015 16:38:21.963999    2720 upstream.go:631] stop querySecret
+I1015 16:38:21.963999    2720 upstream.go:110] Stop updateDeviceStatus
+W1015 16:38:21.964005    2720 upstream.go:631] stop querySecret
+I1015 16:38:21.964006    2720 upstream.go:110] Stop updateDeviceStatus
+W1015 16:38:21.964011    2720 upstream.go:691] stop queryVolumeAttachment
+I1015 16:38:21.964016    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.964016    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.964017    2720 upstream.go:110] Stop updateDeviceStatus
+W1015 16:38:21.964018    2720 upstream.go:619] stop queryConfigMap
+I1015 16:38:21.964025    2720 upstream.go:110] Stop updateDeviceStatus
+W1015 16:38:21.964028    2720 upstream.go:619] stop queryConfigMap
+I1015 16:38:21.964031    2720 upstream.go:110] Stop updateDeviceStatus
+W1015 16:38:21.964033    2720 upstream.go:619] stop queryConfigMap
+I1015 16:38:21.964034    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.964035    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.964038    2720 upstream.go:110] Stop updateDeviceStatus
+W1015 16:38:21.964039    2720 upstream.go:619] stop queryConfigMap
+I1015 16:38:21.964043    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.964050    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.964052    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.964053    2720 upstream.go:110] Stop updateDeviceStatus
+W1015 16:38:21.964054    2720 downstream.go:509] Stop edgecontroller downstream syncRuleEndpoint loop
+I1015 16:38:21.964056    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.964062    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.964069    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.964070    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.964073    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.964075    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.964081    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.964087    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.964092    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.964093    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.964094    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.964104    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.964104    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.964109    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.964111    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.964128    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.964145    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.964152    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.964153    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.964160    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.964162    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.964171    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.964173    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.964173    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.964180    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.964180    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.964190    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.964192    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.964193    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.964194    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.964200    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.964219    2720 upstream.go:110] Stop updateDeviceStatus
+I1015 16:38:21.981101    2720 core.go:40] Cleanup module cloudhub
+I1015 16:38:22.001307    2720 core.go:40] Cleanup module edgecontroller
+W1015 16:38:22.001352    2720 channelq.go:65] node id is not found in the message
+W1015 16:38:22.001366    2720 channelq.go:53] Cloudhub channel eventqueue dispatch message loop stoped
+I1015 16:38:22.021511    2720 core.go:40] Cleanup module devicecontroller
+W1015 16:38:22.021550    2720 upstream.go:185] parse message:  resource type with error: resource type not found
+I1015 16:38:22.021573    2720 upstream.go:170] stop dispatchMessage
+I1015 16:38:22.041733    2720 core.go:40] Cleanup module synccontroller
+I1015 16:38:22.041778    2720 upstream.go:88] Dispatch message: 
+W1015 16:38:22.041812    2720 upstream.go:92] Parse message:  resource type with error: unknown resource
+I1015 16:38:22.041827    2720 upstream.go:78] Stop dispatchMessage
