@@ -1,10 +1,10 @@
 package main
 
 import (
+	"encoding/json"
 	"flag"
 	"fmt"
 	"time"
-	"encoding/json"
 
 	"github.com/yosssi/gmq/mqtt"
 	"github.com/yosssi/gmq/mqtt/client"
@@ -39,11 +39,11 @@ func main() {
 
 	data := types.DeviceTwinUpdate{}
 	data.EventID = "12345"
-	data.Timestamp = time.Now().Unix()/1e6
+	data.Timestamp = time.Now().Unix() /1e6
 	data.Twin = map[string]*types.MsgTwin{"track": &types.MsgTwin{Expected:&types.TwinValue{Value:songname, Metadata:&types.ValueMetadata{Timestamp: time.Now().Unix()/1e6}}, Optional: &optional, Metadata:&types.TypeMetadata{Type:"string"}, ExpectedVersion: &types.TwinVersion{CloudVersion: 22022, EdgeVersion:0}}}
 
 	// Publish a message.
-	bytes,_:=json.Marshal(data)
+	bytes, _ := json.Marshal(data)
 	fmt.Println(string(bytes))
 	err = cli.Publish(&client.PublishOptions{
 		QoS:       mqtt.QoS0,
@@ -54,7 +54,7 @@ func main() {
 		panic(err)
 	}
 
-	time.Sleep(2*time.Second)
+	time.Sleep(2 * time.Second)
 	// Disconnect the Network Connection.
 	if err := cli.Disconnect(); err != nil {
 		panic(err)
