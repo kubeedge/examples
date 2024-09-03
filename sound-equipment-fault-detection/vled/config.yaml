@@ -1,0 +1,9 @@
+grpc_server:
+  socket_path: /etc/kubeedge/vled.sock
+common:
+  name: VLED-mapper
+  version: v1.13.0
+  api_version: v1.0.0
+  protocol: virtualProtocol
+  address: 192.168.1.201
+  edgecore_sock: /etc/kubeedge/dmi.sock

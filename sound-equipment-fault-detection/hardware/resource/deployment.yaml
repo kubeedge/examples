@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hardware
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hardware
+  template:
+    metadata:
+      labels:
+        app: hardware
+    spec:
+      hostNetwork: true
+      nodeName: kedge1 # Schedule the Pod to the node kedge1. Please modify
+      containers:
+        - name: hardware
+          image: hardware:latest
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - name: config-volume
+              mountPath: /etc/config
+          ports:
+            - containerPort: 5020
+          command: ["python"]
+          args: ["main.py"] 
+      volumes:
+        - name: config-volume
+          configMap:
+            name: hardware-config
+            items:
+              - key: normal
+                path: normal
+      restartPolicy: Always

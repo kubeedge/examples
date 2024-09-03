@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LED Status</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            text-align: center;
+        }
+        #app {
+            font-size: 1.5em;
+        }
+        .led {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin: 10px;
+        }
+        .on {
+            background-color: green;
+        }
+        .off {
+            background-color: gray;
+        }
+        .status-off {
+            color: red; /* When the LED is off the text color is red */
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <div :class="['led', isOn ? 'on' : 'off']"></div>
+    <p :class="!isOn ? 'status-off' : ''">
+        {{ isOn ? 'LED is ON, The equipment is operating normally' : 'LED is OFF, Defects detected!' }}
+    </p>
+    <p>Current Time: {{ currentTime }}</p> <!-- Display the current time including year, month and day -->
+</div>
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            isOn: true, // Initial state is ON
+            currentTime: '' // Initialize the time field
+        },
+        methods: {
+            async fetchLEDStatus() {
+                try {
+                    const response = await axios.get('/api/led');
+                    this.isOn = response.data.isOn; // Assume the backend returns { isOn: true/false }
+                } catch (error) {
+                    console.error('Error fetching LED status:', error);
+                }
+            },
+            updateTime() {
+                const now = new Date();
+                this.currentTime = now.toLocaleString(); // Update to include date and time
+            }
+        },
+        mounted() {
+            // Get the LED status and update the time every second
+            setInterval(() => {
+                this.fetchLEDStatus();
+                this.updateTime(); // Update the time at the same time
+            }, 1000); // 1000 milliseconds = 1 second
+        }
+    });
+</script>
+</body>
+</html>

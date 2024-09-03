@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: onnx
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: onnx
+  template:
+    metadata:
+      labels:
+        app: onnx
+    spec:
+      hostNetwork: true
+      nodeName: kedge1 # Schedule the Pod to the node kedge1. Please modify
+      containers:
+        - name: onnx
+          image: onnx:latest
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - name: data-volume          
+              mountPath: /etc/data
+          command: ["python"]
+          args: ["deploy/infer.py"] 
+      volumes:
+        - name: data-volume              
+          hostPath:
+            path: /etc/data              
+            type: DirectoryOrCreate       
+      restartPolicy: Always

@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vled
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vled
+  template:
+    metadata:
+      labels:
+        app: vled
+    spec:
+      nodeName: kedge1 # Schedule the Pod to the node kedge1. Please modify
+      hostNetwork: true
+      containers:
+        - name: vled
+          volumeMounts:
+            - name: vled-volume
+              mountPath: /etc/kubeedge
+          image: vled
+          ports:
+            - containerPort: 5050
+            - containerPort: 10350
+          imagePullPolicy: IfNotPresent
+          command: ["/bin/sh", "-c"]
+          args: ["/kubeedge/main --v 4"]
+      volumes:
+        - name: vled-volume
+          hostPath:
+            path: /etc/kubeedge
+            type: Directory

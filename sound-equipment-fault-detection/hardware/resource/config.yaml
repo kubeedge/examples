@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: hardware-config
+  namespace: default
+data:
+  normal: "true"
