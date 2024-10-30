@@ -1,0 +1,12 @@
+apiVersion: devices.kubeedge.io/v1beta1
+kind: DeviceModel
+metadata:
+  name: vled-01
+  namespace: default
+spec:
+  protocol: virtualProtocol
+  properties:
+    - name: status
+      description: vled switch status, 0 represents off and 1 represents on
+      type: INT
+      accessMode: ReadWrite

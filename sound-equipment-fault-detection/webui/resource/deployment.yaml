@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webui
+  labels:
+    app: webui
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: webui
+  template:
+    metadata:
+      labels:
+        app: webui
+    spec:
+      hostNetwork: true 
+      nodeName: kmaster1 # Schedule the Pod to the node kmaster1. Please modify
+      containers:
+        - name: webui
+          image: webui:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+      tolerations:
+        - key: node-role.kubernetes.io/master
+          operator: Exists
+          effect: NoSchedule
+        - key: node-role.kubernetes.io/control-plane
+          operator: Exists
+          effect: NoSchedule
+      restartPolicy: Always

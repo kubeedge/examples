@@ -1,0 +1,48 @@
+apiVersion: devices.kubeedge.io/v1beta1
+kind: Device
+metadata:
+  name: vled-instance-01
+  labels:
+    model: vled-01
+spec:
+  deviceModelRef:
+    name: vled-01
+  protocol:
+    protocolName: virtualProtocol  # in your mapper, this should be replaced by the protocol name your use
+    configData:
+      deviceID: 2
+      serialPort: '/dev/ttyS0'
+      baudRate: 9600
+      dataBits: 8
+      parity: even
+      stopBits: 1
+      protocolID: 1
+  nodeName: kedge1 # config
+  properties:
+    - name: status
+      visitors:
+        protocolName: virtualProtocol # in your mapper, this should be replaced by the protocol name your use
+        configData:
+          dataType: int
+      reportCycle: 1000000000
+      collectCycle: 1000000000
+      reportToCloud: true
+      pushMethod:
+        mqtt:
+          address: tcp://127.0.0.1:1883 # replace it by the url of your mqtt client
+          topic: status
+          qos: 0
+          retained: false
+status:
+  twins:
+    - propertyName: status
+      reported:
+        metadata:
+          timestamp: '1550049403598'
+          type: integer
+        value: "100"
+      observedDesired:
+        metadata:
+          timestamp: '1550049403598'
+          type: integer
+        value: "100"
