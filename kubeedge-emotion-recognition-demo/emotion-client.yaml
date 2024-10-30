@@ -1,0 +1,43 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+  labels:
+    app: emotion-client
+  name: emotion-client
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: emotion-client
+  template:
+    metadata:
+      labels:
+        app: emotion-client
+    spec:
+      containers:
+      - image: kuramal/faceemotion-client
+        imagePullPolicy: Always
+        name: client
+        env:
+        - name: DISPLAY
+          value: :0
+        - name: FACEEMOTION_SERVER
+          value: $EMOTION_SERVER
+        - name: FACEEMOTION_PORT
+          value: $EMOTION_CLIENT
+        volumeMounts:
+        - mountPath: /tmp/.X11-unix
+          name: x11
+        - mountPath: /dev/video0
+          name: video
+        securityContext:
+          privileged: true
+      volumes:
+      - name: x11
+        hostPath:
+          path: /tmp/.X11-unix
+      - name: video
+        hostPath:
+          path: /dev/video0
