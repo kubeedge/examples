@@ -5,6 +5,9 @@ metadata:
   labels:
     description: 'counter'
 spec:
+  protocol:
+    customizedProtocol:
+      protocolName: counter
   deviceModelRef:
     name: counter-model
   nodeSelector:
