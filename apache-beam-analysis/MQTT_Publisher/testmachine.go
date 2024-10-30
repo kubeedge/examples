@@ -1,12 +1,12 @@
 package main
 
 import (
-	"time"
-	"fmt"
 	"encoding/json"
+	"fmt"
+	"time"
 
 	"github.com/yosssi/gmq/mqtt"
-	"github.com/yosssi/gmq/mqtt/client"	
+	"github.com/yosssi/gmq/mqtt/client"
 )
 
 type ReadDataFn struct {
@@ -52,7 +52,7 @@ func main() {
 	for i = 0; i < 20; i++ {
 		time.Sleep(2 * time.Second)
 		Data.ID = i
-		Data.CreateTime = time.Now().Local()	
+		Data.CreateTime = time.Now().Local()
 		if i == 1 {
 			Data.Value = "90"
 			Data.MachineID = "M2000"

@@ -12,10 +12,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/kubeedge/kubeedge/cloud/pkg/devicecontroller/types"
-
 	MQTT "github.com/eclipse/paho.mqtt.golang"
-
+	"github.com/kubeedge/kubeedge/cloud/pkg/devicecontroller/types"
 	"github.com/kubeedge/kubeedge/edge/pkg/devicetwin/dttype"
 )
 
