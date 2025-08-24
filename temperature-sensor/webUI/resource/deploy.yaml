@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: temperature-webui
+  labels:
+    app: temperature-webui
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: temperature-webui
+  template:
+    metadata:
+      labels:
+        app: temperature-webui
+    spec:
+      hostNetwork: true
+      nodeName: kind-control-plane # 1. replace the nodeName with your edge node name
+      containers:
+        - name: temperature-webui
+          image: temperature-webui:v1.0
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080

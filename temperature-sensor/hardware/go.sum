@@ -1,0 +1,5 @@
+github.com/goburrow/serial v0.1.0 h1:v2T1SQa/dlUqQiYIT8+Cu7YolfqAi3K96UmhwYyuSrA=
+github.com/goburrow/serial v0.1.0/go.mod h1:sAiqG0nRVswsm1C97xsttiYCzSLBmUZ/VSlVLZJ8haA=
+github.com/thinkgos/gomodbus v1.5.2 h1:zmFEzXILpCtBYB8FwcAuLnb8Rrr3NcdX8oukmyB9hwE=
+github.com/thinkgos/gomodbus v1.5.2/go.mod h1:HX6B+W3xV/oKinltblD+aqr9LnQuh9mWT4kMul5hYvE=
+github.com/thinkgos/timing v1.1.2/go.mod h1:zS1qzRn2ISTjI1xJc6AHNfWAvCtc7FylwWjt32L8qvo=

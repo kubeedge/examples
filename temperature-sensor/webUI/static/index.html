@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperature Sensor Monitor</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            text-align: center;
+        }
+        #app {
+            font-size: 1.5em;
+        }
+        .switch-on {
+            color: green;
+        }
+        .switch-off {
+            color: red;
+        }
+        .status-normal {
+            color: blue;
+        }
+        .status-high {
+            color: orange;
+        }
+        .status-low {
+            color: purple;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <p>Temperature: {{ temperature }}°C</p>
+    <p :class="isSwitchOn ? 'switch-on' : 'switch-off'">
+        {{ isSwitchOn ? 'Sensor is ON' : 'Sensor is OFF' }}
+    </p>
+    <p :class="statusClass">{{ additionalInfo }}</p>
+    <p>Record Time: {{ rcdTime }}</p>
+</div>
+
+<script>
+    new Vue({
+        el: '#app',
+        // Data properties used in the component
+        data: {
+            temperature: 0, 
+            isSwitchOn: true, 
+            additionalInfo: '',
+            warning: 0,
+            rcdTime: ''
+        },
+        // Computed property to determine the status class based on warning level
+        computed: {
+            statusClass() {
+                switch (this.warning) {
+                    case 0:
+                        return 'status-normal';
+                    case 1:
+                        return 'status-high';
+                    case 2:
+                        return 'status-low';
+                    case 3:
+                        return 'status-offline';
+
+                    default:
+                        return '';
+                }
+            }
+        },
+        // Methods used to fetch data and update the component state
+        methods: {
+            formatTimestamp(timestamp) {
+        const date = new Date(timestamp * 1000); 
+        return date.toLocaleString('zh-CN', {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit'
+        });
+    },
+            // Fetch temperature data from the backend API
+            async fetchTemperature() {
+                try {
+                    const response = await axios.get('/api/v1/temperature');
+                    // Extract temperature data from the response
+                    this.temperature = response.data.temperature;
+                    // Extract warning status from the response
+                    this.warning = response.data.warning;
+                    // Extract record time from the response
+                    this.rcdTime = this.formatTimestamp(response.data.rcdTime);
+                    // Set additional information based on the warning status
+                    switch (this.warning) {
+                        case 0:
+                            this.additionalInfo = 'Normal';
+                            break;
+                        case 1:
+                            this.additionalInfo = 'Temperature too high!';
+                            break;
+                        case 2:
+                            this.additionalInfo = 'Temperature too low!';
+                            break;
+                        case 3:
+                            this.additionalInfo = 'Temperature-Sensor is OffLine!';
+                            break;
+                        default:
+                            this.additionalInfo = 'Unknown status';
+                    }
+                } catch (error) {
+                    console.error('Error fetching temperature:', error);
+                }
+            },
+            // Fetch switch status from the backend API
+            async fetchSwitchStatus() {
+                try {
+                    const response = await axios.get('/api/v1/switch');
+                    this.isSwitchOn = (response.data.switch == 1);
+                } catch (error) {
+                    console.error('Error fetching switch status:', error);
+                }
+            }
+            
+        },
+        // Lifecycle hook: executed when the component is mounted
+        mounted() {
+            this.fetchSwitchStatus();
+            this.fetchTemperature();
+
+            setInterval(() => {
+                this.fetchTemperature();
+                this.fetchSwitchStatus();
+            }, 10000); 
+        }
+    });
+</script>
+</body>
+</html>
