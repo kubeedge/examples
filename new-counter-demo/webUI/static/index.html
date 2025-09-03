@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Counter Console</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            text-align: center;
+        }
+        #app {
+            font-size: 1.5em;
+        }
+        .switch-on {
+            color: green;
+        }
+        .switch-off {
+            color: red;
+        }
+        .switch-pause {
+            color: orange;
+        }
+
+        .counter-positive { color: green; }
+        .counter-negative { color: red; }
+        .counter-zero { color: #333; }
+
+    </style>
+</head>
+<body>
+<div id="app">
+    <h1>Real-time Counter</h1>
+    <div class="counter-display">
+        <p>Current Count: <span :class="counterClass">{{ this.counter }}</span></p>
+        
+        <div class="custom-start">
+            <input type="number" v-model="customStartValue" placeholder="Start Number">
+            <button @click="setCustomStart">SetCustomStart</button>
+        </div>
+        
+        <div class="switch-control">
+            <p :class="statusClass">{{ statusText }}</p>
+            <button @click="startPause">{{ getStartPauseButtonText }}</button>
+            <button @click="shutdown">Shutdown</button>
+            <button @click="resetCounter">Reset</button>
+        </div>
+        
+        <p>Current Time:{{ this.CurrentTime }}</p>
+    </div>
+</div>
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            counter: 0,
+            status: "1", // ON:0 OFF:1 PAUSE:2
+            CurrentTime: '',    
+            customStartValue: 0 ,
+            timerId: null,
+        },
+        computed: {
+            // Determine counter display class based on its value
+            counterClass() {
+                return {
+                    'counter-positive': this.counter > "0",
+                    'counter-negative': this.counter < "0",
+                    'counter-zero': this.counter === "0"
+                };
+            },
+            statusClass() { 
+                return this.status === "0" ? 'switch-on' : this.status === "1" ? 'switch-off' : 'switch-pause';
+            },
+            statusText() { 
+                return this.status === "0" ? 'Counter is running' : this.status === "1" ? 'Counter is stopped' : 'Counter is paused';
+            },
+            getStartPauseButtonText() {
+                if (this.status === "1"||this.status === "2") return 'Start';   
+                if (this.status === "0") return 'Pause';      
+                return 'Start'; 
+            }
+        },
+        methods: {
+            updateTime() {
+                this.CurrentTime = new Date().toLocaleString();
+            },
+            async fetchCounter() {
+                try {
+                    const response = await axios.get('/api/v1/counter', { timeout: 5000 });
+                    this.counter = response.data.counter;
+                } catch (error) {
+                    console.error('Failed to fetch counter:', error);
+                }
+            },
+            async fetchStatus() {
+                try {
+                    const response = await axios.get('/api/v1/status', { timeout: 5000 });
+                    this.status = response.data.status;
+                } catch (error) {
+                    console.error('Failed to fetch status:', error);
+                }
+            },
+            async startPause() {
+                try {
+                    const targetStatus = (this.status === "1" || this.status === "2" )? "0" : "2";
+
+                    const response = await axios.get('/api/v1/set/status', { params: { status: targetStatus } });
+                    if (response.data.status === targetStatus) {
+                        this.status = targetStatus;
+                    } else {
+                        console.error('Status update failed:', response.data.status);
+                        alert('Status update failed, please try again');
+                    }
+                } catch (error) {
+                    console.error('Failed to toggle status:', error);
+                    alert('Failed to toggle status: ' + error.message);
+                }
+            },
+            async shutdown() {
+                try {
+                    await axios.get('/api/v1/set/status', { params: { status: "1" } });
+                    this.status = "1";
+                    this.counter= 0;
+                } catch (error) {
+                    console.error('Failed to shutdown:', error);
+                }
+            },
+            async resetCounter() {
+                try {
+                    await axios.get('/api/v1/reset');
+                    this.fetchCounter();
+                } catch (error) {
+                    console.error('Failed to reset counter:', error);
+                }
+            },
+            async setCustomStart() {
+                if (this.customStartValue === null || this.customStartValue === undefined || isNaN(this.customStartValue)) {
+                    alert('Input a number to start counting ');
+                    return;
+                }
+                try {
+                    await axios.get('/api/v1/set/counter', {
+                        params: { count: this.customStartValue }
+                    });
+                    this.counter = this.customStartValue;
+                } catch (error) {
+                    console.error('Failed to set custom start:', error);
+                }
+            }
+        },
+        mounted() {
+            this.fetchStatus();
+            this.fetchCounter(); 
+            this.updateTime();
+
+            const refreshData = () => {
+                this.updateTime();
+                if (this.status === "0"){
+                    this.fetchCounter();
+                }
+                this.timerId = setTimeout(refreshData, 1000);
+            };
+            refreshData();
+        },
+        beforeDestroy() {
+            if (this.timerId) {
+                clearTimeout(this.timerId);
+                this.timerId = null;
+            }
+        }
+    });
+</script>
+</body>
+</html>

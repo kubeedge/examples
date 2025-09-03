@@ -1,0 +1,45 @@
+apiVersion: devices.kubeedge.io/v1beta1
+kind: Device
+metadata:
+  name: counter-instance
+  namespace: default
+spec:
+  deviceModelRef:
+    name: counter-model
+  nodeName: "kind-worker"
+  protocol:
+    protocolName: virtualProtocol
+    configData:
+      # ip: "172.18.0.3"
+  
+  properties:
+    - name: status
+      visitors:
+        configData:
+          name: status
+      collectCycle: 10000
+      reportCycle: 10000
+      reportToCloud: true
+    - name: count
+      visitors:
+        configData:
+          name: count
+      collectCycle: 1000
+      reportCycle: 10000
+      reportToCloud: true
+      # pushMethod:
+      #   mqtt:
+      #     topic: "current count"
+      #     qos: 0
+      #     address: "tcp://127.0.0.1:1884"  # replace the address with your mqtt broker address
+      #     retained: false
+  methods:
+    - name: UpdateStatus
+      description: update status of counter. 0=ON,1=OFF 2=PAUSED
+      propertyNames:
+        - status
+    - name: SetCount
+      description: set count of counter
+      propertyNames:
+        - count
+  

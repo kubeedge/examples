@@ -1,0 +1,16 @@
+apiVersion: devices.kubeedge.io/v1beta1
+kind: DeviceModel
+metadata:
+ name: counter-model
+ namespace: default
+spec:
+  protocol: "virtualProtocol"
+  properties:
+   - name: status
+     description: counter status:0=ON,1=OFF 2=PAUSED
+     type: STRING
+     accessMode: ReadWrite
+   - name: count
+     description: counter count
+     type: STRING
+     accessMode: ReadWrite
