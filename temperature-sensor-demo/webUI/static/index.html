@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperature Sensor Console</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            text-align: center;
+        }
+
+        #app {
+            font-size: 1.5em;
+        }
+
+        .switch-on {
+            color: green;
+        }
+
+        .switch-off {
+            color: red;
+        }
+
+        .status-normal {
+            color: blue;
+        }
+
+        .status-high {
+            color: orange;
+        }
+
+        .status-low {
+            color: purple;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <p>Temperature: {{ temperature }}°C</p>
+        <p :class="isSwitchOn ? 'switch-on' : 'switch-off'">{{ isSwitchOn ? 'Sensor is ON' : 'Sensor is OFF' }}</p>
+        <p :class="statusClass">Warning: {{ warning }}</p>
+        <p>Record Time: {{ rcdTime }}</p>
+
+        <div class="controls">
+            <button @click="SwitchControl">
+                {{ isSwitchOn ? 'Turn Off Sensor' : 'Turn On Sensor' }}
+            </button>
+
+            <div class="temperature-setting">
+                <input type="number" v-model.number="newTemperature" placeholder="Set temperature">
+                <button @click="setTemperature">Set Temperature</button>
+            </div>
+        </div>
+        <div v-if="showMessage" :class="'message-box ' + messageType" class="message-box">
+            {{ messageText }}
+        </div>
+    </div>
+
+    <style>
+        .switch-on {
+            color: green;
+        }
+
+        .switch-off {
+            color: red;
+        }
+
+        .status-normal {
+            color: blue;
+        }
+
+        .status-high {
+            color: orange;
+        }
+
+        .status-low {
+            color: purple;
+        }
+
+        .message-box {
+            position: fixed;
+            top: 350px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 12px 20px;
+            border-radius: 4px;
+            color: white;
+            font-weight: bold;
+            z-index: 1000;
+            transition: opacity 0.3s;
+        }
+
+        .success {
+            background-color: #4CAF50;
+        }
+
+        .error {
+            background-color: #f44336;
+        }
+    </style>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                temperature: 0,
+                isSwitchOn: true,
+                warning: '',  // Temperature warning information
+                rcdTime: '',
+                newTemperature: 0,
+                showMessage: false,
+                messageText: '',
+                messageType: '', // 'success' or 'error'
+                timer: null
+            },
+            computed: {
+                statusClass() {
+                    switch (this.warning) {
+                        case 'Normal operation': return 'status-normal';
+                        case 'Temperature too high!': return 'status-high';
+                        case 'Temperature too low!': return 'status-low';
+                        case 'Temperature-Sensor is OffLine!': return 'status-offline';
+                        default: return '';
+                    }
+                }
+            },
+            methods: {
+                updateCurrentTime() {
+                    this.rcdTime = new Date().toLocaleString();
+                },
+                // Fetch temperature data from the backend API
+                async fetchTemperature() {
+                    try {
+                        const response = await axios.get('/api/v1/temperature');
+                        this.temperature = response.data.temperature;
+                        
+                        // Set warning based on status
+                        switch (response.data.warning) {
+                            case 0:
+                                this.warning = 'Normal';
+                                break;
+                            case 1:
+                                this.warning = 'Temperature too high!';
+                                break;
+                            case 2:
+                                this.warning = 'Temperature too low!';
+                                break;
+                            default:
+                                this.warning = 'Unknown status';
+                        }
+                    } catch (error) {
+                        console.error('Error fetching temperature:', error);
+                    }
+                },
+                // Fetch switch status from the backend API
+                async fetchSwitchStatus() {
+                    try {
+                        const response = await axios.get('/api/v1/switch');
+                        this.isSwitchOn = (response.data.switch == 1);
+                    } catch (error) {
+                        console.error('Error fetching switch status:', error);
+                    }
+                },
+                async SwitchControl() {
+                    try {
+                        const response = await axios.get('/api/v1/set/switch', {
+                            params: { switchStatus: (this.isSwitchOn ? 0 : 1) }
+                        });
+
+                        if (response.data.success) {
+                            this.isSwitchOn = !this.isSwitchOn;
+                            this.showMessage = true;
+                            this.messageType = 'success';
+                            this.messageText = `Sensor ${this.isSwitchOn ? 'activated' : 'deactivated'}`;
+                            setTimeout(() => this.showMessage = false, 3000);
+                        } else {
+                            this.showMessage = true;
+                            this.messageType = 'error';
+                            this.messageText = 'Failed to update sensor status';
+                            setTimeout(() => this.showMessage = false, 3000);
+                        }
+                    } catch (error) {
+                        this.showMessage = true;
+                        this.messageType = 'error';
+                        this.messageText = 'Error communicate with device';
+                        setTimeout(() => this.showMessage = false, 3000);
+                    }
+                },
+                async setTemperature() {
+                    if (isNaN(this.newTemperature) || this.newTemperature < -50 || this.newTemperature > 150) {
+                        this.showMessage = true;
+                        this.messageType = 'error';
+                        this.messageText = 'Invalid Input: Please enter valid temperature (-50~150)';
+                        setTimeout(() => this.showMessage = false, 3000);
+                        return;
+                    }
+
+                    try {
+                        const response = await axios.get('/api/v1/set/temperature', { params: { temperature: this.newTemperature } });
+                        if (response.data.success) {
+                            this.temperature = this.newTemperature;
+                            this.showMessage = true;
+                            this.messageType = 'success';
+                            this.messageText = `Temperature updated to ${this.newTemperature}°C`;
+                            setTimeout(() => this.showMessage = false, 3000);
+                        } else {
+                            this.showMessage = true;
+                            this.messageType = 'error';
+                            this.messageText = 'Failed to update temperature';
+                            setTimeout(() => this.showMessage = false, 3000);
+                        }
+                    } catch (error) {
+                        this.showMessage = true;
+                        this.messageType = 'error';
+                        this.messageText = 'Error communicate with device';
+                        setTimeout(() => this.showMessage = false, 3000);
+                    }
+                }
+            },
+            mounted() {
+                this.fetchSwitchStatus();
+                this.fetchTemperature();
+                this.updateCurrentTime();
+
+                this.timer = setInterval(() => {
+                    this.updateCurrentTime();
+                    this.fetchTemperature();
+                    this.fetchSwitchStatus();
+                }, 10000);
+            },
+            beforeUnmount() {
+            clearInterval(this.timer);
+            }
+        });
+    </script>
+</body>
+
+</html>
