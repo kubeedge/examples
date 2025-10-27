@@ -1,0 +1,9 @@
+grpc_server:
+  socket_path: /etc/kubeedge/virtualprotocol.sock
+common:
+  name: VirtualProtocol-mapper
+  version: v1.13.0
+  api_version: v1.0.0
+  protocol: virtualProtocol
+  address: 127.0.0.1
+  edgecore_sock: /etc/kubeedge/dmi.sock
