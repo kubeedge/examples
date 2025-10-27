@@ -1,0 +1,66 @@
+apiVersion: devices.kubeedge.io/v1beta1
+kind: Device
+metadata:
+  name: temperature-instance
+spec:
+  deviceModelRef:
+    name: temperature-model
+  protocol:
+    protocolName: modbus
+    # Custom protocol configuration
+    configData:
+      communicateMode: "TCP"   # TCP/RTU
+      port: "5502"             # replace the port with your modbus device port
+      slaveID: 1
+      ip: "10.244.1.13"   # 1.replace the ip with your modbus device ip
+      
+  nodeName: "kind-worker" # 2.replace the nodeName with your edge node name
+  properties:
+    - name: temperature
+      visitors:
+        protocolName: modbus
+        configData:
+          dataType: "float"  # Define the output format, consistent with the model type definition Enum::int/float/double/string/boolean/bytes
+          register: "HoldingRegister" # Register Type Enum::CoilRegister/DiscreteInputRegister/HoldingRegister/InputRegister
+          offset: 0  # Register offset
+          limit: 1   # Number of registers to read
+          scale: 0.1 # Scaling factor for temperature values
+          isSwap: false  # Whether to swap bytes
+          isRegisterSwap: false # Whether to swap registers
+          max: 100.0  # Maximum value for temperature
+          min: 1.0    # Minimum value for temperature
+      collectCycle: 10000
+      reportCycle: 10000
+      reportToCloud: true
+      # Enabling the push function requires deploying related services,like mosquitto broker
+      # pushMethod:
+      #   mqtt:
+      #     topic: "current temperature"
+      #     qos: 0
+      #     address: "tcp://172.18.0.3:31883"  # replace the address with your mqtt broker address
+      #     retained: false
+    - name: temperature-switch
+      collectCycle: 10000
+      reportCycle: 10000
+      reportToCloud: true
+      desired:
+        value: "1"
+      visitors:
+        protocolName: modbus
+        configData:
+          dataType: "int"
+          register: "CoilRegister"
+          offset: 0
+          limit: 1
+          scale: 1
+          isSwap: false
+          isRegisterSwap: false
+  methods:
+    - name: SwitchControl
+      description: control the switch of the device
+      propertyNames:
+        - temperature-switch
+    - name: UpdateTemperature
+      description: update the temperature of the device
+      propertyNames:
+        - temperature

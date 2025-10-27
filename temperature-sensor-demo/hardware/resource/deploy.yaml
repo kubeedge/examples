@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: temperature-sensor
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: temperature-sensor
+  template:
+    metadata:
+      labels:
+        app: temperature-sensor
+    spec:
+      nodeName: kind-worker
+      containers:
+        - name: temperature-sensor
+          image: temperature-sensor:v1.0
+          imagePullPolicy: IfNotPresent
+          resources:
+            limits:
+              cpu: 300m
+              memory: 500Mi
+            requests:
+              cpu: 100m
+              memory: 100Mi
