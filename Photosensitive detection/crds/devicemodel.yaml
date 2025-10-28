@@ -1,0 +1,13 @@
+apiVersion: devices.kubeedge.io/v1alpha2
+kind: DeviceModel
+metadata:
+  name: light-model
+  namespace: default
+spec:
+  properties:
+    - name: light-status
+      description: Light collected from the edge device
+      type:
+        string:
+          accessMode: ReadOnly
+          defaultValue: ''

@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: light-mapper
+  labels:
+    app: light
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: light
+  template:
+    metadata:
+      labels:
+        app: light
+    spec:
+      hostNetwork: true
+      nodeSelector:
+        name: pi32-1
+      containers:
+      - name: light
+        image:  yangrl/light-py:dev
+        imagePullPolicy: IfNotPresent
+        command: ["python3","-u", "/light.py"]
+        securityContext:
+          privileged: true
