@@ -26,9 +26,6 @@ var deviceID = "counter"
 // The default namespace in which the counter device instance resides
 var namespace = "default"
 
-// The default status of the counter
-var originCmd = "OFF"
-
 // The CRD client used to patch the device instance.
 var crdClient *rest.RESTClient
 
@@ -48,21 +45,29 @@ func init() {
 
 	crdClient, err = utils.NewCRDClient(kubeConfig)
 	if err != nil {
-		log.Fatalf("Failed to create device crd client , error : %v", err)
+		log.Fatalf("Failed to create device crd client, error : %v", err)
 	}
 	log.Println("Get crdClient successfully")
 }
 
-func UpdateStatus() map[string]string {
-	result := DeviceStatus{}
-	raw, _ := crdClient.Get().Namespace(namespace).Resource(utils.ResourceTypeDevices).Name(deviceID).DoRaw(context.TODO())
-
+// QueryDeviceStatus query device status
+func QueryDeviceStatus() map[string]string {
 	status := map[string]string{
 		"status": "OFF",
 		"value":  "0",
 	}
+	result := DeviceStatus{}
+	raw, err := crdClient.Get().Namespace(namespace).Resource(utils.ResourceTypeDevices).Name(deviceID).DoRaw(context.TODO())
+	if err != nil {
+		log.Printf("Failed to query device status of device %v in namespace %v, error:%+v", deviceID, namespace, err)
+		return status
+	}
 
-	_ = json.Unmarshal(raw, &result)
+	err = json.Unmarshal(raw, &result)
+	if err != nil {
+		log.Printf("Failed to Unmarshal device raw of device %v in namespace %v, error:%+v", deviceID, namespace, err)
+		return status
+	}
 	for _, twin := range result.Status.Twins {
 		status["status"] = twin.Desired.Value
 		status["value"] = twin.Reported.Value
@@ -74,7 +79,9 @@ func UpdateStatus() map[string]string {
 // UpdateDeviceTwinWithDesiredTrack patches the desired state of
 // the device twin with the command.
 func UpdateDeviceTwinWithDesiredTrack(cmd string) bool {
-	if cmd == originCmd {
+	// get current device status
+	currentDeviceStatus := QueryDeviceStatus()
+	if cmd == currentDeviceStatus["status"] {
 		return true
 	}
 
@@ -92,7 +99,6 @@ func UpdateDeviceTwinWithDesiredTrack(cmd string) bool {
 	} else {
 		log.Printf("Turn %s %s", cmd, deviceID)
 	}
-	originCmd = cmd
 
 	return true
 }
@@ -123,7 +129,7 @@ func (controller *TrackController) Index() {
 	log.Println("Index Finish")
 }
 
-// Control
+// ControlTrack is the main view
 func (controller *TrackController) ControlTrack() {
 	// Get track id
 	params := struct {
@@ -143,7 +149,7 @@ func (controller *TrackController) ControlTrack() {
 		UpdateDeviceTwinWithDesiredTrack(params.TrackID)
 		resultCode = 2
 	} else if params.TrackID == "STATUS" {
-		status = UpdateStatus()
+		status = QueryDeviceStatus()
 		resultCode = 3
 	}
 
