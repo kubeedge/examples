@@ -45,9 +45,9 @@ $ git clone https://github.com/kubeedge/examples.git $GOPATH/src/github.com/kube
 
 ```console
 $ cd $GOPATH/src/github.com/kubeedge/examples/temperature-demo/crds
-$ kubectl apply -f devicemodel.yaml
+$ kubectl apply -f model.yaml
 $ sed -i "s#edge-node#<your-edge-node-name>#g" instance.yaml
-$ kubectl apply -f device.yaml
+$ kubectl apply -f instance.yaml
 ```
 
  6. Build the mapper to run in RaspBerry-Pi.
