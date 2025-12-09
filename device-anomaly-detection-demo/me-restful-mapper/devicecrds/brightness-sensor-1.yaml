@@ -1,0 +1,27 @@
+apiVersion: devices.kubeedge.io/v1beta1
+kind: Device
+metadata:
+  name: brightness-sensor-1
+spec:
+  deviceModelRef:
+    name: brightness-sensor
+  nodeName: hadoop2
+  properties:
+  - name: brightness
+    collectCycle: 10000
+    reportCycle: 10000
+    reportToCloud: true
+    pushMethod:
+      anomalyDetection:
+        host: external-anomaly-detector
+        port: 6804
+        deviceName: brightness-sensor-1
+        namespace: default
+        propertyName: brightness
+  stateReport:
+    reportToCloud: true
+    reportCycle: 10000
+  protocol:
+    configData:
+      url: /brightness
+    protocolName: me-restful

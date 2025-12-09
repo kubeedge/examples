@@ -1,0 +1,27 @@
+apiVersion: devices.kubeedge.io/v1beta1
+kind: Device
+metadata:
+  name: light-1
+spec:
+  deviceModelRef:
+    name: light
+  nodeName: hadoop2
+  properties:
+  - name: working_state
+    collectCycle: 10000
+    reportCycle: 10000
+    reportToCloud: true
+    pushMethod:
+      anomalyDetection:
+        host: external-anomaly-detector
+        port: 6804
+        deviceName: light-1
+        namespace: default
+        propertyName: working_state
+  stateReport:
+    reportToCloud: true
+    reportCycle: 10000
+  protocol:
+    configData:
+      url: /lights/light1
+    protocolName: me-restful

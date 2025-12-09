@@ -1,0 +1,38 @@
+graph TB
+    subgraph "Edge Node"
+        RS[Room Simulator<br/>FastAPI Service<br/>Port 8000]
+        Mapper[me-restful-mapper<br/>KubeEdge Mapper]
+        EdgeCore[EdgeCore]
+    end
+    
+    subgraph "Cloud/Control Plane"
+        CloudCore[CloudCore]
+        K8s[Kubernetes API Server]
+        Detector[External Anomaly Detector<br/>gRPC Service<br/>Port 6804]
+    end
+    
+    subgraph "Devices"
+        Light1[Light Device 1]
+        Light2[Light Device 2]
+        Sensor[Brightness Sensor]
+    end
+    
+    RS -->|RESTful API| Light1
+    RS -->|RESTful API| Light2
+    RS -->|RESTful API| Sensor
+    
+    Mapper -->|HTTP Requests| RS
+    Mapper -->|Device Data<br/>via gRPC| Detector
+    Mapper <-->|DMI Protocol| EdgeCore
+    
+    EdgeCore <-->|WebSocket| CloudCore
+    CloudCore <-->|Update Device Status CRD<br/>.status.twins| K8s
+    
+    Detector -->|Update Device Status CRD<br/>.status.extensions| K8s
+    
+    style RS fill:#e1f5ff
+    style Mapper fill:#fff4e1
+    style Detector fill:#ffe1f5
+    style EdgeCore fill:#f0f0f0
+    style CloudCore fill:#f0f0f0
+    style K8s fill:#f0f0f0
