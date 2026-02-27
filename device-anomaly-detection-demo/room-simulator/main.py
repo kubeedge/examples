@@ -94,10 +94,13 @@ class BrightnessSensor:
     """
     Brightness Sensor Class
     
-    Automatically calculates brightness based on the number of lights in the room:
-    - 0 = dark (no lights)
-    - 1 = moderate (one light)
-    - 2 = bright (two lights)
+    Calculates brightness based on the weighted contribution of each light:
+    - light1 contributes 1 to brightness
+    - light2 contributes 2 to brightness
+    - 0 = dark (both lights off)
+    - 1 = dim (light1 only)
+    - 2 = moderate (light2 only)
+    - 3 = bright (both lights on)
     """
     
     def __init__(self, name: str = "brightness_sensor"):
@@ -106,17 +109,17 @@ class BrightnessSensor:
         self._brightness = 0
         logger.info(f"Brightness sensor {self.name} initialized, current brightness: dark")
     
-    def update_brightness(self, active_lights_count: int) -> None:
+    def update_brightness(self, brightness_value: int) -> None:
         """
-        Update brightness based on number of active lights
+        Update brightness based on weighted light contributions (light1*1 + light2*2)
         
         Args:
-            active_lights_count: Number of lights turned on
+            brightness_value: Weighted brightness value (0=dark, 1=dim, 2=moderate, 3=bright)
         """
         old_brightness = self._brightness
-        self._brightness = active_lights_count
+        self._brightness = brightness_value
         
-        brightness_map = {0: "dark", 1: "moderate", 2: "bright"}
+        brightness_map = {0: "dark", 1: "dim", 2: "moderate", 3: "bright"}
         if old_brightness != self._brightness:
             logger.info(
                 f"Brightness sensor {self.name} state changed: "
@@ -146,9 +149,13 @@ class Room:
         self._update_brightness()
     
     def _update_brightness(self) -> None:
-        """Update brightness sensor based on actual state of lights"""
-        active_count = self.light1.actual_state + self.light2.actual_state
-        self.brightness_sensor.update_brightness(active_count)
+        """Update brightness sensor based on actual state of lights.
+        
+        light1 contributes 1 to brightness, light2 contributes 2.
+        Possible values: 0 (both off), 1 (light1 only), 2 (light2 only), 3 (both on).
+        """
+        brightness_value = self.light1.actual_state * 1 + self.light2.actual_state * 2
+        self.brightness_sensor.update_brightness(brightness_value)
     
     def set_light(self, light_name: str, state: int) -> Dict:
         """
@@ -239,7 +246,7 @@ class Room:
         Returns:
             Dictionary containing brightness information
         """
-        brightness_map = {0: "dark", 1: "moderate", 2: "bright"}
+        brightness_map = {0: "dark", 1: "dim", 2: "moderate", 3: "bright"}
         return {
             "brightness": self.brightness_sensor.brightness,
             "description": brightness_map[self.brightness_sensor.brightness],

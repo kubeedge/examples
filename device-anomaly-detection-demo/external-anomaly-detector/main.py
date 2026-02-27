@@ -61,6 +61,53 @@ class ExternalAnomalyDetector(external_anomaly_detector_pb2_grpc.ExternalAnomaly
         logger.info(f"Stored {device_name}.{property_name} = {property_value} in memory")
         
         
+def locate_fault(l1, l2, actual_brightness, predicted):
+    """Attempt to localize faulty device(s) by flipping light states and re-running Bayesian inference.
+    
+    Returns a dict mapping each device name to its anomaly message.
+    """
+    flipped_l1 = 1 - l1
+    flipped_l2 = 1 - l2
+
+    # Try flipping light-1 only
+    pred = predict_brightness(flipped_l1, l2)
+    if pred is not None and int(pred) == actual_brightness:
+        logger.info(f"Fault localized: light-1 is faulty (state reported={l1}, should be={flipped_l1})")
+        return {
+            "light-1": f"Device fault: reported state={l1} but should be={flipped_l1}",
+            "light-2": "no anomaly",
+            "brightness-sensor-1": "no anomaly",
+        }
+
+    # Try flipping light-2 only
+    pred = predict_brightness(l1, flipped_l2)
+    if pred is not None and int(pred) == actual_brightness:
+        logger.info(f"Fault localized: light-2 is faulty (state reported={l2}, should be={flipped_l2})")
+        return {
+            "light-1": "no anomaly",
+            "light-2": f"Device fault: reported state={l2} but should be={flipped_l2}",
+            "brightness-sensor-1": "no anomaly",
+        }
+
+    # Try flipping both light-1 and light-2
+    pred = predict_brightness(flipped_l1, flipped_l2)
+    if pred is not None and int(pred) == actual_brightness:
+        logger.info(f"Fault localized: both light-1 and light-2 are faulty")
+        return {
+            "light-1": f"Device fault: reported state={l1} but should be={flipped_l1}",
+            "light-2": f"Device fault: reported state={l2} but should be={flipped_l2}",
+            "brightness-sensor-1": "no anomaly",
+        }
+
+    # Cannot localize fault
+    logger.warning("Could not localize fault after trying all flip combinations")
+    return {
+        "light-1": "Device fault: unknown cause",
+        "light-2": "Device fault: unknown cause",
+        "brightness-sensor-1": f"Anomaly: predicted brightness={predicted} does not match actual={actual_brightness}",
+    }
+
+
 def anomaly_detection_loop():
     """Background thread that performs anomaly detection every 10 seconds"""
     while True:
@@ -81,14 +128,18 @@ def anomaly_detection_loop():
                     
                     logger.info(f"Anomaly detection: light-1={l1}, light-2={l2} -> predicted={predicted}, actual={actual_brightness}")
                     
-                    # Determine anomaly status
                     if predicted != actual_brightness:
-                        anomaly_msg = f"Predicted brightness {predicted} does not match actual brightness {actual_brightness}"
+                        # Anomaly detected — try to localize the faulty device(s)
+                        messages = locate_fault(l1, l2, actual_brightness, predicted)
                     else:
-                        anomaly_msg = "no anomaly"
+                        messages = {
+                            "light-1": "no anomaly",
+                            "light-2": "no anomaly",
+                            "brightness-sensor-1": "no anomaly",
+                        }
                     
                     # Update anomaly status to apiserver
-                    update_anomaly_status(anomaly_msg)
+                    update_anomaly_status(messages)
                 else:
                     logger.warning("Prediction returned None")
             else:
@@ -97,20 +148,23 @@ def anomaly_detection_loop():
         except Exception as e:
             logger.error(f"Error in anomaly detection loop: {e}")
 
-def update_anomaly_status(message):
-    """Update brightness-sensor-1 anomaly status to k8s apiserver"""
+def update_anomaly_status(messages):
+    """Update anomaly status for each device to k8s apiserver.
+    
+    Args:
+        messages: dict mapping device name to its anomaly message string.
+    """
     try:
         api = client.CustomObjectsApi()
         
-        patch = {
-            "status": {
-                "extensions": {
-                    "anomaly": message
+        for d_name, message in messages.items():
+            patch = {
+                "status": {
+                    "extensions": {
+                        "anomaly": message
+                    }
                 }
             }
-        }
-        
-        for d_name in ["light-1", "light-2", "brightness-sensor-1"]:
             api.patch_namespaced_custom_object(
                 group="devices.kubeedge.io",
                 version="v1beta1",
@@ -119,8 +173,7 @@ def update_anomaly_status(message):
                 name=d_name,
                 body=patch
             )
-            
-        logger.info(f"Updated anomaly status to apiserver: {message}")
+            logger.info(f"Updated {d_name} anomaly status: {message}")
         
     except Exception as e:
         logger.error(f"Error updating anomaly status to apiserver: {e}")
@@ -133,7 +186,7 @@ def serve(host, port):
         logger.info("Kubernetes config loaded successfully")
     except Exception as e:
         logger.error(f"Failed to load kubernetes config: {e}")
-        raise
+        sys.exit(1)
     
     # Start gRPC server
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))

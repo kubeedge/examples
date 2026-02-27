@@ -1,6 +1,10 @@
 import bnlearn as bn
 import pandas as pd
 import os
+import logging
+
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
 
 # Define paths
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -14,26 +18,26 @@ def model_training():
     Performs structure learning and parameter learning.
     Saves the trained model to the models directory.
     """
-    print(f"Loading data from {DATA_PATH}...")
+    logger.info(f"Loading data from {DATA_PATH}...")
     df = pd.read_csv(DATA_PATH)
     
     # Structure learning
-    print("Performing structure learning...")
+    logger.info("Performing structure learning...")
     # methodtype='hc' (Hill Climbing) or 'ex' (ExhaustiveSearch) or 'cs' (Constraint-based)
     # 'hc' is a good default for structure learning
     dag = bn.structure_learning.fit(df, methodtype='hc', verbose=0)
     
     # Parameter learning
-    print("Performing parameter learning...")
+    logger.info("Performing parameter learning...")
     model = bn.parameter_learning.fit(dag, df, verbose=0)
     
     # Save model
     if not os.path.exists(MODEL_DIR):
         os.makedirs(MODEL_DIR)
     
-    print(f"Saving model to {MODEL_PATH}...")
+    logger.info(f"Saving model to {MODEL_PATH}...")
     bn.save(model, filepath=MODEL_PATH, overwrite=True)
-    print("Model training completed.")
+    logger.info("Model training completed.")
     return model
 
 def predict_brightness(light1, light2):
@@ -44,7 +48,7 @@ def predict_brightness(light1, light2):
     if os.path.exists(MODEL_PATH):
         model = bn.load(filepath=MODEL_PATH, verbose=0)
     else:
-        print("Model not found. Training new model...")
+        logger.info("Model not found. Training new model...")
         model = model_training()
         
     # Inference
@@ -59,15 +63,15 @@ def predict_brightness(light1, light2):
         predicted_brightness = max_prob_row['brightness']
         return predicted_brightness
     else:
-        print("Error: Could not retrieve prediction results.")
+        logger.error("Error: Could not retrieve prediction results.")
         return None
 
 if __name__ == "__main__":
     model_training()
     
     # Simple test
-    print("\nTesting prediction:")
+    logger.info("Testing prediction:")
     for l1 in [0, 1]:
         for l2 in [0, 1]:
             pred = predict_brightness(l1, l2)
-            print(f"Light1={l1}, Light2={l2} -> Predicted Brightness={pred}")
+            logger.info(f"Light1={l1}, Light2={l2} -> Predicted Brightness={pred}")

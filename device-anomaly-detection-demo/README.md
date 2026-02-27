@@ -39,9 +39,10 @@ Contains the Protocol Buffer definition (`external_anomaly_detector.proto`) for 
 #### `external-anomaly-detector/`
 A Python-based gRPC service that receives device data from the mapper, stores it in memory, and performs anomaly detection using a machine learning model. The service:
 - Collects device property updates via gRPC
-- Trains a machine learning model on historical data
+- Trains a Bayesian Network model on historical observation data
 - Detects anomalies by comparing actual vs. predicted device states
-- Updates device twin status in Kubernetes when anomalies are detected
+- Localizes the faulty device by systematically flipping reported light states and re-running inference
+- Updates DeviceStatus CRD `.status.extensions.anomaly` in Kubernetes for each device
 
 #### `me-restful-mapper/`
 A KubeEdge mapper written in Go that:
@@ -54,7 +55,7 @@ A KubeEdge mapper written in Go that:
 #### `room-simulator/`
 A Python FastAPI application that simulates IoT devices in a room:
 - Two controllable light devices (`light1`, `light2`)
-- One brightness sensor that responds to light states
+- One brightness sensor whose value equals `light1_state × 1 + light2_state × 2` (range 0–3: 0=dark, 1=dim, 2=moderate, 3=bright)
 - RESTful API for device control and status queries
 - Fault injection capabilities for testing anomaly detection
 
@@ -77,7 +78,7 @@ A Python FastAPI application that simulates IoT devices in a room:
 
 Before running the demo, please ensure your KubeEdge `cloudcore` and `edgecore` are properly set up and running, and include codes from PR [#6543](https://github.com/kubeedge/kubeedge/pull/6543). For convenience, the `room-simulator`, `external-anomaly-detector`, and `me-restful-mapper` are planned to be run in Docker containers, so please ensure Docker is installed on your system. If you prefer to run them directly on your host machine, please use `uv` to install the required Python dependencies for `room-simulator` and `external-anomaly-detector`, and build binary with Go for `me-restful-mapper`.
 
-Theorically, the `external-anomaly-detector` can be deployed on cloud side or edge side, since it communicates with `me-restful-mapper` via standard gRPC, which is workable as long as network connectivity is ensured. In order to make the demo easy to run, here we deploy all components on one KubeEdge edge node.
+Theoretically, the `external-anomaly-detector` can be deployed on cloud side or edge side, since it communicates with `me-restful-mapper` via standard gRPC, which is workable as long as network connectivity is ensured. In order to make the demo easy to run, here we deploy all components on one KubeEdge edge node.
 
 ### Step 1. Create DeviceModel and Device CRDs in Kubernetes
 
@@ -88,10 +89,10 @@ cd me-restful-mapper/devicecrds/
 kubectl apply -f brightness-sensor-model.yaml -f light-model.yaml
 ```
 
-Then, you need to set `.spec.nodeName` to your edge node name in the Device CRD files `brightness-sensor.yaml`, `light-1.yaml`, and `light-2.yaml`. After that, apply the Device CRDs.
+Then, you need to set `.spec.nodeName` to your edge node name in the Device CRD files `brightness-sensor-1.yaml`, `light-1.yaml`, and `light-2.yaml`. After that, apply the Device CRDs.
 
 ```bash
-kubectl apply -f brightness-sensor.yaml -f light-1.yaml -f light-2.yaml
+kubectl apply -f brightness-sensor-1.yaml -f light-1.yaml -f light-2.yaml
 ```
 
 ### Step 2. Run three components with Docker Compose
@@ -180,7 +181,7 @@ spec: {}
 status:
   extensions:
     # Anomaly detected, details shown here. This field is propagated by external-anomaly-detector
-    anomaly: Predicted brightness 0 does not match actual brightness 1
+    anomaly: "Device fault: reported state=0 but should be=1"
   lastOnlineTime: "2025-12-09T09:09:38Z"
   state: ok
   twins:
@@ -203,7 +204,7 @@ You can stop all services and remove the created DeviceModels and Devices by run
 
 ```bash
 cd me-restful-mapper/devicecrds/
-kubectl delete -f light-1.yaml -f light-2.yaml -f brightness-sensor.yaml
+kubectl delete -f light-1.yaml -f light-2.yaml -f brightness-sensor-1.yaml
 kubectl delete -f light-model.yaml -f brightness-sensor-model.yaml
 cd ../../
 bash stop.sh

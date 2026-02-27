@@ -2,15 +2,15 @@
 
 A Python application that simulates a room with light devices and a brightness sensor, providing RESTful API interfaces for device control and status querying.
 
-[中文文档](README_zh.md)
-
 ## Features
 
 - **Two Light Devices**: `light1` and `light2`, each can be on (1) or off (0)
-- **Brightness Sensor**: Automatically adjusts based on the number of lights on in the room
-  - 0 = dark (no lights on)
-  - 1 = moderate (one light on)
-  - 2 = bright (two lights on)
+- **Brightness Sensor**: Weighted sum of the actual state of each light
+  - `brightness = light1.actual_state × 1 + light2.actual_state × 2`
+  - 0 = dark (both lights off)
+  - 1 = dim (light1 on, light2 off)
+  - 2 = moderate (light1 off, light2 on)
+  - 3 = bright (both lights on)
 - **Fault Injection**: Inject faults into any light device, causing its actual working state to be opposite to its set state
 - **RESTful API**: Complete REST interface for device control and status querying
 - **Logging**: Detailed logging of all device state changes
@@ -183,7 +183,7 @@ GET /brightness
 ```
 1
 ```
-(Returns `0` for dark, `1` for moderate, or `2` for bright)
+(Returns `0` for dark, `1` for dim, `2` for moderate, or `3` for bright)
 
 ## Usage Examples
 
@@ -258,7 +258,7 @@ print(response.json())
 
 # Check brightness
 response = requests.get(f"{base_url}/brightness")
-print(f"Brightness: {response.text}")  # Returns "0", "1", or "2"
+print(f"Brightness: {response.text}")  # Returns "0", "1", "2", or "3"
 ```
 
 ## How It Works
@@ -272,7 +272,8 @@ print(f"Brightness: {response.text}")  # Returns "0", "1", or "2"
 ### Brightness Sensor
 
 - Brightness value is based on the **actual state** of lights in the room (not the set state)
-- Calculation formula: `brightness = light1.actual_state + light2.actual_state`
+- Calculation formula: `brightness = light1.actual_state × 1 + light2.actual_state × 2`
+- This weighted design makes each combination of light states produce a unique brightness value, enabling the anomaly detector to unambiguously identify which device is faulty
 - Therefore, even if a faulty light is set to on but actually off, the brightness sensor correctly reflects the actual brightness
 
 ### Fault Injection Example
@@ -294,10 +295,10 @@ Log example:
 ```
 2025-12-01 10:00:00 - __main__ - INFO - Light device light1 initialized, state: off
 2025-12-01 10:00:05 - __main__ - INFO - Light device light1 state changed: 0 -> 1 (on)
-2025-12-01 10:00:05 - __main__ - INFO - Brightness sensor brightness_sensor state changed: 0(dark) -> 1(moderate)
+2025-12-01 10:00:05 - __main__ - INFO - Brightness sensor brightness_sensor state changed: 0(dark) -> 1(dim)
 2025-12-01 10:00:10 - __main__ - WARNING - Light device light1 fault injected
 2025-12-01 10:00:10 - __main__ - INFO - Light device light1 actual working state: off
-2025-12-01 10:00:10 - __main__ - INFO - Brightness sensor brightness_sensor state changed: 1(moderate) -> 0(dark)
+2025-12-01 10:00:10 - __main__ - INFO - Brightness sensor brightness_sensor state changed: 1(dim) -> 0(dark)
 ```
 
 ## Project Structure
@@ -306,8 +307,7 @@ Log example:
 room-simulator/
 ├── main.py              # Main program file with all classes and API endpoints
 ├── pyproject.toml       # Project configuration and dependencies
-├── README.md            # Project documentation (English, this file)
-├── README_zh.md         # Project documentation (Chinese)
+├── README.md            # Project documentation
 └── room_simulator.log   # Log file (generated at runtime)
 ```
 
@@ -321,7 +321,7 @@ room-simulator/
    - Logs state changes
 
 2. **BrightnessSensor Class**: Represents the brightness sensor
-   - Automatically updates brightness value based on number of lights
+   - Calculates brightness as a weighted sum: `light1.actual_state × 1 + light2.actual_state × 2`
    - Logs brightness changes
 
 3. **Room Class**: Room manager

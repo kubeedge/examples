@@ -82,7 +82,12 @@ func (c *CustomizedClient) AnomalyDetectionProcess(req *AnomalyDetectionRequest)
 		DeviceName:   config.DeviceName,
 		Namespace:    config.Namespace,
 		PropertyName: config.PropertyName,
-		PropertyValue: req.Data.(string),
+	}
+
+	if strData, ok := req.Data.(string); ok {
+		grpcRequest.PropertyValue = strData
+	} else {
+		return fmt.Errorf("unsupported data type for propertyValue: %T", req.Data)
 	}
 
 	// Call the gRPC service

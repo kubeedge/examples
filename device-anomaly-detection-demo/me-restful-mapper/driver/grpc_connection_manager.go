@@ -3,11 +3,11 @@ package driver
 import (
 	"context"
 	"fmt"
-	"net"
 	"sync"
 	"time"
 
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/connectivity"
 	"k8s.io/klog/v2"
 )
 
@@ -28,22 +28,15 @@ func (m *GRPCConnectionManager) GetConnection(address string) (*grpc.ClientConn,
 
 	// Check if a connection already exists
 	if conn, exists := m.connections[address]; exists {
-		if conn.GetState().String() != "SHUTDOWN" && conn.GetState().String() != "TRANSIENT_FAILURE" {
+		state := conn.GetState()
+		if state == connectivity.Ready || state == connectivity.Idle {
 			return conn, nil
 		}
-		// Remove the broken connection
-		klog.Warningf("Connection to %s is in state %s, creating a new one", address, conn.GetState().String())
+		// Close and remove connections that are not reusable
+		klog.Warningf("Connection to %s is in state %s, closing and creating a new one", address, state)
+		_ = conn.Close()
 		delete(m.connections, address)
 	}
-
-	// Check if the port is open before attempting gRPC connection
-	dialer := net.Dialer{Timeout: 2 * time.Second}
-	tcpConn, err := dialer.Dial("tcp", address)
-	if err != nil {
-		err := fmt.Errorf("port check failed for %s: %v", address, err)
-		return nil, err
-	}
-	tcpConn.Close()
 
 	// Create a new gRPC connection with timeout
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)

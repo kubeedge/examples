@@ -24,7 +24,6 @@ func main() {
 		}
 	}()
 
-
 	var err error
 	var c *config.Config
 

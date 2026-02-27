@@ -10,7 +10,7 @@ import (
 // SetDeviceValue sets the value of a device by sending an HTTP PUT request.
 func SetDeviceValue(ip string, port int, urlPath string, value string) error {
 	url := fmt.Sprintf("http://%s:%d%s", ip, port, urlPath)
-	requestBody := bytes.NewBufferString(fmt.Sprintf("%d", value))
+	requestBody := bytes.NewBufferString(value)
 
 	req, err := http.NewRequest(http.MethodPut, url, requestBody)
 	if err != nil {
