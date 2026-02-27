@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  room-simulator:
+    image: huajuan6848/room-simulator:1.0.0
+    container_name: room-simulator
+    ports:
+      - "8000:8000"
+    networks:
+      - device-anomaly-detection-demo
+    restart: unless-stopped
+
+  external-anomaly-detector:
+    image: huajuan6848/external-anomaly-detector:1.0.0
+    container_name: external-anomaly-detector
+    ports:
+      - "6804:6804"
+    volumes:
+      - ~/.kube/config:/root/.kube/config:ro
+    networks:
+      - device-anomaly-detection-demo
+    restart: unless-stopped
+
+  me-restful-mapper:
+    image: huajuan6848/me-restful-mapper:1.0.0
+    container_name: me-restful-mapper
+    volumes:
+      - /etc/kubeedge:/etc/kubeedge
+      - ./me-restful-mapper/config.yaml:/kubeedge/config.yaml
+    networks:
+      - device-anomaly-detection-demo
+    command: ["/kubeedge/main", "--config-file", "/kubeedge/config.yaml"]
+    restart: unless-stopped
+
+networks:
+  device-anomaly-detection-demo:
+    driver: bridge

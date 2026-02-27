@@ -1,0 +1,9 @@
+grpc_server:
+  socket_path: /etc/kubeedge/me-restful.sock
+common:
+  name: Me-Restful-mapper
+  version: v1.13.0
+  api_version: v1.0.0
+  protocol: me-restful
+  address: 127.0.0.1
+  edgecore_sock: /etc/kubeedge/dmi.sock

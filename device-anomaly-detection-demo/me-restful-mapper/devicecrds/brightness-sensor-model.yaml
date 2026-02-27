@@ -1,0 +1,19 @@
+apiVersion: devices.kubeedge.io/v1beta1
+kind: DeviceModel
+metadata:
+  name: brightness-sensor
+spec:
+  properties:
+    - name: brightness
+      type: STRING
+      description: "The brightness level of the sensor"
+      accessMode: ReadOnly
+      visitors:
+        configData: 
+          name: brightness
+          dataType: STRING
+        protocolName: me-restful
+  protocolConfigData:
+    ip: room-simulator
+    port: 8000
+  protocol: me-restful

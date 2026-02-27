@@ -1,0 +1,19 @@
+apiVersion: devices.kubeedge.io/v1beta1
+kind: DeviceModel
+metadata:
+  name: light
+spec:
+  properties:
+    - name: working_state
+      type: STRING
+      description: "The working state of the light device"
+      accessMode: ReadWrite
+      visitors:
+        configData: 
+          name: working_state
+          dataType: STRING
+        protocolName: me-restful
+  protocolConfigData:
+    ip: room-simulator
+    port: 8000
+  protocol: me-restful

@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package externalanomalydetector;
+
+import "google/protobuf/timestamp.proto";
+
+// External Anomaly Detector Service
+service ExternalAnomalyDetector {
+  // Detects anomalies based on the provided data
+  rpc DetectAnomaly (AnomalyRequest) returns (AnomalyResponse);
+}
+
+// Request message containing the anomaly detection data
+message AnomalyRequest {
+  google.protobuf.Timestamp timestamp = 1; // Timestamp of the data
+  string deviceName = 2; // Name of the device
+  string namespace = 3; // Namespace of the device
+  string propertyName = 4; // Property name to check for anomalies
+  string propertyValue = 5; // Value of the property
+}
+
+// Response message containing the anomaly detection result
+message AnomalyResponse {
+  bool success = 1; // Indicates if the upload was successful
+  int32 errorCode = 2; // Error code if any issue occurred
+  string message = 3; // Additional information or error message
+}

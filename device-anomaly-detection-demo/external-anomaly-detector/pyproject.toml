@@ -1,0 +1,27 @@
+[project]
+name = "external-anomaly-detector"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "bnlearn>=0.12.0",
+    "grpcio>=1.76.0",
+    "grpcio-tools>=1.76.0",
+    "kubernetes>=34.1.0",
+    "openpyxl>=3.1.5",
+    "pandas>=2.3.3",
+    "protobuf>=6.33.1",
+    "torch>=2.2.0",
+]
+
+[tool.setuptools]
+packages = ["models", "model_training", "externalanomalydetectorpb"]
+
+[[tool.uv.index]]
+name = "torchcpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
+
+[tool.uv.sources]
+torch = { index = "torchcpu" }
