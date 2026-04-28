@@ -14,12 +14,10 @@ spec:
       labels:
         k8s-app: kubeedge-pi-counter
     spec:
-      nodeSelector:
-        node-role.kubernetes.io/master: ""
       hostNetwork: true
       containers:
       - name: kubeedge-pi-counter
-        image: kubeedge/kubeedge-pi-counter:v1.0.0
+        image: docker.io/kubeedge/kubeedge-pi-counter:v1.0.0
         imagePullPolicy: IfNotPresent
       nodeSelector:
         node-role.kubernetes.io/edge: ""

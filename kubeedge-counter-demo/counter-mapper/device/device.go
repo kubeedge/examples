@@ -1,7 +1,7 @@
 package counter
 
 import (
-	"fmt"
+	"log"
 	"time"
 )
 
@@ -27,8 +27,8 @@ func (counter *Counter) runDevice(interrupt chan struct{}) {
 		default:
 			data++
 			counter.handle(data)
-			fmt.Println("Counter value:", data)
-			time.Sleep(1 * time.Second)
+			log.Println("Counter value:", data)
+			time.Sleep(5 * time.Second)
 		}
 	}
 }
@@ -51,10 +51,12 @@ func (counter *Counter) initDevice() {
 
 func (counter *Counter) TurnOn() {
 	counter.status <- ON
+	log.Println("device on")
 }
 
 func (counter *Counter) TurnOff() {
 	counter.status <- OFF
+	log.Println("device off")
 }
 
 func NewCounter(h func (x int)) *Counter {
@@ -65,6 +67,7 @@ func NewCounter(h func (x int)) *Counter {
 
 	go counter.initDevice()
 
+	log.Println("New conter device")
 	return counter
 }
 

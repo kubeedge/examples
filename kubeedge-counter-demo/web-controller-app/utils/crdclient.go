@@ -3,8 +3,8 @@ package utils
 import (
 	"log"
 
-	devices "github.com/kubeedge/kubeedge/cloud/pkg/apis/devices/v1alpha2"
-
+	// CHANGED: v1alpha2 → v1beta1, new package path
+        devices "github.com/kubeedge/api/apis/devices/v1beta1"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/runtime/serializer"
@@ -15,7 +15,6 @@ import (
 func NewCRDClient(cfg *rest.Config) (*rest.RESTClient, error) {
 	scheme := runtime.NewScheme()
 	schemeBuilder := runtime.NewSchemeBuilder(addDeviceCrds)
-
 	err := schemeBuilder.AddToScheme(scheme)
 	if err != nil {
 		return nil, err
@@ -23,7 +22,7 @@ func NewCRDClient(cfg *rest.Config) (*rest.RESTClient, error) {
 
 	config := *cfg
 	config.APIPath = "/apis"
-	config.GroupVersion = &devices.SchemeGroupVersion
+	config.GroupVersion = &devices.SchemeGroupVersion  // still exists in v1beta1
 	config.ContentType = runtime.ContentTypeJSON
 	config.NegotiatedSerializer = serializer.NewCodecFactory(scheme)
 
@@ -32,16 +31,21 @@ func NewCRDClient(cfg *rest.Config) (*rest.RESTClient, error) {
 		log.Fatalf("Failed to create REST Client due to error %v", err)
 		return nil, err
 	}
-
 	return client, nil
 }
 
 func addDeviceCrds(scheme *runtime.Scheme) error {
-	// Add Device
-	scheme.AddKnownTypes(devices.SchemeGroupVersion, &devices.Device{}, &devices.DeviceList{})
+	// CHANGED: same pattern, but now registering v1beta1 types
+	scheme.AddKnownTypes(devices.SchemeGroupVersion,
+		&devices.Device{},
+		&devices.DeviceList{},
+	)
 	v1.AddToGroupVersion(scheme, devices.SchemeGroupVersion)
-	// Add DeviceModel
-	scheme.AddKnownTypes(devices.SchemeGroupVersion, &devices.DeviceModel{}, &devices.DeviceModelList{})
+
+	scheme.AddKnownTypes(devices.SchemeGroupVersion,
+		&devices.DeviceModel{},
+		&devices.DeviceModelList{},
+	)
 	v1.AddToGroupVersion(scheme, devices.SchemeGroupVersion)
 
 	return nil

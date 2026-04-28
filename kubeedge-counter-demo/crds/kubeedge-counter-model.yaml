@@ -1,13 +1,11 @@
-apiVersion: devices.kubeedge.io/v1alpha2
+apiVersion: devices.kubeedge.io/v1beta1
 kind: DeviceModel
 metadata:
- name: counter-model
- namespace: default
+  name: counter-model
+  namespace: default
 spec:
- properties:
-  - name: status
-    description: counter status
-    type:
-     string:
+  properties:
+    - name: status
+      description: counter status
+      type: STRING
       accessMode: ReadWrite
-      defaultValue: ''

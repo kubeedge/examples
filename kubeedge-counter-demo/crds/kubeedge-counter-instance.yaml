@@ -1,28 +1,18 @@
-apiVersion: devices.kubeedge.io/v1alpha2
+apiVersion: devices.kubeedge.io/v1beta1
 kind: Device
 metadata:
   name: counter
+  namespace: default
   labels:
-    description: 'counter'
+    description: "counter"
 spec:
   deviceModelRef:
     name: counter-model
-  nodeSelector:
-    nodeSelectorTerms:
-    - matchExpressions:
-      - key: ''
-        operator: In
-        values:
-        - edge-node
-
-status:
-  twins:
-    - propertyName: status
+  nodeName: anode-ultraman
+  properties:
+    - name: status
       desired:
-        metadata:
-          type: string
-        value: 'OFF'
-      reported:
-        metadata:
-          type: string
-        value: '0'
+        value: "OFF"
+      collectCycle: 1000
+      reportCycle: 1000 
+      reportToCloud: true

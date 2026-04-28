@@ -16,10 +16,10 @@ spec:
     spec:
       hostNetwork: true
       nodeSelector:
-        node-role.kubernetes.io/master: ""
+        node-role.kubernetes.io/control-plane: ""
       containers:
       - name: kubeedge-counter-app
-        image: kubeedge/kubeedge-counter-app:v1.0.0
+        image: docker.io/kubeedge/kubeedge-counter-app:v1.0.0
         imagePullPolicy: IfNotPresent
       tolerations:
       - key: node-role.kubernetes.io/master
@@ -29,19 +29,27 @@ spec:
         operator: Exists
         effect: NoSchedule
       restartPolicy: Always
+
 ---
-apiVersion: rbac.authorization.k8s.io/v1beta1
+apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
   name: kubeedge-counter
   namespace: default
 rules:
-- apiGroups: ["devices.kubeedge.io"]
-  resources: ["devices"]
-  verbs: ["get", "patch"]
+  - apiGroups: ["devices.kubeedge.io"]
+    resources:
+      - devices
+      - devicestatuses
+    verbs:
+      - get
+      - list
+      - watch
+      - patch
+      - update
 
 ---
-apiVersion: rbac.authorization.k8s.io/v1beta1
+apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: kubeedge-counter-rbac
@@ -49,6 +57,7 @@ metadata:
 subjects:
   - kind: ServiceAccount
     name: default
+    namespace: default
 roleRef:
   kind: Role
   name: kubeedge-counter

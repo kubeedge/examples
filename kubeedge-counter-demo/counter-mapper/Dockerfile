@@ -1,10 +1,13 @@
 # Based on ubuntu
-FROM ubuntu:18.04
+FROM ubuntu:22.04
 LABEL maintainers="KubeEdge Community Developer"
 LABEL description="KubeEdge Raspi Counter App"
 
 # Copy from build directory
 COPY pi-counter-app /pi-counter-app
+
+# Make sure the binary is executable
+RUN chmod +x /pi-counter-app
 
 # Define default command
 ENTRYPOINT ["/pi-counter-app"]
