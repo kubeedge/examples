@@ -19,3 +19,4 @@ IOT releated examples need extra devices, like Raspberry and so on.
 | [Control pseudo device counter and collect data](kubeedge-counter-demo/README.md) | Control pseudo device counter and collect data based KubeEdge
   [Play Music @Edge through Twitter](ke-twitter-demo/README.md)| Play music at edge based on Twitter and KubeEdge. 
   [Control Zigbee @Edge through cloud](kubeedge-edge-ai-application/README.md) | Face detection at cloud using OpenCV and using it to control zigbee on edge using Kubeedge.
+| [Predictive Maintenance @Edge](predictive-maintenance/README.md) | Industrial equipment anomaly detection at edge using Z-score inference and KubeEdge DMI |
