@@ -2,8 +2,6 @@ package mqtt
 
 import (
 	"encoding/json"
-	"fmt"
-	"os"
 	"time"
 
 	mqtt "github.com/eclipse/paho.mqtt.golang"
@@ -48,8 +46,8 @@ func (pm *PushMethod) Push(data *common.DataModel) {
 	client := mqtt.NewClient(opts)
 
 	if token := client.Connect(); token.Wait() && token.Error() != nil {
-		fmt.Println(token.Error())
-		os.Exit(1)
+		klog.Errorf("Publish device data by MQTT failed to connect, err = %v", token.Error())
+		return
 	}
 	formatTimeStr := time.Unix(data.TimeStamp/1e3, 0).Format("2006-01-02 15:04:05")
 	str_time := "time is " + formatTimeStr + "  "
