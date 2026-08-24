@@ -2,7 +2,6 @@ package http
 
 import (
 	"encoding/json"
-	"fmt"
 	"io"
 	"net/http"
 	"strconv"
@@ -58,7 +57,8 @@ func (pm *PushMethod) Push(data *common.DataModel) {
 		strings.NewReader(payload))
 
 	if err != nil {
-		fmt.Println(err)
+		klog.Errorf("Publish device data by HTTP failed, err = %v", err)
+		return
 	}
 	defer resp.Body.Close()
 	body, err := io.ReadAll(resp.Body)
