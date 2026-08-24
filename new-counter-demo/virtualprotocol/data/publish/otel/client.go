@@ -44,6 +44,10 @@ func NewConfig(clientConfig json.RawMessage) (*Config, error) {
 	if cfg.EndpointURL == "" {
 		return nil, errors.New("endpointURL is required")
 	}
+	endpoint, err := url.Parse(cfg.EndpointURL)
+	if err != nil || endpoint.Host == "" || (endpoint.Scheme != "http" && endpoint.Scheme != "https") {
+		return nil, errors.New("endpointURL must be a valid HTTP or HTTPS URL")
+	}
 	return &cfg, nil
 }
 
